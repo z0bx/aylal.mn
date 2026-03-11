@@ -168,12 +168,24 @@ body {
 .article-box {
     display: flex;
     gap: 40px;
+    align-items: flex-start;
 }
 
 .article-box img {
     width: 420px;
     height: 260px;
     object-fit: cover;
+    border-radius: 10px;
+}
+
+.article-box h3 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.article-box p {
+    margin-bottom: 15px;
+    line-height: 1.6;
 }
 
 /* PARTNERS */
