@@ -1,276 +1,757 @@
 <!DOCTYPE html>
 <html lang="mn">
+
 <head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Нүүдэл — Газрууд</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--dusk:#1a2e3b;--earth:#b5703a;--gold:#e8a830;--moss:#4a6741;--cream:#f5f0e8;--sand:#e2d5bc;--white:#fff;--text:#1a2e3b;--muted:#6b7f8c}
-body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 48px;background:rgba(245,240,232,.94);backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(0,0,0,.06)}
-.nav-logo{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--dusk);text-decoration:none}
-.nav-links{display:flex;gap:28px;list-style:none}
-.nav-links a{text-decoration:none;font-size:14px;font-weight:500;color:var(--muted);transition:color .2s}
-.nav-links a:hover,.nav-links a.active{color:var(--gold)}
-.nav-right{display:flex;gap:12px;align-items:center}
-.nav-login{font-size:14px;font-weight:500;color:var(--muted);text-decoration:none}
-.nav-cta{background:var(--gold);color:var(--dusk);border:none;padding:10px 22px;border-radius:100px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;text-decoration:none;transition:transform .2s}
-.nav-cta:hover{transform:translateY(-2px)}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Нүүдэл — Газрууд</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
 
-/* PAGE HERO */
-.page-hero{margin-top:64px;background:linear-gradient(135deg,var(--dusk) 0%,#0f2535 100%);padding:64px 48px 52px;position:relative;overflow:hidden}
-.page-hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1400&q=60') center/cover;opacity:.12}
-.page-hero-inner{position:relative;max-width:640px}
-.breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:16px;font-size:12px;color:rgba(255,255,255,.45)}
-.breadcrumb a{color:rgba(255,255,255,.45);text-decoration:none}.breadcrumb a:hover{color:var(--gold)}
-.breadcrumb span{color:rgba(255,255,255,.25)}
-.page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,60px);font-weight:700;color:#fff;line-height:1.1;margin-bottom:12px}
-.page-hero h1 em{font-style:italic;color:var(--gold)}
-.page-hero p{color:rgba(255,255,255,.65);font-size:16px;line-height:1.65}
+    :root {
+      --dusk: #1a2e3b;
+      --earth: #b5703a;
+      --gold: #e8a830;
+      --moss: #4a6741;
+      --cream: #f5f0e8;
+      --sand: #e2d5bc;
+      --white: #fff;
+      --text: #1a2e3b;
+      --muted: #6b7f8c
+    }
 
-/* FILTER BAR */
-.filter-bar{background:#fff;border-bottom:1px solid var(--sand);padding:0 48px;display:flex;align-items:center;gap:0;overflow-x:auto;position:sticky;top:64px;z-index:90}
-.filter-tab{padding:16px 22px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:color .2s,border-color .2s}
-.filter-tab:hover{color:var(--text)}
-.filter-tab.active{color:var(--earth);border-bottom-color:var(--earth)}
-.filter-right{margin-left:auto;display:flex;gap:12px;align-items:center;padding:12px 0}
-.filter-select{border:1.5px solid var(--sand);border-radius:10px;padding:8px 14px;font-family:inherit;font-size:13px;color:var(--text);background:var(--cream);outline:none;cursor:pointer}
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden
+    }
 
-/* MAIN CONTENT */
-.page-body{padding:48px 48px 80px;max-width:1400px;margin:0 auto}
-.results-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:12px}
-.results-count{font-size:14px;color:var(--muted)}
-.results-count strong{color:var(--text)}
-.view-toggle{display:flex;gap:4px}
-.vbtn{width:34px;height:34px;border-radius:8px;border:1.5px solid var(--sand);background:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--muted);transition:background .2s,color .2s}
-.vbtn.active{background:var(--dusk);color:#fff;border-color:var(--dusk)}
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(245, 240, 232, .94);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 1px 0 rgba(0, 0, 0, .06)
+    }
 
-/* DESTINATION GRID */
-.dest-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
-.dest-card{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:3/4;cursor:pointer;transition:transform .3s,box-shadow .3s;text-decoration:none;display:block}
-.dest-card:hover{transform:translateY(-6px);box-shadow:0 24px 60px rgba(26,46,59,.2)}
-.dest-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
-.dest-card:hover img{transform:scale(1.06)}
-.dest-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(26,46,59,.9) 0%,rgba(26,46,59,0) 55%)}
-.dest-body{position:absolute;bottom:0;left:0;right:0;padding:22px 20px}
-.dest-tag{display:inline-block;background:var(--gold);color:var(--dusk);font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:100px;margin-bottom:8px}
-.dest-name{font-family:'Playfair Display',serif;font-size:21px;color:#fff;line-height:1.15;font-weight:700}
-.dest-sub{color:rgba(255,255,255,.6);font-size:11px;margin-top:4px}
-.dest-meta{display:flex;align-items:center;gap:12px;margin-top:10px}
-.dest-rating{color:var(--gold);font-size:12px;font-weight:500}
-.dest-price{color:rgba(255,255,255,.75);font-size:12px}
-.dest-fav{position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.15);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;transition:background .2s}
-.dest-fav:hover{background:rgba(232,168,48,.3)}
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--dusk);
+      text-decoration: none
+    }
 
-/* FEATURED STRIP */
-.featured-strip{background:linear-gradient(135deg,var(--earth),#7a3020);border-radius:20px;padding:28px 32px;display:flex;align-items:center;gap:24px;margin-bottom:32px;color:#fff;flex-wrap:wrap}
-.featured-strip-text{flex:1;min-width:200px}
-.featured-strip-text h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:4px}
-.featured-strip-text p{font-size:13px;color:rgba(255,255,255,.7);line-height:1.5}
-.featured-strip-btn{background:#fff;color:var(--earth);border:none;padding:11px 24px;border-radius:100px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;text-decoration:none;transition:transform .2s}
-.featured-strip-btn:hover{transform:scale(1.04)}
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none
+    }
 
-/* PAGINATION */
-.pagination{display:flex;justify-content:center;gap:8px;margin-top:48px}
-.pg-btn{width:38px;height:38px;border-radius:10px;border:1.5px solid var(--sand);background:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:500;cursor:pointer;color:var(--muted);transition:background .2s,color .2s,border-color .2s}
-.pg-btn.active{background:var(--dusk);color:#fff;border-color:var(--dusk)}
-.pg-btn:hover:not(.active){background:var(--cream)}
+    .nav-links a {
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      transition: color .2s
+    }
 
-footer{background:var(--dusk);color:rgba(255,255,255,.45);padding:40px 48px 24px}
-.footer-simple{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
-.footer-logo{font-family:'Playfair Display',serif;font-size:22px;color:#fff;text-decoration:none}
-.footer-links{display:flex;gap:24px}
-.footer-links a{color:rgba(255,255,255,.4);font-size:13px;text-decoration:none}.footer-links a:hover{color:var(--gold)}
-.footer-copy{font-size:12px;margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.07);text-align:center}
-@media(max-width:768px){nav{padding:14px 20px}.nav-links{display:none}.page-hero{padding:40px 20px 32px}.page-body{padding:32px 20px 60px}.filter-bar{padding:0 20px}}
-</style>
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--gold)
+    }
+
+    .nav-right {
+      display: flex;
+      gap: 12px;
+      align-items: center
+    }
+
+    .nav-login {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none
+    }
+
+    .nav-cta {
+      background: var(--gold);
+      color: var(--dusk);
+      border: none;
+      padding: 10px 22px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      text-decoration: none;
+      transition: transform .2s
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px)
+    }
+
+    /* PAGE HERO */
+    .page-hero {
+      margin-top: 64px;
+      background: linear-gradient(135deg, var(--dusk) 0%, #0f2535 100%);
+      padding: 64px 48px 52px;
+      position: relative;
+      overflow: hidden
+    }
+
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1400&q=60') center/cover;
+      opacity: .12
+    }
+
+    .page-hero-inner {
+      position: relative;
+      max-width: 640px
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, .45)
+    }
+
+    .breadcrumb a {
+      color: rgba(255, 255, 255, .45);
+      text-decoration: none
+    }
+
+    .breadcrumb a:hover {
+      color: var(--gold)
+    }
+
+    .breadcrumb span {
+      color: rgba(255, 255, 255, .25)
+    }
+
+    .page-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 12px
+    }
+
+    .page-hero h1 em {
+      font-style: italic;
+      color: var(--gold)
+    }
+
+    .page-hero p {
+      color: rgba(255, 255, 255, .65);
+      font-size: 16px;
+      line-height: 1.65
+    }
+
+    /* FILTER BAR */
+    .filter-bar {
+      background: #fff;
+      border-bottom: 1px solid var(--sand);
+      padding: 0 48px;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      overflow-x: auto;
+      position: sticky;
+      top: 64px;
+      z-index: 90
+    }
+
+    .filter-tab {
+      padding: 16px 22px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+      transition: color .2s, border-color .2s
+    }
+
+    .filter-tab:hover {
+      color: var(--text)
+    }
+
+    .filter-tab.active {
+      color: var(--earth);
+      border-bottom-color: var(--earth)
+    }
+
+    .filter-right {
+      margin-left: auto;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 0
+    }
+
+    .filter-select {
+      border: 1.5px solid var(--sand);
+      border-radius: 10px;
+      padding: 8px 14px;
+      font-family: inherit;
+      font-size: 13px;
+      color: var(--text);
+      background: var(--cream);
+      outline: none;
+      cursor: pointer
+    }
+
+    /* MAIN CONTENT */
+    .page-body {
+      padding: 48px 48px 80px;
+      max-width: 1400px;
+      margin: 0 auto
+    }
+
+    .results-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 12px
+    }
+
+    .results-count {
+      font-size: 14px;
+      color: var(--muted)
+    }
+
+    .results-count strong {
+      color: var(--text)
+    }
+
+    .view-toggle {
+      display: flex;
+      gap: 4px
+    }
+
+    .vbtn {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      border: 1.5px solid var(--sand);
+      background: var(--white);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: var(--muted);
+      transition: background .2s, color .2s
+    }
+
+    .vbtn.active {
+      background: var(--dusk);
+      color: #fff;
+      border-color: var(--dusk)
+    }
+
+    /* DESTINATION GRID */
+    .dest-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px
+    }
+
+    .dest-card {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      cursor: pointer;
+      transition: transform .3s, box-shadow .3s;
+      text-decoration: none;
+      display: block
+    }
+
+    .dest-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(26, 46, 59, .2)
+    }
+
+    .dest-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .6s
+    }
+
+    .dest-card:hover img {
+      transform: scale(1.06)
+    }
+
+    .dest-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(26, 46, 59, .9) 0%, rgba(26, 46, 59, 0) 55%)
+    }
+
+    .dest-body {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 22px 20px
+    }
+
+    .dest-tag {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--dusk);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-bottom: 8px
+    }
+
+    .dest-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 21px;
+      color: #fff;
+      line-height: 1.15;
+      font-weight: 700
+    }
+
+    .dest-sub {
+      color: rgba(255, 255, 255, .6);
+      font-size: 11px;
+      margin-top: 4px
+    }
+
+    .dest-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 10px
+    }
+
+    .dest-rating {
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 500
+    }
+
+    .dest-price {
+      color: rgba(255, 255, 255, .75);
+      font-size: 12px
+    }
+
+    .dest-fav {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .15);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, .2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background .2s
+    }
+
+    .dest-fav:hover {
+      background: rgba(232, 168, 48, .3)
+    }
+
+    /* FEATURED STRIP */
+    .featured-strip {
+      background: linear-gradient(135deg, var(--earth), #7a3020);
+      border-radius: 20px;
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 32px;
+      color: #fff;
+      flex-wrap: wrap
+    }
+
+    .featured-strip-text {
+      flex: 1;
+      min-width: 200px
+    }
+
+    .featured-strip-text h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 4px
+    }
+
+    .featured-strip-text p {
+      font-size: 13px;
+      color: rgba(255, 255, 255, .7);
+      line-height: 1.5
+    }
+
+    .featured-strip-btn {
+      background: #fff;
+      color: var(--earth);
+      border: none;
+      padding: 11px 24px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      white-space: nowrap;
+      text-decoration: none;
+      transition: transform .2s
+    }
+
+    .featured-strip-btn:hover {
+      transform: scale(1.04)
+    }
+
+    /* PAGINATION */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 48px
+    }
+
+    .pg-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      border: 1.5px solid var(--sand);
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--muted);
+      transition: background .2s, color .2s, border-color .2s
+    }
+
+    .pg-btn.active {
+      background: var(--dusk);
+      color: #fff;
+      border-color: var(--dusk)
+    }
+
+    .pg-btn:hover:not(.active) {
+      background: var(--cream)
+    }
+
+    footer {
+      background: var(--dusk);
+      color: rgba(255, 255, 255, .45);
+      padding: 40px 48px 24px
+    }
+
+    .footer-simple {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: #fff;
+      text-decoration: none
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, .4);
+      font-size: 13px;
+      text-decoration: none
+    }
+
+    .footer-links a:hover {
+      color: var(--gold)
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, .07);
+      text-align: center
+    }
+
+    @media(max-width:768px) {
+      nav {
+        padding: 14px 20px
+      }
+
+      .nav-links {
+        display: none
+      }
+
+      .page-hero {
+        padding: 40px 20px 32px
+      }
+
+      .page-body {
+        padding: 32px 20px 60px
+      }
+
+      .filter-bar {
+        padding: 0 20px
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<nav>
-  <a href="index.html" class="nav-logo">Нүүдэл</a>
-  <ul class="nav-links">
-    <li><a href="index.html">Нүүр</a></li>
-    <li><a href="destinations.html" class="active">Газрууд</a></li>
-    <li><a href="packages.html">Аяллууд</a></li>
-    <li><a href="map.html">Маршрут</a></li>
-  </ul>
-  <div class="nav-right">
-    <a href="login.html" class="nav-login">Нэвтрэх</a>
-    <a href="login.html#register" class="nav-cta">Бүртгүүлэх</a>
-  </div>
-</nav>
-
-<div class="page-hero">
-  <div class="page-hero-inner">
-    <div class="breadcrumb"><a href="index.html">Нүүр</a><span>/</span><span style="color:rgba(255,255,255,.7)">Газрууд</span></div>
-    <h1>Монголын <em>онцлох</em><br>газрууд</h1>
-    <p>21 аймгийн хамгийн сонирхолтой, байгалийн болон соёлын дурсгалт 340+ газраас сонго.</p>
-  </div>
-</div>
-
-<!-- FILTERS -->
-<div class="filter-bar">
-  <div class="filter-tab active" onclick="setFilter(this,'Бүгд')">Бүгд</div>
-  <div class="filter-tab" onclick="setFilter(this,'Байгаль')">🌿 Байгаль</div>
-  <div class="filter-tab" onclick="setFilter(this,'Уул')">⛰️ Уул</div>
-  <div class="filter-tab" onclick="setFilter(this,'Нуур')">💧 Нуур</div>
-  <div class="filter-tab" onclick="setFilter(this,'Цөл')">🏜️ Цөл</div>
-  <div class="filter-tab" onclick="setFilter(this,'Түүх')">🏛️ Түүх &amp; Соёл</div>
-  <div class="filter-tab" onclick="setFilter(this,'Амралт')">🏕️ Амралт</div>
-  <div class="filter-right">
-    <select class="filter-select"><option>Бүх аймаг</option><option>Хөвсгөл</option><option>Өмнөговь</option><option>Хэнтий</option><option>Архангай</option><option>Баян-Өлгий</option></select>
-    <select class="filter-select"><option>Эрэмбэлэх: Шилдэг</option><option>Үнэ: Бага → Их</option><option>Үнэ: Их → Бага</option><option>Шинэ нэмэгдсэн</option></select>
-  </div>
-</div>
-
-<div class="page-body">
-
-  <!-- FEATURED -->
-  <a href="package-detail.html" class="featured-strip" style="text-decoration:none">
-    <div style="font-size:32px">🏆</div>
-    <div class="featured-strip-text">
-      <h3>Энэ сарын онцлох: Хонгорын элс</h3>
-      <p>Говийн хамгийн алдартай байгалийн дурсгалт газар · 5 хоногийн иж бүрэн багц</p>
+  <nav>
+    <a href="index.html" class="nav-logo">Нүүдэл</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Нүүр</a></li>
+      <li><a href="destinations.html" class="active">Газрууд</a></li>
+      <li><a href="packages.html">Аяллууд</a></li>
+      <li><a href="map.html">Маршрут</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="login.html" class="nav-login">Нэвтрэх</a>
+      <a href="login.html#register" class="nav-cta">Бүртгүүлэх</a>
     </div>
-    <span class="featured-strip-btn">Дэлгэрэнгүй →</span>
-  </a>
+  </nav>
 
-  <div class="results-header">
-    <p class="results-count"><strong>48</strong> газар олдлоо</p>
-    <div class="view-toggle">
-      <button class="vbtn active" title="Grid">⊞</button>
-      <button class="vbtn" title="List">☰</button>
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="breadcrumb"><a href="index.html">Нүүр</a><span>/</span><span
+          style="color:rgba(255,255,255,.7)">Газрууд</span></div>
+      <h1>Монголын <em>онцлох</em><br>газрууд</h1>
+      <p>21 аймгийн хамгийн сонирхолтой, байгалийн болон соёлын дурсгалт 340+ газраас сонго.</p>
     </div>
   </div>
 
-  <div class="dest-grid" id="destGrid">
-    <a href="package-detail.html" class="dest-card">
-      <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=700&q=80" alt="Хөвсгөл"/>
-      <div class="dest-overlay"></div>
-      <div class="dest-fav">♡</div>
-      <div class="dest-body">
-        <span class="dest-tag">Нуур</span>
-        <div class="dest-name">Хөвсгөл нуур</div>
-        <div class="dest-sub">Хөвсгөл аймаг</div>
-        <div class="dest-meta"><span class="dest-rating">★ 4.9</span><span class="dest-price">₮180,000-аас</span></div>
-      </div>
-    </a>
-    <a href="package-detail.html" class="dest-card">
-      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=80" alt="Говь"/>
-      <div class="dest-overlay"></div>
-      <div class="dest-fav">♡</div>
-      <div class="dest-body">
-        <span class="dest-tag" style="background:var(--earth);color:#fff">Цөл</span>
-        <div class="dest-name">Хонгорын элс</div>
-        <div class="dest-sub">Өмнөговь аймаг</div>
-        <div class="dest-meta"><span class="dest-rating">★ 4.8</span><span class="dest-price">₮220,000-аас</span></div>
-      </div>
-    </a>
-    <a href="package-detail.html" class="dest-card">
-      <img src="https://images.unsplash.com/photo-1491555103944-7c647fd857e6?w=700&q=80" alt="Хэнтий"/>
-      <div class="dest-overlay"></div>
-      <div class="dest-fav">♡</div>
-      <div class="dest-body">
-        <span class="dest-tag" style="background:var(--moss);color:#fff">Уул</span>
-        <div class="dest-name">Хэнтийн нуруу</div>
-        <div class="dest-sub">Хэнтий аймаг</div>
-        <div class="dest-meta"><span class="dest-rating">★ 4.8</span><span class="dest-price">₮150,000-аас</span></div>
-      </div>
-    </a>
-    <a href="package-detail.html" class="dest-card">
-      <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=700&q=80" alt="Тэрэлж"/>
-      <div class="dest-overlay"></div>
-      <div class="dest-fav">♡</div>
-      <div class="dest-body">
-        <span class="dest-tag">Байгаль</span>
-        <div class="dest-name">Тэрэлж НЦГ</div>
-        <div class="dest-sub">Төв аймаг</div>
-        <div class="dest-meta"><span class="dest-rating">★ 4.7</span><span class="dest-price">₮120,000-аас</span></div>
-      </div>
-    </a>
-    <a href="package-detail.html" class="dest-card">
-      <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=700&q=80" alt="Орхон"/>
-      <div class="dest-overlay"></div>
-      <div class="dest-fav">♡</div>
-      <div class="dest-body">
-        <span class="dest-tag" style="background:#6b5a3e;color:#fff">Түүх</span>
-        <div class="dest-name">Орхоны хөндий</div>
-        <div class="dest-sub">Өвөрхангай аймаг</div>
-        <div class="dest-meta"><span class="dest-rating">★ 4.6</span><span class="dest-price">₮130,000-аас</span></div>
-      </div>
-    </a>
-    <a href="package-detail.html" class="dest-card">
-      <img src="https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=700&q=80" alt="Говь"/>
-      <div class="dest-overlay"></div>
-      <div class="dest-fav">♡</div>
-      <div class="dest-body">
-        <span class="dest-tag" style="background:var(--earth);color:#fff">Цөл</span>
-        <div class="dest-name">Баянзаг</div>
-        <div class="dest-sub">Өмнөговь аймаг</div>
-        <div class="dest-meta"><span class="dest-rating">★ 4.5</span><span class="dest-price">₮200,000-аас</span></div>
-      </div>
-    </a>
-    <a href="package-detail.html" class="dest-card">
-      <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=700&q=80" alt="Нуур"/>
-      <div class="dest-overlay"></div>
-      <div class="dest-fav">♡</div>
-      <div class="dest-body">
-        <span class="dest-tag">Нуур</span>
-        <div class="dest-name">Цагаан нуур</div>
-        <div class="dest-sub">Баян-Өлгий аймаг</div>
-        <div class="dest-meta"><span class="dest-rating">★ 4.7</span><span class="dest-price">₮260,000-аас</span></div>
-      </div>
-    </a>
-    <a href="package-detail.html" class="dest-card">
-      <img src="https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=700&q=80" alt="Тал нутаг"/>
-      <div class="dest-overlay"></div>
-      <div class="dest-fav">♡</div>
-      <div class="dest-body">
-        <span class="dest-tag" style="background:var(--moss);color:#fff">Тал</span>
-        <div class="dest-name">Дархан тал</div>
-        <div class="dest-sub">Архангай аймаг</div>
-        <div class="dest-meta"><span class="dest-rating">★ 4.4</span><span class="dest-price">₮110,000-аас</span></div>
-      </div>
-    </a>
-  </div>
-
-  <div class="pagination">
-    <button class="pg-btn active">1</button>
-    <button class="pg-btn">2</button>
-    <button class="pg-btn">3</button>
-    <button class="pg-btn">…</button>
-    <button class="pg-btn">8</button>
-    <button class="pg-btn">→</button>
-  </div>
-</div>
-
-<footer>
-  <div class="footer-simple">
-    <a href="index.html" class="footer-logo">Нүүдэл</a>
-    <div class="footer-links">
-      <a href="destinations.html">Газрууд</a>
-      <a href="packages.html">Аяллууд</a>
-      <a href="map.html">Маршрут</a>
-      <a href="login.html">Нэвтрэх</a>
+  <!-- FILTERS -->
+  <div class="filter-bar">
+    <div class="filter-tab active" onclick="setFilter(this,'Бүгд')">Бүгд</div>
+    <div class="filter-tab" onclick="setFilter(this,'Байгаль')">🌿 Байгаль</div>
+    <div class="filter-tab" onclick="setFilter(this,'Уул')">⛰️ Уул</div>
+    <div class="filter-tab" onclick="setFilter(this,'Нуур')">💧 Нуур</div>
+    <div class="filter-tab" onclick="setFilter(this,'Цөл')">🏜️ Цөл</div>
+    <div class="filter-tab" onclick="setFilter(this,'Түүх')">🏛️ Түүх &amp; Соёл</div>
+    <div class="filter-tab" onclick="setFilter(this,'Амралт')">🏕️ Амралт</div>
+    <div class="filter-right">
+      <select class="filter-select">
+        <option>Бүх аймаг</option>
+        <option>Хөвсгөл</option>
+        <option>Өмнөговь</option>
+        <option>Хэнтий</option>
+        <option>Архангай</option>
+        <option>Баян-Өлгий</option>
+      </select>
+      <select class="filter-select">
+        <option>Эрэмбэлэх: Шилдэг</option>
+        <option>Үнэ: Бага → Их</option>
+        <option>Үнэ: Их → Бага</option>
+        <option>Шинэ нэмэгдсэн</option>
+      </select>
     </div>
   </div>
-  <div class="footer-copy">© 2025 Нүүдэл. Бүх эрх хуулиар хамгаалагдсан.</div>
-</footer>
 
-<script>
-function setFilter(el,name){
-  document.querySelectorAll('.filter-tab').forEach(t=>t.classList.remove('active'));
-  el.classList.add('active');
-}
-document.querySelectorAll('.dest-card').forEach((c,i)=>{
-  c.style.opacity='0';c.style.transform='translateY(24px)';c.style.transition=`opacity .5s ${i*.07}s ease,transform .5s ${i*.07}s ease`;
-  setTimeout(()=>{c.style.opacity='1';c.style.transform='translateY(0)'},100);
-});
-document.querySelectorAll('.dest-fav').forEach(f=>{
-  f.addEventListener('click',e=>{e.preventDefault();f.textContent=f.textContent==='♡'?'♥':'♡';f.style.color=f.textContent==='♥'?'#e8a830':''});
-});
-</script>
+  <div class="page-body">
+
+    <!-- FEATURED -->
+    <a href="package-detail.html" class="featured-strip" style="text-decoration:none">
+      <div style="font-size:32px">🏆</div>
+      <div class="featured-strip-text">
+        <h3>Энэ сарын онцлох: Хонгорын элс</h3>
+        <p>Говийн хамгийн алдартай байгалийн дурсгалт газар · 5 хоногийн иж бүрэн багц</p>
+      </div>
+      <span class="featured-strip-btn">Дэлгэрэнгүй →</span>
+    </a>
+
+    <div class="results-header">
+      <p class="results-count"><strong>48</strong> газар олдлоо</p>
+      <div class="view-toggle">
+        <button class="vbtn active" title="Grid">⊞</button>
+        <button class="vbtn" title="List">☰</button>
+      </div>
+    </div>
+
+    <div class="dest-grid" id="destGrid">
+      <a href="package-detail.html" class="dest-card">
+        <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=700&q=80" alt="Хөвсгөл" />
+        <div class="dest-overlay"></div>
+        <div class="dest-fav">♡</div>
+        <div class="dest-body">
+          <span class="dest-tag">Нуур</span>
+          <div class="dest-name">Хөвсгөл нуур</div>
+          <div class="dest-sub">Хөвсгөл аймаг</div>
+          <div class="dest-meta"><span class="dest-rating">★ 4.9</span><span class="dest-price">₮180,000-аас</span>
+          </div>
+        </div>
+      </a>
+      <a href="package-detail.html" class="dest-card">
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=80" alt="Говь" />
+        <div class="dest-overlay"></div>
+        <div class="dest-fav">♡</div>
+        <div class="dest-body">
+          <span class="dest-tag" style="background:var(--earth);color:#fff">Цөл</span>
+          <div class="dest-name">Хонгорын элс</div>
+          <div class="dest-sub">Өмнөговь аймаг</div>
+          <div class="dest-meta"><span class="dest-rating">★ 4.8</span><span class="dest-price">₮220,000-аас</span>
+          </div>
+        </div>
+      </a>
+      <a href="package-detail.html" class="dest-card">
+        <img src="https://images.unsplash.com/photo-1491555103944-7c647fd857e6?w=700&q=80" alt="Хэнтий" />
+        <div class="dest-overlay"></div>
+        <div class="dest-fav">♡</div>
+        <div class="dest-body">
+          <span class="dest-tag" style="background:var(--moss);color:#fff">Уул</span>
+          <div class="dest-name">Хэнтийн нуруу</div>
+          <div class="dest-sub">Хэнтий аймаг</div>
+          <div class="dest-meta"><span class="dest-rating">★ 4.8</span><span class="dest-price">₮150,000-аас</span>
+          </div>
+        </div>
+      </a>
+      <a href="package-detail.html" class="dest-card">
+        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=700&q=80" alt="Тэрэлж" />
+        <div class="dest-overlay"></div>
+        <div class="dest-fav">♡</div>
+        <div class="dest-body">
+          <span class="dest-tag">Байгаль</span>
+          <div class="dest-name">Тэрэлж НЦГ</div>
+          <div class="dest-sub">Төв аймаг</div>
+          <div class="dest-meta"><span class="dest-rating">★ 4.7</span><span class="dest-price">₮120,000-аас</span>
+          </div>
+        </div>
+      </a>
+      <a href="package-detail.html" class="dest-card">
+        <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=700&q=80" alt="Орхон" />
+        <div class="dest-overlay"></div>
+        <div class="dest-fav">♡</div>
+        <div class="dest-body">
+          <span class="dest-tag" style="background:#6b5a3e;color:#fff">Түүх</span>
+          <div class="dest-name">Орхоны хөндий</div>
+          <div class="dest-sub">Өвөрхангай аймаг</div>
+          <div class="dest-meta"><span class="dest-rating">★ 4.6</span><span class="dest-price">₮130,000-аас</span>
+          </div>
+        </div>
+      </a>
+      <a href="package-detail.html" class="dest-card">
+        <img src="https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=700&q=80" alt="Говь" />
+        <div class="dest-overlay"></div>
+        <div class="dest-fav">♡</div>
+        <div class="dest-body">
+          <span class="dest-tag" style="background:var(--earth);color:#fff">Цөл</span>
+          <div class="dest-name">Баянзаг</div>
+          <div class="dest-sub">Өмнөговь аймаг</div>
+          <div class="dest-meta"><span class="dest-rating">★ 4.5</span><span class="dest-price">₮200,000-аас</span>
+          </div>
+        </div>
+      </a>
+      <a href="package-detail.html" class="dest-card">
+        <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=700&q=80" alt="Нуур" />
+        <div class="dest-overlay"></div>
+        <div class="dest-fav">♡</div>
+        <div class="dest-body">
+          <span class="dest-tag">Нуур</span>
+          <div class="dest-name">Цагаан нуур</div>
+          <div class="dest-sub">Баян-Өлгий аймаг</div>
+          <div class="dest-meta"><span class="dest-rating">★ 4.7</span><span class="dest-price">₮260,000-аас</span>
+          </div>
+        </div>
+      </a>
+      <a href="package-detail.html" class="dest-card">
+        <img src="https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=700&q=80" alt="Тал нутаг" />
+        <div class="dest-overlay"></div>
+        <div class="dest-fav">♡</div>
+        <div class="dest-body">
+          <span class="dest-tag" style="background:var(--moss);color:#fff">Тал</span>
+          <div class="dest-name">Дархан тал</div>
+          <div class="dest-sub">Архангай аймаг</div>
+          <div class="dest-meta"><span class="dest-rating">★ 4.4</span><span class="dest-price">₮110,000-аас</span>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="pagination">
+      <button class="pg-btn active">1</button>
+      <button class="pg-btn">2</button>
+      <button class="pg-btn">3</button>
+      <button class="pg-btn">…</button>
+      <button class="pg-btn">8</button>
+      <button class="pg-btn">→</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-simple">
+      <a href="index.html" class="footer-logo">Нүүдэл</a>
+      <div class="footer-links">
+        <a href="destinations.html">Газрууд</a>
+        <a href="packages.html">Аяллууд</a>
+        <a href="map.html">Маршрут</a>
+        <a href="login.html">Нэвтрэх</a>
+      </div>
+    </div>
+    <div class="footer-copy">© 2025 Нүүдэл. Бүх эрх хуулиар хамгаалагдсан.</div>
+  </footer>
+
+  <script>
+    function setFilter(el, name) {
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+    }
+    document.querySelectorAll('.dest-card').forEach((c, i) => {
+      c.style.opacity = '0'; c.style.transform = 'translateY(24px)'; c.style.transition = `opacity .5s ${i * .07}s ease,transform .5s ${i * .07}s ease`;
+      setTimeout(() => { c.style.opacity = '1'; c.style.transform = 'translateY(0)' }, 100);
+    });
+    document.querySelectorAll('.dest-fav').forEach(f => {
+      f.addEventListener('click', e => { e.preventDefault(); f.textContent = f.textContent === '♡' ? '♥' : '♡'; f.style.color = f.textContent === '♥' ? '#e8a830' : '' });
+    });
+  </script>
 </body>
+
 </html>
