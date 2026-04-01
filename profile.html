@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Нүүдэл — Профайл</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--dusk:#1a2e3b;--earth:#b5703a;--gold:#e8a830;--moss:#4a6741;--cream:#f5f0e8;--sand:#e2d5bc;--white:#fff;--text:#1a2e3b;--muted:#6b7f8c}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 48px;background:rgba(245,240,232,.94);backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(0,0,0,.06)}
+.nav-logo{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--dusk);text-decoration:none}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{text-decoration:none;font-size:14px;font-weight:500;color:var(--muted);transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.nav-right{display:flex;gap:12px;align-items:center}
+.nav-logout{font-size:13px;color:var(--muted);text-decoration:none;cursor:pointer}
+.nav-logout:hover{color:var(--earth)}
+
+/* PROFILE HEADER */
+.profile-header{margin-top:64px;background:linear-gradient(135deg,var(--dusk) 0%,#0f2535 100%);padding:48px 48px 0;position:relative;overflow:hidden}
+.profile-header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(232,168,48,.08),transparent 60%)}
+.ph-inner{display:flex;align-items:flex-end;gap:28px;position:relative;flex-wrap:wrap}
+.ph-avatar-wrap{position:relative}
+.ph-avatar{width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--earth));display:flex;align-items:center;justify-content:center;font-size:40px;border:4px solid rgba(255,255,255,.15);flex-shrink:0}
+.ph-edit-btn{position:absolute;bottom:0;right:0;width:26px;height:26px;border-radius:50%;background:var(--gold);color:var(--dusk);border:2px solid var(--dusk);display:flex;align-items:center;justify-content:center;font-size:11px;cursor:pointer}
+.ph-info{flex:1;padding-bottom:28px}
+.ph-name{font-family:'Playfair Display',serif;font-size:28px;color:#fff;font-weight:700;margin-bottom:4px}
+.ph-email{font-size:13px;color:rgba(255,255,255,.45);margin-bottom:16px}
+.ph-badges{display:flex;gap:8px;flex-wrap:wrap}
+.ph-badge{padding:5px 14px;border-radius:100px;font-size:11px;font-weight:600;letter-spacing:.5px}
+.ph-badge.level{background:rgba(232,168,48,.2);border:1px solid rgba(232,168,48,.4);color:var(--gold)}
+.ph-badge.member{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);font-size:10px}
+
+/* STATS TAB */
+.ph-stats{background:rgba(255,255,255,.04);border-top:1px solid rgba(255,255,255,.07);margin-top:28px;display:flex}
+.ph-stat{flex:1;text-align:center;padding:16px;border-right:1px solid rgba(255,255,255,.06)}
+.ph-stat:last-child{border-right:none}
+.ph-stat-num{font-family:'Playfair Display',serif;font-size:22px;color:#fff;font-weight:700;line-height:1}
+.ph-stat-label{font-size:11px;color:rgba(255,255,255,.35);margin-top:4px}
+
+/* BODY */
+.profile-body{max-width:1200px;margin:0 auto;padding:40px 48px 80px;display:grid;grid-template-columns:240px 1fr;gap:32px}
+
+/* SIDEBAR NAV */
+.profile-nav{position:sticky;top:84px;align-self:start}
+.pnav-link{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:12px;font-size:14px;font-weight:500;color:var(--muted);cursor:pointer;transition:background .2s,color .2s;text-decoration:none;margin-bottom:4px}
+.pnav-link:hover{background:var(--white);color:var(--text)}
+.pnav-link.active{background:var(--white);color:var(--dusk);box-shadow:0 2px 12px rgba(26,46,59,.06);border:1.5px solid var(--sand)}
+.pnav-icon{font-size:16px;width:20px;text-align:center}
+.pnav-divider{border:none;border-top:1px solid var(--sand);margin:12px 0}
+
+/* SECTIONS */
+.profile-content{}
+.sec-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--dusk);margin-bottom:20px}
+
+/* TRIP CARDS */
+.trips-grid{display:grid;gap:16px;margin-bottom:40px}
+.trip-card{background:#fff;border-radius:16px;overflow:hidden;border:1.5px solid var(--sand);display:flex;transition:box-shadow .2s}
+.trip-card:hover{box-shadow:0 8px 32px rgba(26,46,59,.1)}
+.trip-thumb{width:120px;flex-shrink:0;overflow:hidden}
+.trip-thumb img{width:100%;height:100%;object-fit:cover}
+.trip-body{padding:18px 20px;flex:1}
+.trip-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:6px}
+.trip-name{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--dusk)}
+.trip-badge{font-size:10px;font-weight:700;padding:4px 12px;border-radius:100px;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+.trip-badge.done{background:rgba(74,103,65,.1);color:var(--moss);border:1px solid rgba(74,103,65,.2)}
+.trip-badge.upcoming{background:rgba(232,168,48,.12);color:var(--earth);border:1px solid rgba(232,168,48,.3)}
+.trip-badge.planned{background:rgba(107,127,140,.1);color:var(--muted);border:1px solid var(--sand)}
+.trip-meta{display:flex;gap:16px;color:var(--muted);font-size:12px;margin-bottom:10px}
+.trip-desc{font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:12px}
+.trip-actions{display:flex;gap:8px}
+.trip-btn{padding:7px 16px;border-radius:100px;font-size:12px;font-weight:500;cursor:pointer;font-family:inherit;border:1.5px solid var(--sand);background:#fff;color:var(--muted);transition:all .2s;text-decoration:none}
+.trip-btn:hover{border-color:var(--dusk);color:var(--dusk)}
+.trip-btn.pri{background:var(--dusk);color:#fff;border-color:var(--dusk)}
+.trip-btn.pri:hover{background:var(--earth);border-color:var(--earth)}
+
+/* SAVED ROUTES */
+.routes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-bottom:40px}
+.route-card{background:#fff;border-radius:14px;padding:18px;border:1.5px solid var(--sand);cursor:pointer;transition:all .2s;text-decoration:none;display:block;color:inherit}
+.route-card:hover{border-color:var(--gold);box-shadow:0 6px 24px rgba(232,168,48,.12)}
+.rc-map{height:80px;border-radius:10px;background:linear-gradient(135deg,#1a3a4a,#0e2030);margin-bottom:14px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.rc-map-dots{display:flex;gap:8px;align-items:center}
+.rc-dot{width:8px;height:8px;border-radius:50%;background:var(--gold)}
+.rc-line{flex:1;height:1px;background:rgba(232,168,48,.4);max-width:20px}
+.rc-name{font-size:14px;font-weight:600;margin-bottom:4px}
+.rc-meta{font-size:11px;color:var(--muted)}
+.rc-actions{display:flex;gap:6px;margin-top:12px}
+.rc-btn{padding:6px 12px;border-radius:8px;font-size:11px;font-weight:500;cursor:pointer;font-family:inherit;border:1.5px solid var(--sand);background:#fff;color:var(--muted);transition:all .2s}
+.rc-btn:hover{border-color:var(--earth);color:var(--earth)}
+.rc-btn.pri{background:var(--dusk);color:#fff;border-color:var(--dusk)}
+
+/* NOTES */
+.notes-area{background:#fff;border-radius:16px;border:1.5px solid var(--sand);overflow:hidden;margin-bottom:20px}
+.notes-header{background:var(--dusk);padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
+.notes-header span{font-size:14px;font-weight:600;color:#fff}
+.notes-add{background:var(--gold);color:var(--dusk);border:none;padding:6px 16px;border-radius:100px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit}
+.note-item{padding:16px 20px;border-bottom:1px solid var(--sand);display:flex;gap:14px;align-items:flex-start}
+.note-item:last-child{border-bottom:none}
+.note-date{font-size:10px;color:var(--muted);text-align:center;padding:6px;background:var(--cream);border-radius:8px;min-width:42px}
+.note-text{font-size:13px;line-height:1.6;flex:1}
+.note-trip{font-size:11px;color:var(--earth);margin-top:3px}
+.note-del{background:none;border:none;cursor:pointer;color:var(--muted);font-size:16px;padding:4px;transition:color .2s}
+.note-del:hover{color:#cc4444}
+
+/* SETTINGS */
+.settings-card{background:#fff;border-radius:16px;border:1.5px solid var(--sand);overflow:hidden;margin-bottom:20px}
+.settings-card h3{padding:18px 22px;font-size:14px;font-weight:600;border-bottom:1px solid var(--sand)}
+.settings-row{padding:16px 22px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--sand)}
+.settings-row:last-child{border-bottom:none}
+.settings-label{font-size:13px;font-weight:500}
+.settings-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.toggle{width:42px;height:24px;border-radius:100px;background:var(--sand);position:relative;cursor:pointer;transition:background .2s;flex-shrink:0}
+.toggle.on{background:var(--moss)}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:left .2s;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.toggle.on::after{left:21px}
+.settings-input{border:1.5px solid var(--sand);border-radius:10px;padding:8px 14px;font-family:inherit;font-size:13px;color:var(--text);background:var(--cream);outline:none;width:220px}
+
+footer{background:var(--dusk);color:rgba(255,255,255,.45);padding:40px 48px 24px}
+.footer-simple{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.footer-logo{font-family:'Playfair Display',serif;font-size:22px;color:#fff;text-decoration:none}
+.footer-links{display:flex;gap:24px}
+.footer-links a{color:rgba(255,255,255,.4);font-size:13px;text-decoration:none}.footer-links a:hover{color:var(--gold)}
+.footer-copy{font-size:12px;margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.07);text-align:center}
+@media(max-width:900px){nav{padding:14px 20px}.nav-links{display:none}.profile-header{padding:32px 20px 0}.profile-body{grid-template-columns:1fr;padding:24px 20px 60px}.profile-nav{position:static;display:flex;flex-wrap:wrap;gap:4px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Нүүдэл</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Нүүр</a></li>
+    <li><a href="destinations.html">Газрууд</a></li>
+    <li><a href="packages.html">Аяллууд</a></li>
+    <li><a href="map.html">Маршрут</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="login.html" class="nav-logout">← Гарах</a>
+  </div>
+</nav>
+
+<!-- PROFILE HEADER -->
+<div class="profile-header">
+  <div class="ph-inner">
+    <div class="ph-avatar-wrap">
+      <div class="ph-avatar">🙍‍♀️</div>
+      <div class="ph-edit-btn">✏</div>
+    </div>
+    <div class="ph-info">
+      <div class="ph-name">Болормаа Дорж</div>
+      <div class="ph-email">bolormaa.dorj@gmail.com</div>
+      <div class="ph-badges">
+        <span class="ph-badge level">🌟 Мөнгөн аялагч</span>
+        <span class="ph-badge member">Гишүүн болсон: 2023.04</span>
+      </div>
+    </div>
+  </div>
+  <div class="ph-stats">
+    <div class="ph-stat"><div class="ph-stat-num">8</div><div class="ph-stat-label">Аялал</div></div>
+    <div class="ph-stat"><div class="ph-stat-num">12</div><div class="ph-stat-label">Маршрут</div></div>
+    <div class="ph-stat"><div class="ph-stat-num">34</div><div class="ph-stat-label">Үнэлгээ</div></div>
+    <div class="ph-stat"><div class="ph-stat-num">5</div><div class="ph-stat-label">Хадгалсан</div></div>
+    <div class="ph-stat"><div class="ph-stat-num">₮2.1M</div><div class="ph-stat-label">Нийт зардал</div></div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="profile-body">
+
+  <!-- LEFT NAV -->
+  <div class="profile-nav">
+    <a class="pnav-link active" onclick="setSection('trips',this)"><span class="pnav-icon">✈️</span> Миний аяллууд</a>
+    <a class="pnav-link" onclick="setSection('routes',this)"><span class="pnav-icon">🗺️</span> Маршрутууд</a>
+    <a class="pnav-link" onclick="setSection('notes',this)"><span class="pnav-icon">📝</span> Тэмдэглэл</a>
+    <a class="pnav-link" onclick="setSection('settings',this)"><span class="pnav-icon">⚙️</span> Тохиргоо</a>
+    <hr class="pnav-divider"/>
+    <a class="pnav-link" href="map.html"><span class="pnav-icon">➕</span> Шинэ маршрут</a>
+    <a class="pnav-link" href="packages.html"><span class="pnav-icon">🔍</span> Аялал хайх</a>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="profile-content">
+
+    <!-- TRIPS -->
+    <div id="sec-trips">
+      <div class="sec-title">Миний аяллууд</div>
+      <div class="trips-grid">
+        <div class="trip-card">
+          <div class="trip-thumb"><img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=200&q=80" alt="Хөвсгөл"/></div>
+          <div class="trip-body">
+            <div class="trip-row">
+              <div class="trip-name">Хөвсгөлийн нуур эргийн аялал</div>
+              <span class="trip-badge done">Дууссан</span>
+            </div>
+            <div class="trip-meta"><span>📅 2024.07.15–19</span><span>👥 2 хүн</span><span>₮760,000</span></div>
+            <p class="trip-desc">4 хоногийн хамгийн гоё аялал байсан. Загас барьсан, гэрт хоносон.</p>
+            <div class="trip-actions">
+              <a href="package-detail.html" class="trip-btn">Дэлгэрэнгүй</a>
+              <a href="#" class="trip-btn">Үнэлгээ өгөх ★</a>
+            </div>
+          </div>
+        </div>
+        <div class="trip-card">
+          <div class="trip-thumb"><img src="https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=200&q=80" alt="Говь"/></div>
+          <div class="trip-body">
+            <div class="trip-row">
+              <div class="trip-name">Өмнөговийн шийдэмгий аялал</div>
+              <span class="trip-badge upcoming">Удахгүй</span>
+            </div>
+            <div class="trip-meta"><span>📅 2025.08.10–14</span><span>👥 4 хүн</span><span>₮1,800,000</span></div>
+            <p class="trip-desc">Хонгорын элс, Баянзаг. Тэмдэглэл бэлтгэж байна.</p>
+            <div class="trip-actions">
+              <a href="package-detail.html" class="trip-btn pri">Бэлтгэл харах →</a>
+              <a href="#" class="trip-btn">Цуцлах</a>
+            </div>
+          </div>
+        </div>
+        <div class="trip-card">
+          <div class="trip-thumb"><img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=200&q=80" alt="Тэрэлж"/></div>
+          <div class="trip-body">
+            <div class="trip-row">
+              <div class="trip-name">Тэрэлжийн уулын аялал</div>
+              <span class="trip-badge planned">Төлөвлөсөн</span>
+            </div>
+            <div class="trip-meta"><span>📅 2025.09.05–06</span><span>👥 6 хүн</span><span>₮864,000</span></div>
+            <p class="trip-desc">Найзуудтай 2 өдрийн викенд.</p>
+            <div class="trip-actions">
+              <a href="package-detail.html" class="trip-btn pri">Захиалах →</a>
+              <a href="map.html" class="trip-btn">Маршрут</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROUTES -->
+    <div id="sec-routes" style="display:none">
+      <div class="sec-title">Хадгалсан маршрутууд</div>
+      <div class="routes-grid">
+        <a href="map.html" class="route-card">
+          <div class="rc-map"><div class="rc-map-dots"><div class="rc-dot"></div><div class="rc-line"></div><div class="rc-dot"></div><div class="rc-line"></div><div class="rc-dot"></div></div></div>
+          <div class="rc-name">УБ → Хөвсгөл → Орхон</div>
+          <div class="rc-meta">3 цэг · 640 км · 9 цаг</div>
+          <div class="rc-actions"><button class="rc-btn pri">Нээх</button><button class="rc-btn">Хуваалцах</button></div>
+        </a>
+        <a href="map.html" class="route-card">
+          <div class="rc-map"><div class="rc-map-dots"><div class="rc-dot"></div><div class="rc-line"></div><div class="rc-dot" style="background:var(--earth)"></div><div class="rc-line"></div><div class="rc-dot"></div></div></div>
+          <div class="rc-name">Говийн дугуй маршрут</div>
+          <div class="rc-meta">5 цэг · 1,240 км · 16 цаг</div>
+          <div class="rc-actions"><button class="rc-btn pri">Нээх</button><button class="rc-btn">Хуваалцах</button></div>
+        </a>
+        <a href="map.html" class="route-card">
+          <div class="rc-map"><div class="rc-map-dots"><div class="rc-dot"></div><div class="rc-line"></div><div class="rc-dot" style="background:var(--moss)"></div></div></div>
+          <div class="rc-name">Тэрэлж → Хэнтий</div>
+          <div class="rc-meta">2 цэг · 180 км · 3 цаг</div>
+          <div class="rc-actions"><button class="rc-btn pri">Нээх</button><button class="rc-btn">Засах</button></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- NOTES -->
+    <div id="sec-notes" style="display:none">
+      <div class="sec-title">Аяллын тэмдэглэл</div>
+      <div class="notes-area">
+        <div class="notes-header"><span>📝 Тэмдэглэлүүд</span><button class="notes-add">+ Нэмэх</button></div>
+        <div class="note-item">
+          <div class="note-date"><div style="font-size:16px">07</div><div style="font-size:9px;text-transform:uppercase;letter-spacing:.5px">7-р сар</div></div>
+          <div style="flex:1"><div class="note-text">Хөвсгөл нуурт байх хугацаанд өглөө бүр загас барьсан. Нуурын ус маш цэвэр, тунгалаг байлаа. Дараагийн удаа кайяк авах хэрэгтэй.</div><div class="note-trip">Хөвсгөлийн аялал · 2024</div></div>
+          <button class="note-del">🗑</button>
+        </div>
+        <div class="note-item">
+          <div class="note-date"><div style="font-size:16px">08</div><div style="font-size:9px;text-transform:uppercase;letter-spacing:.5px">8-р сар</div></div>
+          <div style="flex:1"><div class="note-text">Говийн аялалд авах зүйлс: хөнгөн цагаан хувцас, нарны тосолгоо, усны сав, гутлын нэмэлт оосор.</div><div class="note-trip">Говийн аялал · 2025</div></div>
+          <button class="note-del">🗑</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div id="sec-settings" style="display:none">
+      <div class="sec-title">Тохиргоо</div>
+      <div class="settings-card">
+        <h3>Хувийн мэдээлэл</h3>
+        <div class="settings-row"><div><div class="settings-label">Нэр</div><div class="settings-sub">Нийтлэлд харагдах нэр</div></div><input class="settings-input" value="Болормаа Дорж"/></div>
+        <div class="settings-row"><div><div class="settings-label">Имэйл</div></div><input class="settings-input" value="bolormaa@gmail.com"/></div>
+        <div class="settings-row"><div><div class="settings-label">Утасны дугаар</div></div><input class="settings-input" value="+976 9911 2233"/></div>
+      </div>
+      <div class="settings-card">
+        <h3>Мэдэгдэл</h3>
+        <div class="settings-row"><div><div class="settings-label">Захиалгын мэдэгдэл</div><div class="settings-sub">Шинэ захиалга, баталгааны имэйл</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="settings-row"><div><div class="settings-label">Санал болголт</div><div class="settings-sub">Шинэ аяллын санал болголт</div></div><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+        <div class="settings-row"><div><div class="settings-label">SMS мэдэгдэл</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+      </div>
+      <button style="background:var(--dusk);color:#fff;border:none;padding:13px 28px;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit">Хадгалах</button>
+    </div>
+
+  </div><!-- /profile-content -->
+</div><!-- /profile-body -->
+
+<footer>
+  <div class="footer-simple">
+    <a href="index.html" class="footer-logo">Нүүдэл</a>
+    <div class="footer-links"><a href="destinations.html">Газрууд</a><a href="packages.html">Аяллууд</a><a href="map.html">Маршрут</a></div>
+  </div>
+  <div class="footer-copy">© 2025 Нүүдэл. Бүх эрх хуулиар хамгаалагдсан.</div>
+</footer>
+
+<script>
+function setSection(id,el){
+  ['trips','routes','notes','settings'].forEach(s=>document.getElementById('sec-'+s).style.display=s===id?'block':'none');
+  document.querySelectorAll('.pnav-link').forEach(l=>l.classList.remove('active'));
+  el.classList.add('active');
+}
+document.querySelectorAll('.note-del').forEach(b=>{b.addEventListener('click',()=>b.closest('.note-item').remove())});
+</script>
+</body>
+</html>

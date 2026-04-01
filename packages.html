@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Нүүдэл — Багц аялалууд</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--dusk:#1a2e3b;--earth:#b5703a;--gold:#e8a830;--moss:#4a6741;--cream:#f5f0e8;--sand:#e2d5bc;--white:#fff;--text:#1a2e3b;--muted:#6b7f8c}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 48px;background:rgba(245,240,232,.94);backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(0,0,0,.06)}
+.nav-logo{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--dusk);text-decoration:none}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{text-decoration:none;font-size:14px;font-weight:500;color:var(--muted);transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.nav-right{display:flex;gap:12px;align-items:center}
+.nav-login{font-size:14px;color:var(--muted);text-decoration:none}
+.nav-cta{background:var(--gold);color:var(--dusk);border:none;padding:10px 22px;border-radius:100px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;text-decoration:none;transition:transform .2s}
+.nav-cta:hover{transform:translateY(-2px)}
+
+/* HERO */
+.page-hero{margin-top:64px;background:linear-gradient(135deg,var(--dusk) 0%,#0f2535 100%);padding:60px 48px 48px;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=1400&q=60') center/cover;opacity:.1}
+.page-hero-inner{position:relative}
+.breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:14px;font-size:12px;color:rgba(255,255,255,.4)}
+.breadcrumb a{color:rgba(255,255,255,.4);text-decoration:none}.breadcrumb a:hover{color:var(--gold)}
+.page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,56px);font-weight:700;color:#fff;line-height:1.1;margin-bottom:10px}
+.page-hero h1 em{font-style:italic;color:var(--gold)}
+.page-hero p{color:rgba(255,255,255,.6);font-size:15px;max-width:500px;line-height:1.6}
+
+/* FILTER ROW */
+.filter-row{background:#fff;border-bottom:1px solid var(--sand);padding:14px 48px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;position:sticky;top:64px;z-index:90}
+.ftag{padding:8px 18px;border-radius:100px;font-size:12px;font-weight:500;cursor:pointer;border:1.5px solid var(--sand);color:var(--muted);background:#fff;font-family:inherit;transition:all .2s}
+.ftag.active,.ftag:hover{background:var(--dusk);color:#fff;border-color:var(--dusk)}
+.ftag.gold.active,.ftag.gold:hover{background:var(--gold);color:var(--dusk);border-color:var(--gold)}
+.fsel{border:1.5px solid var(--sand);border-radius:10px;padding:8px 14px;font-family:inherit;font-size:12px;color:var(--text);background:var(--cream);outline:none;margin-left:auto}
+
+/* PROMO BANNER */
+.promo{background:linear-gradient(90deg,var(--moss),#2a5025);border-radius:16px;padding:20px 28px;display:flex;align-items:center;gap:20px;margin:32px 48px 0;flex-wrap:wrap}
+.promo-text{flex:1;color:#fff}
+.promo-text h3{font-size:16px;font-weight:600;margin-bottom:2px}
+.promo-text p{font-size:12px;color:rgba(255,255,255,.65)}
+.promo-btn{background:#fff;color:var(--moss);border:none;padding:9px 22px;border-radius:100px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap}
+
+/* PACKAGES */
+.pkg-body{padding:32px 48px 80px}
+.pkg-section-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--dusk);margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.pkg-section-title::after{content:'';flex:1;height:1px;background:var(--sand)}
+.pkg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px;margin-bottom:48px}
+.pkg-card{background:#fff;border-radius:20px;overflow:hidden;border:1.5px solid var(--sand);transition:transform .3s,box-shadow .3s;text-decoration:none;display:block;color:inherit}
+.pkg-card:hover{transform:translateY(-5px);box-shadow:0 20px 56px rgba(26,46,59,.13)}
+.pkg-img{position:relative;height:220px;overflow:hidden}
+.pkg-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.pkg-card:hover .pkg-img img{transform:scale(1.05)}
+.pkg-badge{position:absolute;top:14px;right:14px;font-size:10px;font-weight:700;padding:4px 12px;border-radius:100px;letter-spacing:.5px;text-transform:uppercase}
+.pkg-badge.pop{background:var(--moss);color:#fff}
+.pkg-badge.new{background:var(--earth);color:#fff}
+.pkg-badge.sale{background:var(--gold);color:var(--dusk)}
+.pkg-heart{position:absolute;top:14px;left:14px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.15);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer}
+.pkg-body-inner{padding:22px 24px}
+.pkg-meta{display:flex;gap:14px;color:var(--muted);font-size:12px;margin-bottom:10px}
+.pkg-meta span{display:flex;align-items:center;gap:4px}
+.pkg-name{font-family:'Playfair Display',serif;font-size:19px;color:var(--dusk);font-weight:700;margin-bottom:8px;line-height:1.2}
+.pkg-desc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:18px}
+.pkg-includes{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.pkg-inc{font-size:11px;color:var(--muted);background:var(--cream);padding:4px 10px;border-radius:100px;border:1px solid var(--sand)}
+.pkg-footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--sand);padding-top:16px}
+.pkg-price-label{font-size:11px;color:var(--muted)}
+.pkg-price-val{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--dusk);line-height:1}
+.pkg-price-old{font-size:11px;color:var(--muted);text-decoration:line-through;margin-left:4px}
+.pkg-cta{background:var(--cream);color:var(--dusk);border:1.5px solid var(--sand);padding:9px 20px;border-radius:100px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s,border-color .2s;text-decoration:none}
+.pkg-cta:hover{background:var(--gold);border-color:var(--gold)}
+
+/* COMPARE BAR */
+.compare-bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1.5px solid var(--sand);padding:14px 48px;display:flex;align-items:center;gap:16px;z-index:90;box-shadow:0 -4px 24px rgba(0,0,0,.06);transform:translateY(100%);transition:transform .3s}
+.compare-bar.show{transform:translateY(0)}
+.compare-items{display:flex;gap:12px;flex:1}
+.compare-chip{background:var(--cream);border:1.5px solid var(--sand);border-radius:10px;padding:8px 14px;font-size:12px;display:flex;align-items:center;gap:8px}
+.compare-chip button{background:none;border:none;cursor:pointer;color:var(--muted);font-size:14px;line-height:1}
+.compare-cta{background:var(--dusk);color:#fff;border:none;padding:10px 24px;border-radius:100px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}
+
+footer{background:var(--dusk);color:rgba(255,255,255,.45);padding:40px 48px 24px}
+.footer-simple{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.footer-logo{font-family:'Playfair Display',serif;font-size:22px;color:#fff;text-decoration:none}
+.footer-links{display:flex;gap:24px}
+.footer-links a{color:rgba(255,255,255,.4);font-size:13px;text-decoration:none}.footer-links a:hover{color:var(--gold)}
+.footer-copy{font-size:12px;margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.07);text-align:center}
+@media(max-width:768px){nav{padding:14px 20px}.nav-links{display:none}.page-hero{padding:40px 20px}.filter-row{padding:12px 20px}.promo{margin:20px 20px 0}.pkg-body{padding:24px 20px 60px}.pkg-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Нүүдэл</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Нүүр</a></li>
+    <li><a href="destinations.html">Газрууд</a></li>
+    <li><a href="packages.html" class="active">Аяллууд</a></li>
+    <li><a href="map.html">Маршрут</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="login.html" class="nav-login">Нэвтрэх</a>
+    <a href="login.html#register" class="nav-cta">Бүртгүүлэх</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb"><a href="index.html">Нүүр</a><span>/</span><span style="color:rgba(255,255,255,.65)">Багц аялалууд</span></div>
+    <h1>Иж бүрэн <em>багц</em><br>аяллууд</h1>
+    <p>Мэргэжлийн гарын авлагчтай, буудал болон хоол багтаасан 60+ бэлэн багцаас сонго.</p>
+  </div>
+</div>
+
+<div class="filter-row">
+  <button class="ftag active" onclick="setF(this)">Бүгд</button>
+  <button class="ftag" onclick="setF(this)">1–3 хоног</button>
+  <button class="ftag" onclick="setF(this)">4–7 хоног</button>
+  <button class="ftag" onclick="setF(this)">7+ хоног</button>
+  <button class="ftag gold" onclick="setF(this)">💰 Хямд</button>
+  <button class="ftag" onclick="setF(this)">👨‍👩‍👧 Гэр бүл</button>
+  <button class="ftag" onclick="setF(this)">🏔️ Адал явдал</button>
+  <select class="fsel"><option>Бүх аймаг</option><option>Хөвсгөл</option><option>Өмнөговь</option><option>Хэнтий</option></select>
+</div>
+
+<div class="promo">
+  <div style="font-size:28px">🎉</div>
+  <div class="promo-text">
+    <h3>Зуны хямдрал — 20% хүртэл хөнгөлөлт!</h3>
+    <p>2025 оны 7–8 дугаар сард захиалбал бүх багцад хөнгөлөлт үйлчилнэ</p>
+  </div>
+  <button class="promo-btn">Санал харах →</button>
+</div>
+
+<div class="pkg-body">
+
+  <div class="pkg-section-title">⭐ Онцлох багцууд</div>
+  <div class="pkg-grid">
+    <a href="package-detail.html" class="pkg-card">
+      <div class="pkg-img">
+        <img src="https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=700&q=80" alt="Говь"/>
+        <div class="pkg-heart">♡</div>
+        <span class="pkg-badge pop">Алдартай</span>
+      </div>
+      <div class="pkg-body-inner">
+        <div class="pkg-meta"><span>📅 5 хоног</span><span>👥 2–12 хүн</span><span>⭐ 4.8 (128)</span></div>
+        <div class="pkg-name">Өмнөговийн шийдэмгий аялал</div>
+        <p class="pkg-desc">Хонгорын элс, Баянзаг, Молцог элс. Тэмээн дэрс унах, гэрт хоноглох бүхий онцгой туршлага.</p>
+        <div class="pkg-includes">
+          <span class="pkg-inc">🏕️ Гэр буудал</span><span class="pkg-inc">🍽️ Хоол багтана</span><span class="pkg-inc">🧭 Гарын авлагч</span>
+        </div>
+        <div class="pkg-footer">
+          <div><div class="pkg-price-label">Нэг хүнд</div><div class="pkg-price-val">₮450,000</div></div>
+          <span class="pkg-cta">Дэлгэрэнгүй →</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="package-detail.html" class="pkg-card">
+      <div class="pkg-img">
+        <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=700&q=80" alt="Хөвсгөл"/>
+        <div class="pkg-heart">♡</div>
+        <span class="pkg-badge new">Шинэ</span>
+      </div>
+      <div class="pkg-body-inner">
+        <div class="pkg-meta"><span>📅 4 хоног</span><span>👥 2–8 хүн</span><span>⭐ 4.9 (84)</span></div>
+        <div class="pkg-name">Хөвсгөлийн нуур эргийн аялал</div>
+        <p class="pkg-desc">Монголын "Далай нуур" дэргэд загас барих, дугуй унах, гэрт хонох хөгжилтэй аялал.</p>
+        <div class="pkg-includes">
+          <span class="pkg-inc">🏕️ Гэр буудал</span><span class="pkg-inc">🚣 Завин аялал</span><span class="pkg-inc">🧭 Гарын авлагч</span>
+        </div>
+        <div class="pkg-footer">
+          <div><div class="pkg-price-label">Нэг хүнд</div><div class="pkg-price-val">₮380,000</div></div>
+          <span class="pkg-cta">Дэлгэрэнгүй →</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="package-detail.html" class="pkg-card">
+      <div class="pkg-img">
+        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=700&q=80" alt="Тэрэлж"/>
+        <div class="pkg-heart">♡</div>
+        <span class="pkg-badge sale">−20%</span>
+      </div>
+      <div class="pkg-body-inner">
+        <div class="pkg-meta"><span>📅 2 хоног</span><span>👥 2–15 хүн</span><span>⭐ 4.7 (210)</span></div>
+        <div class="pkg-name">Тэрэлжийн уулын аялал</div>
+        <p class="pkg-desc">УБ-аас 80 км, онцгой чулуун хаднаар өгсөж, гэрт хоносон сэргэлэн викенд аялал.</p>
+        <div class="pkg-includes">
+          <span class="pkg-inc">🏕️ Кэмп</span><span class="pkg-inc">🧗 Хад авирах</span><span class="pkg-inc">🍖 Шарилж</span>
+        </div>
+        <div class="pkg-footer">
+          <div><div class="pkg-price-label">Нэг хүнд</div><div style="display:flex;align-items:baseline;gap:6px"><div class="pkg-price-val">₮144,000</div><span class="pkg-price-old">₮180,000</span></div></div>
+          <span class="pkg-cta">Дэлгэрэнгүй →</span>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div class="pkg-section-title">🏔️ Адал явдлын аяллууд</div>
+  <div class="pkg-grid">
+    <a href="package-detail.html" class="pkg-card">
+      <div class="pkg-img">
+        <img src="https://images.unsplash.com/photo-1491555103944-7c647fd857e6?w=700&q=80" alt="Хэнтий"/>
+        <div class="pkg-heart">♡</div>
+        <span class="pkg-badge pop">Алдартай</span>
+      </div>
+      <div class="pkg-body-inner">
+        <div class="pkg-meta"><span>📅 7 хоног</span><span>👥 4–10 хүн</span><span>⭐ 4.9 (56)</span></div>
+        <div class="pkg-name">Хэнтийн нурууны тэнүүчлэл</div>
+        <p class="pkg-desc">Чингис хааны нутаг Хэнтийгээр морин аялал хийж, онгон ой тайгаар дайран.</p>
+        <div class="pkg-includes">
+          <span class="pkg-inc">🐎 Морин аялал</span><span class="pkg-inc">🏕️ Хөдөөгийн гэр</span>
+        </div>
+        <div class="pkg-footer">
+          <div><div class="pkg-price-label">Нэг хүнд</div><div class="pkg-price-val">₮620,000</div></div>
+          <span class="pkg-cta">Дэлгэрэнгүй →</span>
+        </div>
+      </div>
+    </a>
+    <a href="package-detail.html" class="pkg-card">
+      <div class="pkg-img">
+        <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=700&q=80" alt="Алтай"/>
+        <div class="pkg-heart">♡</div>
+      </div>
+      <div class="pkg-body-inner">
+        <div class="pkg-meta"><span>📅 6 хоног</span><span>👥 2–8 хүн</span><span>⭐ 4.8 (44)</span></div>
+        <div class="pkg-name">Алтайн нурууны бүргэд агнуур</div>
+        <p class="pkg-desc">Баян-Өлгийд Казах бүргэдчидтэй хамт бүргэд ашиглан ан агнах уламжлалт туршлага.</p>
+        <div class="pkg-includes">
+          <span class="pkg-inc">🦅 Бүргэд агнуур</span><span class="pkg-inc">🏕️ Кэмп</span>
+        </div>
+        <div class="pkg-footer">
+          <div><div class="pkg-price-label">Нэг хүнд</div><div class="pkg-price-val">₮780,000</div></div>
+          <span class="pkg-cta">Дэлгэрэнгүй →</span>
+        </div>
+      </div>
+    </a>
+    <a href="package-detail.html" class="pkg-card">
+      <div class="pkg-img">
+        <img src="https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=700&q=80" alt="Тал"/>
+        <div class="pkg-heart">♡</div>
+        <span class="pkg-badge new">Шинэ</span>
+      </div>
+      <div class="pkg-body-inner">
+        <div class="pkg-meta"><span>📅 3 хоног</span><span>👥 2–20 хүн</span><span>⭐ 4.6 (33)</span></div>
+        <div class="pkg-name">Тал нутгийн гэрийн аялал</div>
+        <p class="pkg-desc">Монгол нүүдлийн соёлыг гэрт хоносон, ардын тоглоом тоглосон, сааль хийсэн туршлага.</p>
+        <div class="pkg-includes">
+          <span class="pkg-inc">🏠 Гэрт оршин</span><span class="pkg-inc">🐄 Сааль</span>
+        </div>
+        <div class="pkg-footer">
+          <div><div class="pkg-price-label">Нэг хүнд</div><div class="pkg-price-val">₮220,000</div></div>
+          <span class="pkg-cta">Дэлгэрэнгүй →</span>
+        </div>
+      </div>
+    </a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-simple">
+    <a href="index.html" class="footer-logo">Нүүдэл</a>
+    <div class="footer-links">
+      <a href="destinations.html">Газрууд</a>
+      <a href="packages.html">Аяллууд</a>
+      <a href="map.html">Маршрут</a>
+      <a href="login.html">Нэвтрэх</a>
+    </div>
+  </div>
+  <div class="footer-copy">© 2025 Нүүдэл. Бүх эрх хуулиар хамгаалагдсан.</div>
+</footer>
+
+<script>
+function setF(el){document.querySelectorAll('.ftag').forEach(t=>t.classList.remove('active'));el.classList.add('active')}
+document.querySelectorAll('.pkg-heart').forEach(h=>{
+  h.addEventListener('click',e=>{e.preventDefault();h.textContent=h.textContent==='♡'?'♥':'♡';h.style.color=h.textContent==='♥'?'var(--gold)':''})});
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)'}})},{threshold:.1});
+document.querySelectorAll('.pkg-card').forEach((el,i)=>{el.style.opacity='0';el.style.transform='translateY(24px)';el.style.transition=`opacity .5s ${i*.08}s,transform .5s ${i*.08}s`;io.observe(el)});
+</script>
+</body>
+</html>

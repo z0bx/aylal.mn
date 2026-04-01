@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Нүүдэл — Нэвтрэх / Бүртгүүлэх</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--dusk:#1a2e3b;--earth:#b5703a;--gold:#e8a830;--moss:#4a6741;--cream:#f5f0e8;--sand:#e2d5bc;--white:#fff;--text:#1a2e3b;--muted:#6b7f8c}
+body{font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;background:var(--cream)}
+
+/* SPLIT LAYOUT */
+.auth-wrap{display:grid;grid-template-columns:1fr 1fr;min-height:100vh}
+
+/* LEFT PANEL */
+.auth-visual{position:relative;overflow:hidden;background:var(--dusk)}
+.auth-bg{position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,46,59,.5) 0%,rgba(26,46,59,.2) 50%,rgba(26,46,59,.75) 100%),url('https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=1000&q=80') center/cover;animation:zoom 20s ease-in-out infinite alternate}
+@keyframes zoom{from{transform:scale(1.04)}to{transform:scale(1.1)}}
+.auth-visual-content{position:relative;z-index:2;padding:40px;height:100%;display:flex;flex-direction:column;justify-content:space-between}
+.auth-logo{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:#fff;text-decoration:none}
+.auth-visual-main{text-align:center;padding:0 24px}
+.auth-visual-main h2{font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,48px);color:#fff;font-weight:700;line-height:1.1;margin-bottom:14px}
+.auth-visual-main h2 em{font-style:italic;color:var(--gold)}
+.auth-visual-main p{color:rgba(255,255,255,.65);font-size:15px;line-height:1.65}
+.auth-stats{display:flex;justify-content:center;gap:32px}
+.astat{text-align:center}
+.astat-num{font-family:'Playfair Display',serif;font-size:28px;color:#fff;font-weight:700}
+.astat-label{font-size:11px;color:rgba(255,255,255,.45);margin-top:2px}
+
+/* RIGHT PANEL */
+.auth-panel{background:#fff;display:flex;align-items:center;justify-content:center;padding:48px 40px}
+.auth-card{width:100%;max-width:420px}
+
+/* TOGGLE */
+.auth-toggle{display:flex;background:var(--cream);border-radius:14px;padding:4px;margin-bottom:32px}
+.toggle-btn{flex:1;padding:10px;border-radius:10px;font-size:14px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--muted);font-family:inherit;transition:background .2s,color .2s,box-shadow .2s}
+.toggle-btn.active{background:#fff;color:var(--dusk);box-shadow:0 2px 12px rgba(26,46,59,.1)}
+
+/* FORMS */
+.auth-heading{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--dusk);margin-bottom:6px}
+.auth-sub{font-size:14px;color:var(--muted);margin-bottom:28px;line-height:1.5}
+.form-field{margin-bottom:16px}
+.form-field label{display:block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.form-field input{width:100%;border:1.5px solid var(--sand);border-radius:12px;padding:13px 16px;font-family:inherit;font-size:14px;color:var(--text);background:var(--cream);outline:none;transition:border-color .2s,box-shadow .2s}
+.form-field input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(232,168,48,.12)}
+.form-field input.error{border-color:#e85555}
+.form-error{font-size:11px;color:#e85555;margin-top:5px;display:none}
+.form-error.show{display:block}
+.pw-wrap{position:relative}
+.pw-wrap input{padding-right:44px}
+.pw-eye{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--muted);font-size:16px;padding:4px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.forgot{font-size:12px;color:var(--earth);text-decoration:none;float:right;margin-top:-8px;margin-bottom:8px}
+.forgot:hover{text-decoration:underline}
+.terms{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:16px}
+.terms a{color:var(--earth);text-decoration:none}
+.terms a:hover{text-decoration:underline}
+.submit-btn{width:100%;background:var(--gold);color:var(--dusk);border:none;padding:15px;border-radius:14px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:transform .2s,box-shadow .2s;margin-bottom:16px}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,168,48,.4)}
+.divider{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--sand)}
+.divider span{font-size:12px;color:var(--muted)}
+.social-btns{display:flex;gap:10px;margin-bottom:20px}
+.social-btn{flex:1;padding:11px;border-radius:12px;border:1.5px solid var(--sand);background:#fff;cursor:pointer;font-size:13px;font-weight:500;font-family:inherit;color:var(--text);transition:border-color .2s,box-shadow .2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.social-btn:hover{border-color:var(--dusk);box-shadow:0 4px 12px rgba(26,46,59,.08)}
+.auth-switch{font-size:13px;color:var(--muted);text-align:center}
+.auth-switch a{color:var(--earth);font-weight:500;text-decoration:none;cursor:pointer}
+.auth-switch a:hover{text-decoration:underline}
+
+/* SUCCESS STATE */
+.success-state{text-align:center;padding:20px 0;display:none}
+.success-icon{font-size:64px;margin-bottom:16px;animation:pop .4s ease}
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+.success-title{font-family:'Playfair Display',serif;font-size:24px;color:var(--dusk);margin-bottom:8px}
+.success-sub{color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:24px}
+.success-btn{background:var(--dusk);color:#fff;border:none;padding:13px 28px;border-radius:100px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-block;transition:background .2s}
+.success-btn:hover{background:var(--earth)}
+
+@media(max-width:768px){.auth-wrap{grid-template-columns:1fr}.auth-visual{display:none}.auth-panel{padding:32px 24px}}
+</style>
+</head>
+<body>
+
+<div class="auth-wrap">
+
+  <!-- LEFT VISUAL -->
+  <div class="auth-visual">
+    <div class="auth-bg"></div>
+    <div class="auth-visual-content">
+      <a href="index.html" class="auth-logo">Нүүдэл</a>
+      <div class="auth-visual-main">
+        <h2>Монголын <em>онгон сайхан</em><br>нутгийг мэдэр</h2>
+        <p>Маршрут зур. Цэг тэмдэглэ.<br>Аяллаа захиалаарай.</p>
+      </div>
+      <div class="auth-stats">
+        <div class="astat"><div class="astat-num">12K+</div><div class="astat-label">Аялагч</div></div>
+        <div class="astat"><div class="astat-num">340+</div><div class="astat-label">Маршрут</div></div>
+        <div class="astat"><div class="astat-num">21</div><div class="astat-label">Аймаг</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT FORM PANEL -->
+  <div class="auth-panel">
+    <div class="auth-card">
+
+      <!-- TOGGLE -->
+      <div class="auth-toggle">
+        <button class="toggle-btn active" id="loginToggle" onclick="showLogin()">Нэвтрэх</button>
+        <button class="toggle-btn" id="regToggle" onclick="showRegister()">Бүртгүүлэх</button>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <div id="loginForm">
+        <div class="auth-heading">Тавтай морил</div>
+        <p class="auth-sub">Өөрийн бүртгэлээр нэвтэрнэ үү</p>
+
+        <div class="form-field">
+          <label>Имэйл хаяг</label>
+          <input type="email" id="loginEmail" placeholder="taname@gmail.com"/>
+          <div class="form-error" id="emailErr">Имэйл хаяг буруу байна</div>
+        </div>
+        <div class="form-field">
+          <label>Нууц үг</label>
+          <a href="#" class="forgot">Нууц үгээ мартсан уу?</a>
+          <div class="pw-wrap">
+            <input type="password" id="loginPw" placeholder="••••••••"/>
+            <button class="pw-eye" onclick="togglePw('loginPw',this)" type="button">👁</button>
+          </div>
+          <div class="form-error" id="pwErr">Нууц үг буруу байна</div>
+        </div>
+
+        <button class="submit-btn" onclick="doLogin()">Нэвтрэх →</button>
+
+        <div class="divider"><span>эсвэл</span></div>
+        <div class="social-btns">
+          <button class="social-btn">🔵 Google</button>
+          <button class="social-btn">🔷 Facebook</button>
+        </div>
+        <div class="auth-switch">Бүртгэл байхгүй юу? <a onclick="showRegister()">Бүртгүүлэх →</a></div>
+      </div>
+
+      <!-- REGISTER FORM -->
+      <div id="regForm" style="display:none">
+        <div class="auth-heading">Бүртгүүлэх</div>
+        <p class="auth-sub">Нүүдэл платформд тавтай морил!</p>
+
+        <div class="form-row">
+          <div class="form-field"><label>Нэр</label><input type="text" placeholder="Болормаа"/></div>
+          <div class="form-field"><label>Овог</label><input type="text" placeholder="Дорж"/></div>
+        </div>
+        <div class="form-field"><label>Имэйл хаяг</label><input type="email" placeholder="taname@gmail.com"/></div>
+        <div class="form-field">
+          <label>Утасны дугаар</label>
+          <input type="tel" placeholder="+976 9911 2233"/>
+        </div>
+        <div class="form-field">
+          <label>Нууц үг</label>
+          <div class="pw-wrap">
+            <input type="password" id="regPw" placeholder="8+ тэмдэгт"/>
+            <button class="pw-eye" onclick="togglePw('regPw',this)" type="button">👁</button>
+          </div>
+        </div>
+        <!-- Password strength -->
+        <div style="margin:-8px 0 14px;display:flex;gap:4px" id="pwStrength">
+          <div style="flex:1;height:3px;background:var(--sand);border-radius:2px" id="ps1"></div>
+          <div style="flex:1;height:3px;background:var(--sand);border-radius:2px" id="ps2"></div>
+          <div style="flex:1;height:3px;background:var(--sand);border-radius:2px" id="ps3"></div>
+          <div style="flex:1;height:3px;background:var(--sand);border-radius:2px" id="ps4"></div>
+        </div>
+        <p class="terms">Бүртгүүлснээр манай <a href="#">Үйлчилгээний нөхцөл</a> болон <a href="#">Нууцлалын бодлого</a>-г зөвшөөрч байна.</p>
+
+        <button class="submit-btn" onclick="doRegister()">Бүртгүүлэх →</button>
+
+        <div class="divider"><span>эсвэл</span></div>
+        <div class="social-btns">
+          <button class="social-btn">🔵 Google</button>
+          <button class="social-btn">🔷 Facebook</button>
+        </div>
+        <div class="auth-switch">Аль хэдийн бүртгэлтэй юу? <a onclick="showLogin()">Нэвтрэх →</a></div>
+      </div>
+
+      <!-- SUCCESS STATE -->
+      <div class="success-state" id="successState">
+        <div class="success-icon">🎉</div>
+        <div class="success-title">Амжилттай нэвтэрлээ!</div>
+        <p class="success-sub">Нүүдэл платформд тавтай морил.<br>Монголыг нээх аяллаа эхлүүлэхэд бэлэн үү?</p>
+        <a href="profile.html" class="success-btn">Профайл харах →</a>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showLogin(){
+  document.getElementById('loginForm').style.display='block';
+  document.getElementById('regForm').style.display='none';
+  document.getElementById('loginToggle').classList.add('active');
+  document.getElementById('regToggle').classList.remove('active');
+}
+function showRegister(){
+  document.getElementById('loginForm').style.display='none';
+  document.getElementById('regForm').style.display='block';
+  document.getElementById('loginToggle').classList.remove('active');
+  document.getElementById('regToggle').classList.add('active');
+}
+function togglePw(id,btn){
+  const el=document.getElementById(id);
+  el.type=el.type==='password'?'text':'password';btn.textContent=el.type==='password'?'👁':'🙈';
+}
+function doLogin(){
+  const email=document.getElementById('loginEmail').value;
+  const pw=document.getElementById('loginPw').value;
+  let ok=true;
+  if(!email||!email.includes('@')){document.getElementById('emailErr').classList.add('show');document.getElementById('loginEmail').classList.add('error');ok=false}
+  else{document.getElementById('emailErr').classList.remove('show');document.getElementById('loginEmail').classList.remove('error')}
+  if(!pw||pw.length<6){document.getElementById('pwErr').classList.add('show');document.getElementById('loginPw').classList.add('error');ok=false}
+  else{document.getElementById('pwErr').classList.remove('show');document.getElementById('loginPw').classList.remove('error')}
+  if(ok){
+    document.getElementById('loginForm').style.display='none';
+    document.getElementById('successState').style.display='block';
+  }
+}
+function doRegister(){
+  document.getElementById('regForm').style.display='none';
+  document.getElementById('successState').style.display='block';
+  document.querySelector('.auth-toggle').style.display='none';
+}
+// Password strength
+document.getElementById('regPw')&&document.getElementById('regPw').addEventListener('input',function(){
+  const v=this.value,l=v.length;
+  const colors=['#e85555','var(--earth)','var(--gold)','var(--moss)'];
+  const bars=[document.getElementById('ps1'),document.getElementById('ps2'),document.getElementById('ps3'),document.getElementById('ps4')];
+  const strength=l===0?0:l<5?1:l<8?2:l<12?3:4;
+  bars.forEach((b,i)=>b.style.background=i<strength?colors[Math.min(strength-1,3)]:'var(--sand)');
+});
+// Check if came from #register
+if(location.hash==='#register')showRegister();
+</script>
+</body>
+</html>
