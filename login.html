@@ -1,243 +1,174 @@
+
+<!-- Нэвтрэх (Login) -->
 <!DOCTYPE html>
-<html lang="mn">
-<head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Нүүдэл — Нэвтрэх / Бүртгүүлэх</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+<html lang="mn"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nomadic Horizon - Нэвтрэх</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&amp;family=Work+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-tint": "#855312",
+              "outline-variant": "#d5c3b4",
+              "primary-fixed": "#ffddbb",
+              "primary-container": "#c68b46",
+              "surface-variant": "#ede1cd",
+              "on-surface-variant": "#514539",
+              "error-container": "#ffdad6",
+              "on-secondary-fixed-variant": "#72351c",
+              "on-primary-fixed-variant": "#673d00",
+              "surface-container-lowest": "#ffffff",
+              "tertiary-fixed": "#f1e2b2",
+              "surface-bright": "#fff8f1",
+              "secondary-container": "#fea685",
+              "on-tertiary": "#ffffff",
+              "surface-container-high": "#f3e7d2",
+              "secondary-fixed-dim": "#ffb59a",
+              "tertiary": "#685e38",
+              "on-primary": "#ffffff",
+              "primary": "#855312",
+              "surface-container": "#f8edd8",
+              "inverse-primary": "#fbba70",
+              "surface-container-low": "#fef2dd",
+              "on-primary-container": "#472800",
+              "on-secondary": "#ffffff",
+              "background": "#fff8f1",
+              "on-secondary-container": "#783920",
+              "on-error": "#ffffff",
+              "surface": "#fff8f1",
+              "on-primary-fixed": "#2b1700",
+              "error": "#ba1a1a",
+              "secondary-fixed": "#ffdbce",
+              "on-tertiary-fixed-variant": "#4f4623",
+              "on-background": "#201b0e",
+              "tertiary-fixed-dim": "#d4c698",
+              "surface-container-highest": "#ede1cd",
+              "inverse-surface": "#363022",
+              "on-tertiary-fixed": "#221b00",
+              "tertiary-container": "#b8ab7f",
+              "on-tertiary-container": "#483f1d",
+              "on-surface": "#201b0e",
+              "on-secondary-fixed": "#380d00",
+              "surface-dim": "#e4d9c4",
+              "on-error-container": "#93000a",
+              "secondary": "#904c31",
+              "outline": "#837467",
+              "inverse-on-surface": "#fbefda",
+              "primary-fixed-dim": "#fbba70"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Work Sans"],
+              "label": ["Work Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--dusk:#1a2e3b;--earth:#b5703a;--gold:#e8a830;--moss:#4a6741;--cream:#f5f0e8;--sand:#e2d5bc;--white:#fff;--text:#1a2e3b;--muted:#6b7f8c}
-body{font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;background:var(--cream)}
-
-/* SPLIT LAYOUT */
-.auth-wrap{display:grid;grid-template-columns:1fr 1fr;min-height:100vh}
-
-/* LEFT PANEL */
-.auth-visual{position:relative;overflow:hidden;background:var(--dusk)}
-.auth-bg{position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,46,59,.5) 0%,rgba(26,46,59,.2) 50%,rgba(26,46,59,.75) 100%),url('https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=1000&q=80') center/cover;animation:zoom 20s ease-in-out infinite alternate}
-@keyframes zoom{from{transform:scale(1.04)}to{transform:scale(1.1)}}
-.auth-visual-content{position:relative;z-index:2;padding:40px;height:100%;display:flex;flex-direction:column;justify-content:space-between}
-.auth-logo{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:#fff;text-decoration:none}
-.auth-visual-main{text-align:center;padding:0 24px}
-.auth-visual-main h2{font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,48px);color:#fff;font-weight:700;line-height:1.1;margin-bottom:14px}
-.auth-visual-main h2 em{font-style:italic;color:var(--gold)}
-.auth-visual-main p{color:rgba(255,255,255,.65);font-size:15px;line-height:1.65}
-.auth-stats{display:flex;justify-content:center;gap:32px}
-.astat{text-align:center}
-.astat-num{font-family:'Playfair Display',serif;font-size:28px;color:#fff;font-weight:700}
-.astat-label{font-size:11px;color:rgba(255,255,255,.45);margin-top:2px}
-
-/* RIGHT PANEL */
-.auth-panel{background:#fff;display:flex;align-items:center;justify-content:center;padding:48px 40px}
-.auth-card{width:100%;max-width:420px}
-
-/* TOGGLE */
-.auth-toggle{display:flex;background:var(--cream);border-radius:14px;padding:4px;margin-bottom:32px}
-.toggle-btn{flex:1;padding:10px;border-radius:10px;font-size:14px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--muted);font-family:inherit;transition:background .2s,color .2s,box-shadow .2s}
-.toggle-btn.active{background:#fff;color:var(--dusk);box-shadow:0 2px 12px rgba(26,46,59,.1)}
-
-/* FORMS */
-.auth-heading{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--dusk);margin-bottom:6px}
-.auth-sub{font-size:14px;color:var(--muted);margin-bottom:28px;line-height:1.5}
-.form-field{margin-bottom:16px}
-.form-field label{display:block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
-.form-field input{width:100%;border:1.5px solid var(--sand);border-radius:12px;padding:13px 16px;font-family:inherit;font-size:14px;color:var(--text);background:var(--cream);outline:none;transition:border-color .2s,box-shadow .2s}
-.form-field input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(232,168,48,.12)}
-.form-field input.error{border-color:#e85555}
-.form-error{font-size:11px;color:#e85555;margin-top:5px;display:none}
-.form-error.show{display:block}
-.pw-wrap{position:relative}
-.pw-wrap input{padding-right:44px}
-.pw-eye{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--muted);font-size:16px;padding:4px}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.forgot{font-size:12px;color:var(--earth);text-decoration:none;float:right;margin-top:-8px;margin-bottom:8px}
-.forgot:hover{text-decoration:underline}
-.terms{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:16px}
-.terms a{color:var(--earth);text-decoration:none}
-.terms a:hover{text-decoration:underline}
-.submit-btn{width:100%;background:var(--gold);color:var(--dusk);border:none;padding:15px;border-radius:14px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:transform .2s,box-shadow .2s;margin-bottom:16px}
-.submit-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,168,48,.4)}
-.divider{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--sand)}
-.divider span{font-size:12px;color:var(--muted)}
-.social-btns{display:flex;gap:10px;margin-bottom:20px}
-.social-btn{flex:1;padding:11px;border-radius:12px;border:1.5px solid var(--sand);background:#fff;cursor:pointer;font-size:13px;font-weight:500;font-family:inherit;color:var(--text);transition:border-color .2s,box-shadow .2s;display:flex;align-items:center;justify-content:center;gap:8px}
-.social-btn:hover{border-color:var(--dusk);box-shadow:0 4px 12px rgba(26,46,59,.08)}
-.auth-switch{font-size:13px;color:var(--muted);text-align:center}
-.auth-switch a{color:var(--earth);font-weight:500;text-decoration:none;cursor:pointer}
-.auth-switch a:hover{text-decoration:underline}
-
-/* SUCCESS STATE */
-.success-state{text-align:center;padding:20px 0;display:none}
-.success-icon{font-size:64px;margin-bottom:16px;animation:pop .4s ease}
-@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
-.success-title{font-family:'Playfair Display',serif;font-size:24px;color:var(--dusk);margin-bottom:8px}
-.success-sub{color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:24px}
-.success-btn{background:var(--dusk);color:#fff;border:none;padding:13px 28px;border-radius:100px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-block;transition:background .2s}
-.success-btn:hover{background:var(--earth)}
-
-@media(max-width:768px){.auth-wrap{grid-template-columns:1fr}.auth-visual{display:none}.auth-panel{padding:32px 24px}}
-</style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-shadow {
+            box-shadow: 0 20px 40px -10px rgba(32, 27, 14, 0.08);
+        }
+        .asymmetric-clip {
+            clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 95%);
+        }
+    </style>
 </head>
-<body>
-
-<div class="auth-wrap">
-
-  <!-- LEFT VISUAL -->
-  <div class="auth-visual">
-    <div class="auth-bg"></div>
-    <div class="auth-visual-content">
-      <a href="index.html" class="auth-logo">Нүүдэл</a>
-      <div class="auth-visual-main">
-        <h2>Монголын <em>онгон сайхан</em><br>нутгийг мэдэр</h2>
-        <p>Маршрут зур. Цэг тэмдэглэ.<br>Аяллаа захиалаарай.</p>
-      </div>
-      <div class="auth-stats">
-        <div class="astat"><div class="astat-num">12K+</div><div class="astat-label">Аялагч</div></div>
-        <div class="astat"><div class="astat-num">340+</div><div class="astat-label">Маршрут</div></div>
-        <div class="astat"><div class="astat-num">21</div><div class="astat-label">Аймаг</div></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- RIGHT FORM PANEL -->
-  <div class="auth-panel">
-    <div class="auth-card">
-
-      <!-- TOGGLE -->
-      <div class="auth-toggle">
-        <button class="toggle-btn active" id="loginToggle" onclick="showLogin()">Нэвтрэх</button>
-        <button class="toggle-btn" id="regToggle" onclick="showRegister()">Бүртгүүлэх</button>
-      </div>
-
-      <!-- LOGIN FORM -->
-      <div id="loginForm">
-        <div class="auth-heading">Тавтай морил</div>
-        <p class="auth-sub">Өөрийн бүртгэлээр нэвтэрнэ үү</p>
-
-        <div class="form-field">
-          <label>Имэйл хаяг</label>
-          <input type="email" id="loginEmail" placeholder="taname@gmail.com"/>
-          <div class="form-error" id="emailErr">Имэйл хаяг буруу байна</div>
-        </div>
-        <div class="form-field">
-          <label>Нууц үг</label>
-          <a href="#" class="forgot">Нууц үгээ мартсан уу?</a>
-          <div class="pw-wrap">
-            <input type="password" id="loginPw" placeholder="••••••••"/>
-            <button class="pw-eye" onclick="togglePw('loginPw',this)" type="button">👁</button>
-          </div>
-          <div class="form-error" id="pwErr">Нууц үг буруу байна</div>
-        </div>
-
-        <button class="submit-btn" onclick="doLogin()">Нэвтрэх →</button>
-
-        <div class="divider"><span>эсвэл</span></div>
-        <div class="social-btns">
-          <button class="social-btn">🔵 Google</button>
-          <button class="social-btn">🔷 Facebook</button>
-        </div>
-        <div class="auth-switch">Бүртгэл байхгүй юу? <a onclick="showRegister()">Бүртгүүлэх →</a></div>
-      </div>
-
-      <!-- REGISTER FORM -->
-      <div id="regForm" style="display:none">
-        <div class="auth-heading">Бүртгүүлэх</div>
-        <p class="auth-sub">Нүүдэл платформд тавтай морил!</p>
-
-        <div class="form-row">
-          <div class="form-field"><label>Нэр</label><input type="text" placeholder="Болормаа"/></div>
-          <div class="form-field"><label>Овог</label><input type="text" placeholder="Дорж"/></div>
-        </div>
-        <div class="form-field"><label>Имэйл хаяг</label><input type="email" placeholder="taname@gmail.com"/></div>
-        <div class="form-field">
-          <label>Утасны дугаар</label>
-          <input type="tel" placeholder="+976 9911 2233"/>
-        </div>
-        <div class="form-field">
-          <label>Нууц үг</label>
-          <div class="pw-wrap">
-            <input type="password" id="regPw" placeholder="8+ тэмдэгт"/>
-            <button class="pw-eye" onclick="togglePw('regPw',this)" type="button">👁</button>
-          </div>
-        </div>
-        <!-- Password strength -->
-        <div style="margin:-8px 0 14px;display:flex;gap:4px" id="pwStrength">
-          <div style="flex:1;height:3px;background:var(--sand);border-radius:2px" id="ps1"></div>
-          <div style="flex:1;height:3px;background:var(--sand);border-radius:2px" id="ps2"></div>
-          <div style="flex:1;height:3px;background:var(--sand);border-radius:2px" id="ps3"></div>
-          <div style="flex:1;height:3px;background:var(--sand);border-radius:2px" id="ps4"></div>
-        </div>
-        <p class="terms">Бүртгүүлснээр манай <a href="#">Үйлчилгээний нөхцөл</a> болон <a href="#">Нууцлалын бодлого</a>-г зөвшөөрч байна.</p>
-
-        <button class="submit-btn" onclick="doRegister()">Бүртгүүлэх →</button>
-
-        <div class="divider"><span>эсвэл</span></div>
-        <div class="social-btns">
-          <button class="social-btn">🔵 Google</button>
-          <button class="social-btn">🔷 Facebook</button>
-        </div>
-        <div class="auth-switch">Аль хэдийн бүртгэлтэй юу? <a onclick="showLogin()">Нэвтрэх →</a></div>
-      </div>
-
-      <!-- SUCCESS STATE -->
-      <div class="success-state" id="successState">
-        <div class="success-icon">🎉</div>
-        <div class="success-title">Амжилттай нэвтэрлээ!</div>
-        <p class="success-sub">Нүүдэл платформд тавтай морил.<br>Монголыг нээх аяллаа эхлүүлэхэд бэлэн үү?</p>
-        <a href="profile.html" class="success-btn">Профайл харах →</a>
-      </div>
-
-    </div>
-  </div>
-
+<body class="bg-surface font-body text-on-surface antialiased">
+<main class="min-h-screen flex flex-col md:flex-row overflow-hidden">
+<div class="hidden md:flex md:w-1/2 lg:w-3/5 bg-surface-container relative items-center justify-center p-12 lg:p-24 overflow-hidden">
+<div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(#855312 0.5px, transparent 0.5px); background-size: 24px 24px;"></div>
+<div class="relative z-10 w-full max-w-2xl">
+<div class="mb-12">
+<span class="font-label text-sm uppercase tracking-widest text-primary mb-4 block">Nomadic Horizon</span>
+<h1 class="font-headline text-6xl lg:text-8xl font-black text-on-surface leading-none tracking-tight">
+                        Тавтай <br/> морилно уу
+                    </h1>
 </div>
-
-<script>
-function showLogin(){
-  document.getElementById('loginForm').style.display='block';
-  document.getElementById('regForm').style.display='none';
-  document.getElementById('loginToggle').classList.add('active');
-  document.getElementById('regToggle').classList.remove('active');
-}
-function showRegister(){
-  document.getElementById('loginForm').style.display='none';
-  document.getElementById('regForm').style.display='block';
-  document.getElementById('loginToggle').classList.remove('active');
-  document.getElementById('regToggle').classList.add('active');
-}
-function togglePw(id,btn){
-  const el=document.getElementById(id);
-  el.type=el.type==='password'?'text':'password';btn.textContent=el.type==='password'?'👁':'🙈';
-}
-function doLogin(){
-  const email=document.getElementById('loginEmail').value;
-  const pw=document.getElementById('loginPw').value;
-  let ok=true;
-  if(!email||!email.includes('@')){document.getElementById('emailErr').classList.add('show');document.getElementById('loginEmail').classList.add('error');ok=false}
-  else{document.getElementById('emailErr').classList.remove('show');document.getElementById('loginEmail').classList.remove('error')}
-  if(!pw||pw.length<6){document.getElementById('pwErr').classList.add('show');document.getElementById('loginPw').classList.add('error');ok=false}
-  else{document.getElementById('pwErr').classList.remove('show');document.getElementById('loginPw').classList.remove('error')}
-  if(ok){
-    document.getElementById('loginForm').style.display='none';
-    document.getElementById('successState').style.display='block';
-  }
-}
-function doRegister(){
-  document.getElementById('regForm').style.display='none';
-  document.getElementById('successState').style.display='block';
-  document.querySelector('.auth-toggle').style.display='none';
-}
-// Password strength
-document.getElementById('regPw')&&document.getElementById('regPw').addEventListener('input',function(){
-  const v=this.value,l=v.length;
-  const colors=['#e85555','var(--earth)','var(--gold)','var(--moss)'];
-  const bars=[document.getElementById('ps1'),document.getElementById('ps2'),document.getElementById('ps3'),document.getElementById('ps4')];
-  const strength=l===0?0:l<5?1:l<8?2:l<12?3:4;
-  bars.forEach((b,i)=>b.style.background=i<strength?colors[Math.min(strength-1,3)]:'var(--sand)');
-});
-// Check if came from #register
-if(location.hash==='#register')showRegister();
-</script>
-</body>
-</html>
+<div class="relative group">
+<div class="absolute -top-8 -left-8 w-32 h-32 bg-primary-fixed rounded-full opacity-50 blur-2xl group-hover:opacity-70 transition-opacity"></div>
+<img class="w-full h-[500px] object-cover rounded-xl editorial-shadow asymmetric-clip grayscale hover:grayscale-0 transition-all duration-700" data-alt="dramatic wide landscape of the mongolian steppe at sunset with golden light hitting the rolling hills and a lone rider in the distance" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7eDiJTgCf6P7Azpw3Po7UsXp2NvClbNGc_KgPLP2kXott4l5bidV3oXcF0kgi4zZuHsahncFAT2b-sw_xzXh_SheRD_qS-jAqW7VBczSXsQt-NiKV6DmA4g90OB0xvxuHNwPT45rdOXy5_U3UUbP3R6-4cqylLZA7alMFGtm2ivwzL60tc6l4VIdZJPKe5moNKA8lfHX1ry66ELvuzpbtr8S20v6oQQ_GVS5AUAbGZm9Gk7Aq4kgf1PYHT_Wkcjb7HNcf12AzrkQ"/>
+<div class="absolute -bottom-6 -right-6 bg-surface p-6 rounded-lg editorial-shadow max-w-xs border-l-4 border-primary">
+<p class="font-headline italic text-on-surface-variant text-lg">"Ертөнцийн хязгаар руу хийх таны дараагийн аялал эндээс эхэлнэ."</p>
+</div>
+</div>
+</div>
+</div>
+<div class="w-full md:w-1/2 lg:w-2/5 bg-surface flex items-center justify-center p-8 md:p-12 lg:p-20 relative">
+<a class="absolute top-8 left-8 md:left-12 flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+<span class="font-label text-sm uppercase tracking-widest">Нүүр хуудас</span>
+</a>
+<div class="w-full max-w-md">
+<div class="mb-10 flex gap-8 items-end">
+<button class="font-headline text-3xl font-bold border-b-2 border-primary pb-2 transition-all">
+                        Нэвтрэх
+                    </button>
+<button class="font-headline text-xl font-medium text-on-surface-variant hover:text-on-surface pb-2 transition-all">
+                        Бүртгүүлэх
+                    </button>
+</div>
+<form class="space-y-8">
+<div class="group">
+<label class="block font-label text-xs uppercase tracking-widest text-on-surface-variant group-focus-within:text-primary transition-colors mb-2" for="email">Имэйл хаяг</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-primary px-0 py-3 text-on-surface font-body placeholder:text-outline-variant/50 transition-all" id="email" placeholder="example@nomad.mn" type="email"/>
+</div>
+<div class="group">
+<div class="flex justify-between items-center mb-2">
+<label class="block font-label text-xs uppercase tracking-widest text-on-surface-variant group-focus-within:text-primary transition-colors" for="password">Нууц үг</label>
+<a class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary underline-offset-4 hover:underline" href="#">Мартсан уу?</a>
+</div>
+<div class="relative">
+<input class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-primary px-0 py-3 text-on-surface font-body transition-all" id="password" placeholder="••••••••" type="password"/>
+<button class="absolute right-0 top-1/2 -translate-y-1/2 text-on-surface-variant" type="button">
+<span class="material-symbols-outlined text-lg">visibility</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<input class="w-4 h-4 rounded-sm border-outline-variant text-primary focus:ring-primary/20 bg-transparent" id="remember" type="checkbox"/>
+<label class="font-label text-sm text-on-surface-variant" for="remember">Намайг сануул</label>
+</div>
+<button class="w-full py-5 px-8 bg-gradient-to-b from-primary to-primary-container text-on-primary font-label text-sm uppercase tracking-[0.2em] font-semibold rounded-md shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex justify-between items-center group" type="submit">
+<span>Аяллаа үргэлжлүүлэх</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</form>
+<div class="mt-16">
+<div class="relative flex items-center justify-center py-4">
+<div class="absolute inset-0 flex items-center"><div class="w-full border-t border-outline-variant/20"></div></div>
+<span class="relative px-4 bg-surface font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Эсвэл нэвтрэх</span>
+</div>
+<div class="grid grid-cols-2 gap-4 mt-6">
+<button class="flex items-center justify-center gap-3 py-4 px-4 bg-surface-container-low hover:bg-surface-container-highest rounded-lg transition-colors group">
+<svg class="w-5 h-5" viewbox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path><path d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path></svg>
+<span class="font-label text-xs uppercase tracking-widest font-medium">Google</span>
+</button>
+<button class="flex items-center justify-center gap-3 py-4 px-4 bg-surface-container-low hover:bg-surface-container-highest rounded-lg transition-colors group">
+<span class="material-symbols-outlined text-lg text-on-surface">ios</span>
+<span class="font-label text-xs uppercase tracking-widest font-medium">Apple</span>
+</button>
+</div>
+</div>
+<footer class="mt-20 text-center">
+<p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant leading-relaxed">
+                        © 2024 Nomadic Horizon. БҮХ ЭРХ ХУУЛИАР ХАМГААЛАГДСАН.<br/>
+<a class="hover:text-primary transition-colors" href="#">НУУЦЛАЛЫН БОДЛОГО</a> • <a class="hover:text-primary transition-colors" href="#">ҮЙЛЧИЛГЭЭНИЙ НӨХЦӨЛ</a>
+</p>
+</footer>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,318 +1,318 @@
+<!-- Хэрэглэгчийн хянах самбар (User Dashboard) -->
 <!DOCTYPE html>
-<html lang="mn">
+
+<html class="light" lang="mn">
+
 <head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Нүүдэл — Профайл</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--dusk:#1a2e3b;--earth:#b5703a;--gold:#e8a830;--moss:#4a6741;--cream:#f5f0e8;--sand:#e2d5bc;--white:#fff;--text:#1a2e3b;--muted:#6b7f8c}
-body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 48px;background:rgba(245,240,232,.94);backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(0,0,0,.06)}
-.nav-logo{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--dusk);text-decoration:none}
-.nav-links{display:flex;gap:28px;list-style:none}
-.nav-links a{text-decoration:none;font-size:14px;font-weight:500;color:var(--muted);transition:color .2s}
-.nav-links a:hover,.nav-links a.active{color:var(--gold)}
-.nav-right{display:flex;gap:12px;align-items:center}
-.nav-logout{font-size:13px;color:var(--muted);text-decoration:none;cursor:pointer}
-.nav-logout:hover{color:var(--earth)}
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Nomadic Horizon | Kaelen Vance Dashboard</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;0,900;1,400&amp;family=Work+Sans:wght@300;400;500;600;700&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-tint": "#855312",
+            "outline-variant": "#d5c3b4",
+            "primary-fixed": "#ffddbb",
+            "primary-container": "#c68b46",
+            "surface-variant": "#ede1cd",
+            "on-surface-variant": "#514539",
+            "error-container": "#ffdad6",
+            "on-secondary-fixed-variant": "#72351c",
+            "on-primary-fixed-variant": "#673d00",
+            "surface-container-lowest": "#ffffff",
+            "tertiary-fixed": "#f1e2b2",
+            "surface-bright": "#fff8f1",
+            "secondary-container": "#fea685",
+            "on-tertiary": "#ffffff",
+            "surface-container-high": "#f3e7d2",
+            "secondary-fixed-dim": "#ffb59a",
+            "tertiary": "#685e38",
+            "on-primary": "#ffffff",
+            "primary": "#855312",
+            "surface-container": "#f8edd8",
+            "inverse-primary": "#fbba70",
+            "surface-container-low": "#fef2dd",
+            "on-primary-container": "#472800",
+            "on-secondary": "#ffffff",
+            "background": "#fff8f1",
+            "on-secondary-container": "#783920",
+            "on-error": "#ffffff",
+            "surface": "#fff8f1",
+            "on-primary-fixed": "#2b1700",
+            "error": "#ba1a1a",
+            "secondary-fixed": "#ffdbce",
+            "on-tertiary-fixed-variant": "#4f4623",
+            "on-background": "#201b0e",
+            "tertiary-fixed-dim": "#d4c698",
+            "surface-container-highest": "#ede1cd",
+            "inverse-surface": "#363022",
+            "on-tertiary-fixed": "#221b00",
+            "tertiary-container": "#b8ab7f",
+            "on-tertiary-container": "#483f1d",
+            "on-surface": "#201b0e",
+            "on-secondary-fixed": "#380d00",
+            "surface-dim": "#e4d9c4",
+            "on-error-container": "#93000a",
+            "secondary": "#904c31",
+            "outline": "#837467",
+            "inverse-on-surface": "#fbefda",
+            "primary-fixed-dim": "#fbba70"
+          },
+          fontFamily: {
+            "headline": ["Noto Serif"],
+            "body": ["Work Sans"],
+            "label": ["Work Sans"]
+          },
+          borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+        },
+      },
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
 
-/* PROFILE HEADER */
-.profile-header{margin-top:64px;background:linear-gradient(135deg,var(--dusk) 0%,#0f2535 100%);padding:48px 48px 0;position:relative;overflow:hidden}
-.profile-header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(232,168,48,.08),transparent 60%)}
-.ph-inner{display:flex;align-items:flex-end;gap:28px;position:relative;flex-wrap:wrap}
-.ph-avatar-wrap{position:relative}
-.ph-avatar{width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--earth));display:flex;align-items:center;justify-content:center;font-size:40px;border:4px solid rgba(255,255,255,.15);flex-shrink:0}
-.ph-edit-btn{position:absolute;bottom:0;right:0;width:26px;height:26px;border-radius:50%;background:var(--gold);color:var(--dusk);border:2px solid var(--dusk);display:flex;align-items:center;justify-content:center;font-size:11px;cursor:pointer}
-.ph-info{flex:1;padding-bottom:28px}
-.ph-name{font-family:'Playfair Display',serif;font-size:28px;color:#fff;font-weight:700;margin-bottom:4px}
-.ph-email{font-size:13px;color:rgba(255,255,255,.45);margin-bottom:16px}
-.ph-badges{display:flex;gap:8px;flex-wrap:wrap}
-.ph-badge{padding:5px 14px;border-radius:100px;font-size:11px;font-weight:600;letter-spacing:.5px}
-.ph-badge.level{background:rgba(232,168,48,.2);border:1px solid rgba(232,168,48,.4);color:var(--gold)}
-.ph-badge.member{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);font-size:10px}
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
 
-/* STATS TAB */
-.ph-stats{background:rgba(255,255,255,.04);border-top:1px solid rgba(255,255,255,.07);margin-top:28px;display:flex}
-.ph-stat{flex:1;text-align:center;padding:16px;border-right:1px solid rgba(255,255,255,.06)}
-.ph-stat:last-child{border-right:none}
-.ph-stat-num{font-family:'Playfair Display',serif;font-size:22px;color:#fff;font-weight:700;line-height:1}
-.ph-stat-label{font-size:11px;color:rgba(255,255,255,.35);margin-top:4px}
-
-/* BODY */
-.profile-body{max-width:1200px;margin:0 auto;padding:40px 48px 80px;display:grid;grid-template-columns:240px 1fr;gap:32px}
-
-/* SIDEBAR NAV */
-.profile-nav{position:sticky;top:84px;align-self:start}
-.pnav-link{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:12px;font-size:14px;font-weight:500;color:var(--muted);cursor:pointer;transition:background .2s,color .2s;text-decoration:none;margin-bottom:4px}
-.pnav-link:hover{background:var(--white);color:var(--text)}
-.pnav-link.active{background:var(--white);color:var(--dusk);box-shadow:0 2px 12px rgba(26,46,59,.06);border:1.5px solid var(--sand)}
-.pnav-icon{font-size:16px;width:20px;text-align:center}
-.pnav-divider{border:none;border-top:1px solid var(--sand);margin:12px 0}
-
-/* SECTIONS */
-.profile-content{}
-.sec-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--dusk);margin-bottom:20px}
-
-/* TRIP CARDS */
-.trips-grid{display:grid;gap:16px;margin-bottom:40px}
-.trip-card{background:#fff;border-radius:16px;overflow:hidden;border:1.5px solid var(--sand);display:flex;transition:box-shadow .2s}
-.trip-card:hover{box-shadow:0 8px 32px rgba(26,46,59,.1)}
-.trip-thumb{width:120px;flex-shrink:0;overflow:hidden}
-.trip-thumb img{width:100%;height:100%;object-fit:cover}
-.trip-body{padding:18px 20px;flex:1}
-.trip-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:6px}
-.trip-name{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--dusk)}
-.trip-badge{font-size:10px;font-weight:700;padding:4px 12px;border-radius:100px;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
-.trip-badge.done{background:rgba(74,103,65,.1);color:var(--moss);border:1px solid rgba(74,103,65,.2)}
-.trip-badge.upcoming{background:rgba(232,168,48,.12);color:var(--earth);border:1px solid rgba(232,168,48,.3)}
-.trip-badge.planned{background:rgba(107,127,140,.1);color:var(--muted);border:1px solid var(--sand)}
-.trip-meta{display:flex;gap:16px;color:var(--muted);font-size:12px;margin-bottom:10px}
-.trip-desc{font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:12px}
-.trip-actions{display:flex;gap:8px}
-.trip-btn{padding:7px 16px;border-radius:100px;font-size:12px;font-weight:500;cursor:pointer;font-family:inherit;border:1.5px solid var(--sand);background:#fff;color:var(--muted);transition:all .2s;text-decoration:none}
-.trip-btn:hover{border-color:var(--dusk);color:var(--dusk)}
-.trip-btn.pri{background:var(--dusk);color:#fff;border-color:var(--dusk)}
-.trip-btn.pri:hover{background:var(--earth);border-color:var(--earth)}
-
-/* SAVED ROUTES */
-.routes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-bottom:40px}
-.route-card{background:#fff;border-radius:14px;padding:18px;border:1.5px solid var(--sand);cursor:pointer;transition:all .2s;text-decoration:none;display:block;color:inherit}
-.route-card:hover{border-color:var(--gold);box-shadow:0 6px 24px rgba(232,168,48,.12)}
-.rc-map{height:80px;border-radius:10px;background:linear-gradient(135deg,#1a3a4a,#0e2030);margin-bottom:14px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.rc-map-dots{display:flex;gap:8px;align-items:center}
-.rc-dot{width:8px;height:8px;border-radius:50%;background:var(--gold)}
-.rc-line{flex:1;height:1px;background:rgba(232,168,48,.4);max-width:20px}
-.rc-name{font-size:14px;font-weight:600;margin-bottom:4px}
-.rc-meta{font-size:11px;color:var(--muted)}
-.rc-actions{display:flex;gap:6px;margin-top:12px}
-.rc-btn{padding:6px 12px;border-radius:8px;font-size:11px;font-weight:500;cursor:pointer;font-family:inherit;border:1.5px solid var(--sand);background:#fff;color:var(--muted);transition:all .2s}
-.rc-btn:hover{border-color:var(--earth);color:var(--earth)}
-.rc-btn.pri{background:var(--dusk);color:#fff;border-color:var(--dusk)}
-
-/* NOTES */
-.notes-area{background:#fff;border-radius:16px;border:1.5px solid var(--sand);overflow:hidden;margin-bottom:20px}
-.notes-header{background:var(--dusk);padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
-.notes-header span{font-size:14px;font-weight:600;color:#fff}
-.notes-add{background:var(--gold);color:var(--dusk);border:none;padding:6px 16px;border-radius:100px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit}
-.note-item{padding:16px 20px;border-bottom:1px solid var(--sand);display:flex;gap:14px;align-items:flex-start}
-.note-item:last-child{border-bottom:none}
-.note-date{font-size:10px;color:var(--muted);text-align:center;padding:6px;background:var(--cream);border-radius:8px;min-width:42px}
-.note-text{font-size:13px;line-height:1.6;flex:1}
-.note-trip{font-size:11px;color:var(--earth);margin-top:3px}
-.note-del{background:none;border:none;cursor:pointer;color:var(--muted);font-size:16px;padding:4px;transition:color .2s}
-.note-del:hover{color:#cc4444}
-
-/* SETTINGS */
-.settings-card{background:#fff;border-radius:16px;border:1.5px solid var(--sand);overflow:hidden;margin-bottom:20px}
-.settings-card h3{padding:18px 22px;font-size:14px;font-weight:600;border-bottom:1px solid var(--sand)}
-.settings-row{padding:16px 22px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--sand)}
-.settings-row:last-child{border-bottom:none}
-.settings-label{font-size:13px;font-weight:500}
-.settings-sub{font-size:11px;color:var(--muted);margin-top:2px}
-.toggle{width:42px;height:24px;border-radius:100px;background:var(--sand);position:relative;cursor:pointer;transition:background .2s;flex-shrink:0}
-.toggle.on{background:var(--moss)}
-.toggle::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:left .2s;box-shadow:0 1px 4px rgba(0,0,0,.15)}
-.toggle.on::after{left:21px}
-.settings-input{border:1.5px solid var(--sand);border-radius:10px;padding:8px 14px;font-family:inherit;font-size:13px;color:var(--text);background:var(--cream);outline:none;width:220px}
-
-footer{background:var(--dusk);color:rgba(255,255,255,.45);padding:40px 48px 24px}
-.footer-simple{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
-.footer-logo{font-family:'Playfair Display',serif;font-size:22px;color:#fff;text-decoration:none}
-.footer-links{display:flex;gap:24px}
-.footer-links a{color:rgba(255,255,255,.4);font-size:13px;text-decoration:none}.footer-links a:hover{color:var(--gold)}
-.footer-copy{font-size:12px;margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.07);text-align:center}
-@media(max-width:900px){nav{padding:14px 20px}.nav-links{display:none}.profile-header{padding:32px 20px 0}.profile-body{grid-template-columns:1fr;padding:24px 20px 60px}.profile-nav{position:static;display:flex;flex-wrap:wrap;gap:4px}}
-</style>
+    .glass-effect {
+      backdrop-filter: blur(16px);
+    }
+  </style>
 </head>
-<body>
 
-<nav>
-  <a href="index.html" class="nav-logo">Нүүдэл</a>
-  <ul class="nav-links">
-    <li><a href="index.html">Нүүр</a></li>
-    <li><a href="destinations.html">Газрууд</a></li>
-    <li><a href="packages.html">Аяллууд</a></li>
-    <li><a href="map.html">Маршрут</a></li>
-  </ul>
-  <div class="nav-right">
-    <a href="login.html" class="nav-logout">← Гарах</a>
-  </div>
-</nav>
-
-<!-- PROFILE HEADER -->
-<div class="profile-header">
-  <div class="ph-inner">
-    <div class="ph-avatar-wrap">
-      <div class="ph-avatar">🙍‍♀️</div>
-      <div class="ph-edit-btn">✏</div>
-    </div>
-    <div class="ph-info">
-      <div class="ph-name">Болормаа Дорж</div>
-      <div class="ph-email">bolormaa.dorj@gmail.com</div>
-      <div class="ph-badges">
-        <span class="ph-badge level">🌟 Мөнгөн аялагч</span>
-        <span class="ph-badge member">Гишүүн болсон: 2023.04</span>
+<body class="bg-surface font-body text-on-surface antialiased">
+  <!-- TopNavBar Navigation Shell -->
+  <header
+    class="bg-[#fff8f1]/80 dark:bg-[#1a160f]/80 backdrop-blur-lg docked full-width top-0 sticky z-50 tonal-shift bg-[#fef2dd] dark:bg-[#2a241a] no-border">
+    <nav class="flex justify-between items-center w-full px-8 py-6 max-w-[1920px] mx-auto">
+      <div class="flex items-center gap-8">
+        <span class="text-2xl font-black text-[#855312] dark:text-[#c68b46] font-noto-serif">Nomadic Horizon</span>
+        <div class="hidden md:flex gap-8 items-center">
+          <a class="text-[#514539] dark:text-[#ede1cd] hover:text-[#855312] font-noto-serif display-md uppercase tracking-tight hover:bg-[#ede1cd]/50 transition-colors duration-300"
+            href="#">Нүүр</a>
+          <a class="text-[#514539] dark:text-[#ede1cd] hover:text-[#855312] font-noto-serif display-md uppercase tracking-tight hover:bg-[#ede1cd]/50 transition-colors duration-300"
+            href="#">Чиглэлүүд</a>
+          <a class="text-[#514539] dark:text-[#ede1cd] hover:text-[#855312] font-noto-serif display-md uppercase tracking-tight hover:bg-[#ede1cd]/50 transition-colors duration-300"
+            href="#">Аяллын хөтөлбөр</a>
+          <a class="text-[#514539] dark:text-[#ede1cd] hover:text-[#855312] font-noto-serif display-md uppercase tracking-tight hover:bg-[#ede1cd]/50 transition-colors duration-300"
+            href="#">Экспедиц</a>
+          <a class="text-[#514539] dark:text-[#ede1cd] hover:text-[#855312] font-noto-serif display-md uppercase tracking-tight hover:bg-[#ede1cd]/50 transition-colors duration-300"
+            href="#">Өв соёл</a>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="ph-stats">
-    <div class="ph-stat"><div class="ph-stat-num">8</div><div class="ph-stat-label">Аялал</div></div>
-    <div class="ph-stat"><div class="ph-stat-num">12</div><div class="ph-stat-label">Маршрут</div></div>
-    <div class="ph-stat"><div class="ph-stat-num">34</div><div class="ph-stat-label">Үнэлгээ</div></div>
-    <div class="ph-stat"><div class="ph-stat-num">5</div><div class="ph-stat-label">Хадгалсан</div></div>
-    <div class="ph-stat"><div class="ph-stat-num">₮2.1M</div><div class="ph-stat-label">Нийт зардал</div></div>
-  </div>
-</div>
-
-<!-- BODY -->
-<div class="profile-body">
-
-  <!-- LEFT NAV -->
-  <div class="profile-nav">
-    <a class="pnav-link active" onclick="setSection('trips',this)"><span class="pnav-icon">✈️</span> Миний аяллууд</a>
-    <a class="pnav-link" onclick="setSection('routes',this)"><span class="pnav-icon">🗺️</span> Маршрутууд</a>
-    <a class="pnav-link" onclick="setSection('notes',this)"><span class="pnav-icon">📝</span> Тэмдэглэл</a>
-    <a class="pnav-link" onclick="setSection('settings',this)"><span class="pnav-icon">⚙️</span> Тохиргоо</a>
-    <hr class="pnav-divider"/>
-    <a class="pnav-link" href="map.html"><span class="pnav-icon">➕</span> Шинэ маршрут</a>
-    <a class="pnav-link" href="packages.html"><span class="pnav-icon">🔍</span> Аялал хайх</a>
-  </div>
-
-  <!-- CONTENT -->
-  <div class="profile-content">
-
-    <!-- TRIPS -->
-    <div id="sec-trips">
-      <div class="sec-title">Миний аяллууд</div>
-      <div class="trips-grid">
-        <div class="trip-card">
-          <div class="trip-thumb"><img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=200&q=80" alt="Хөвсгөл"/></div>
-          <div class="trip-body">
-            <div class="trip-row">
-              <div class="trip-name">Хөвсгөлийн нуур эргийн аялал</div>
-              <span class="trip-badge done">Дууссан</span>
+      <div class="flex items-center gap-6">
+        <button
+          class="bg-[#855312] text-white px-6 py-2 rounded-md font-bold transition-transform duration-200 scale-95 hover:scale-100">Захиалах</button>
+        <div class="w-10 h-10 rounded-full border-2 border-[#855312] flex items-center justify-center overflow-hidden">
+          <img class="w-full h-full object-cover"
+            data-alt="close-up portrait of a rugged man with weather-worn skin and intense eyes, warm cinematic sunset lighting"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRagUgsUFz6jMHHJFge82Zif60GWLLOM_gX_bCneUlPd2ZCTa67UKoT_22MDgGK4-Nlp-7k-VyHGEFTDW_n_muj4m0Zxh72TzNyvbyLKICRmvbBdGmlsh72GZ4MBOz4qF72jfCkFL7LME7XypyGs09Ug-vC1SHBdAfX0X6qw-WWbjWiqnUsC8ar5Fw6RpfH-M_DrEUk2-BCpW0NszByQspYxaOsfH1yDb4QlKaHEmwS-ckAgVoXUL8HG1tDpt_9iOf8sNQcWPtR9w" />
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main class="max-w-[1920px] mx-auto px-8 py-12 lg:py-20">
+    <!-- Hero Section: User Identity -->
+    <section class="mb-16 md:mb-24 relative">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b-0">
+        <div class="space-y-4">
+          <span
+            class="inline-block px-4 py-1 bg-primary-fixed text-on-primary-fixed text-xs font-bold tracking-widest uppercase rounded-sm">Pathfinder
+            Rank</span>
+          <h1 class="font-headline text-5xl md:text-7xl font-black text-primary tracking-tight leading-tight">Аялагч
+            мастер</h1>
+          <div class="flex items-center gap-4 text-on-surface-variant">
+            <span class="font-headline text-2xl">Kaelen Vance</span>
+            <span class="text-outline-variant opacity-30">|</span>
+            <span class="font-body text-lg">Туулсан зам: 42,000 км</span>
+          </div>
+        </div>
+        <div class="hidden lg:block w-48 h-1 bg-primary-container/20 relative overflow-hidden">
+          <div class="absolute left-0 top-0 h-full bg-primary w-3/4"></div>
+        </div>
+      </div>
+    </section>
+    <!-- Bento Layout -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-10">
+      <!-- Left Column: Upcoming Trip (Featured) -->
+      <div class="md:col-span-8 space-y-10">
+        <section>
+          <div class="flex items-center justify-between mb-8">
+            <h2 class="font-headline text-3xl font-bold">Удахгүй болох аялал</h2>
+            <a class="text-primary font-bold text-sm underline-offset-4 hover:underline" href="#">Бүгдийг харах</a>
+          </div>
+          <div class="group relative overflow-hidden rounded-xl bg-surface-container-low shadow-sm">
+            <div class="aspect-[16/9] md:aspect-[21/9] overflow-hidden">
+              <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                data-alt="vast golden sand dunes of the Gobi desert at sunset with deep shadows and warm orange light textures"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpKovmDoY754DxpvL8ZgfmCeplZEmJV5PjOh92TBpI7xyEost3ul8-Ek6rJlvJ2P207SPTkUcj-TatTYT4-oQ2psG1lYnVE8fUBUpRrHFRQbgZSAaklaX16WC5yXLx-1tHiijxNBjpTnKpWbaOomapTaUEbIvRWA-Stt2IO29SF157B6eLBoPaINbOkC9Wuw-t2IIdW6zmhjVNS0z9Yv9hsQ_GfglggVuHOg2fghKZiAWKQiCUmEyIo8d4ar7W8H7oP6_fUrxC-58" />
             </div>
-            <div class="trip-meta"><span>📅 2024.07.15–19</span><span>👥 2 хүн</span><span>₮760,000</span></div>
-            <p class="trip-desc">4 хоногийн хамгийн гоё аялал байсан. Загас барьсан, гэрт хоносон.</p>
-            <div class="trip-actions">
-              <a href="package-detail.html" class="trip-btn">Дэлгэрэнгүй</a>
-              <a href="#" class="trip-btn">Үнэлгээ өгөх ★</a>
+            <div class="absolute inset-0 bg-gradient-to-t from-on-background/80 via-transparent to-transparent"></div>
+            <div class="absolute bottom-0 left-0 p-8 md:p-12 text-white">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="bg-primary px-3 py-1 text-xs font-bold uppercase rounded-md">8 сарын 15</span>
+                <span class="bg-white/20 backdrop-blur-md px-3 py-1 text-xs font-bold uppercase rounded-md">12
+                  өдөр</span>
+              </div>
+              <h3 class="font-headline text-4xl md:text-5xl font-black mb-4">Говийн элсэн манхан</h3>
+              <p class="text-white/80 max-w-lg font-body leading-relaxed">Өмнөговь аймгийн Хонгорын элс рүү хийх энэхүү
+                аялал нь байгалийн хамгийн үзэсгэлэнт тогтоц болон нүүдэлчин ахуйтай танилцах боломж олгоно.</p>
+              <button
+                class="mt-8 px-8 py-3 bg-white text-on-background font-bold rounded-md flex items-center gap-2 hover:bg-primary-fixed transition-colors">
+                <span class="material-symbols-outlined">map</span>
+                Аяллын дэлгэрэнгүй
+              </button>
+            </div>
+          </div>
+        </section>
+        <!-- Stats Grid (Injected as part of dashboard) -->
+        <section class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="bg-surface-container p-6 rounded-xl border-l-4 border-primary">
+            <p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Очсон газрууд</p>
+            <p class="font-headline text-3xl font-black">24</p>
+          </div>
+          <div class="bg-surface-container p-6 rounded-xl border-l-4 border-secondary">
+            <p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Аяллын тэмдэглэл</p>
+            <p class="font-headline text-3xl font-black">156</p>
+          </div>
+          <div class="bg-surface-container p-6 rounded-xl border-l-4 border-tertiary">
+            <p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Нийт ажиглалт</p>
+            <p class="font-headline text-3xl font-black">89</p>
+          </div>
+          <div class="bg-surface-container p-6 rounded-xl border-l-4 border-primary-container">
+            <p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Үнэлгээ</p>
+            <p class="font-headline text-3xl font-black">4.9</p>
+          </div>
+        </section>
+      </div>
+      <!-- Right Column: Recent Sagas -->
+      <aside class="md:col-span-4 space-y-8">
+        <div class="bg-surface-container-low p-8 rounded-xl">
+          <h2 class="font-headline text-2xl font-bold mb-8">Тэмдэглэлүүд</h2>
+          <div class="space-y-10">
+            <!-- Saga Entry -->
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden bg-surface-container-highest">
+                <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all"
+                  data-alt="scenic mountain peaks with snow in summer morning light under a clear sky"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4ND_zH12X15okfKZm04gCH2RlcwJwduxZUr1T8Beu7GN2YOgLiQiic_kcw_dSYQxOkkJng19O9aA5-eCLaDz6G-73IX22mK-63-ohxdNKXWNU2mgFuSp_Q2yz3MMGCHAXzL9EACR5hhw3yfBldrSltlBpm7xw-cynXoNgxdH2T_1NHPCuO_gmj89T6IzeOJisnyIiglwZ44xRURg-GJtQXQas7L9YzzgSTw5udR6hRCFaKNGi1gQLTYAYQhtvD7RWa0F4qde_UxI" />
+              </div>
+              <div>
+                <h4 class="font-bold text-on-surface">Алтай Таван Богд</h4>
+                <p class="text-xs text-on-surface-variant mb-2">2024.05.12 • 420 км</p>
+                <p class="text-sm line-clamp-2 italic text-on-surface-variant">"Мөсөн голын өглөөний туяа үнэхээр ер
+                  бусын..."</p>
+              </div>
+            </div>
+            <!-- Saga Entry -->
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden bg-surface-container-highest">
+                <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all"
+                  data-alt="crystal clear water of a deep blue lake reflecting green pine trees and blue sky"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNruDMtL12eRS6mvVKkfTOuI_bOasAK51NrWldOUp1BDStF36xikESF12Y73mY0luCKHzOe2FLZR5T_rUWzLtZHXiEKX7eYxhPSnL6dAhMR7pvVcH_ysyK4_ZQ56_EKM3iZ09sdn87Ys2swSKSnYZaD5Dmjptn8qMdakcmsTftHMNkk3htndEtIaOYcwaqZm3_-qyUeagltQlvcy2GAJdNxftLYncEeN0CYWHaQ4xlN5z-qH9EIxE2LlUY14kEKmhm1UAt8EhLHgc" />
+              </div>
+              <div>
+                <h4 class="font-bold text-on-surface">Хөвсгөл нуур</h4>
+                <p class="text-xs text-on-surface-variant mb-2">2024.03.20 • 850 км</p>
+                <p class="text-sm line-clamp-2 italic text-on-surface-variant">"Мөсний баярын үеэр авсан зургууд
+                  минь..."</p>
+              </div>
+            </div>
+            <!-- Saga Entry -->
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden bg-surface-container-highest">
+                <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all"
+                  data-alt="lush green deep forest with sunlight filtering through ancient trees"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1Y3QAxfxLRiFv6BnwDEzCUu4SFojhtbtZSjUJHFPZBluVY_Kb9NRDJQKN9cO0DlcV9Nl9UZtjtRfg6vCvgLBRPMn5obAAWbkbS43zqN9-BFBemayMu93aLfISEkZCp6P6MpLTB6y-UE8WL-iewUeP0nYlndHnoG7qzK05Gwdj11XNul-ksROQggt5D1ML-l6rderAf3xV6YmPKYvTQiOJakVFx69uXJqJcCExcIc201NZ87GXU6Toh8yEoy5h6rW8f0CASRJKdYU" />
+              </div>
+              <div>
+                <h4 class="font-bold text-on-surface">Тэрэлж байгалийн цогцолбор</h4>
+                <p class="text-xs text-on-surface-variant mb-2">2024.01.05 • 60 км</p>
+                <p class="text-sm line-clamp-2 italic text-on-surface-variant">"Хадан тогтоц ба өвлийн нам гүм
+                  байдал..."</p>
+              </div>
+            </div>
+          </div>
+          <button
+            class="w-full mt-12 py-4 border border-outline-variant/30 text-on-surface-variant font-bold rounded-md hover:bg-surface-container-highest transition-colors">
+            Бүх тэмдэглэлийг унших
+          </button>
+        </div>
+        <!-- Ad/Teaser -->
+        <div class="bg-primary-container p-8 rounded-xl text-on-primary-container relative overflow-hidden">
+          <div class="relative z-10">
+            <h4 class="font-headline text-xl font-bold mb-2">Дараагийн даваа</h4>
+            <p class="text-sm opacity-90 mb-6">"Аялагч мастер" зэргээ ахиулж "Ертөнцийн хайгуулч" болоход 8,000 км дутуу
+              байна.</p>
+            <div class="h-2 w-full bg-on-primary-container/20 rounded-full overflow-hidden">
+              <div class="bg-primary w-4/5 h-full"></div>
             </div>
           </div>
         </div>
-        <div class="trip-card">
-          <div class="trip-thumb"><img src="https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=200&q=80" alt="Говь"/></div>
-          <div class="trip-body">
-            <div class="trip-row">
-              <div class="trip-name">Өмнөговийн шийдэмгий аялал</div>
-              <span class="trip-badge upcoming">Удахгүй</span>
-            </div>
-            <div class="trip-meta"><span>📅 2025.08.10–14</span><span>👥 4 хүн</span><span>₮1,800,000</span></div>
-            <p class="trip-desc">Хонгорын элс, Баянзаг. Тэмдэглэл бэлтгэж байна.</p>
-            <div class="trip-actions">
-              <a href="package-detail.html" class="trip-btn pri">Бэлтгэл харах →</a>
-              <a href="#" class="trip-btn">Цуцлах</a>
-            </div>
-          </div>
-        </div>
-        <div class="trip-card">
-          <div class="trip-thumb"><img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=200&q=80" alt="Тэрэлж"/></div>
-          <div class="trip-body">
-            <div class="trip-row">
-              <div class="trip-name">Тэрэлжийн уулын аялал</div>
-              <span class="trip-badge planned">Төлөвлөсөн</span>
-            </div>
-            <div class="trip-meta"><span>📅 2025.09.05–06</span><span>👥 6 хүн</span><span>₮864,000</span></div>
-            <p class="trip-desc">Найзуудтай 2 өдрийн викенд.</p>
-            <div class="trip-actions">
-              <a href="package-detail.html" class="trip-btn pri">Захиалах →</a>
-              <a href="map.html" class="trip-btn">Маршрут</a>
-            </div>
-          </div>
-        </div>
-      </div>
+      </aside>
     </div>
-
-    <!-- ROUTES -->
-    <div id="sec-routes" style="display:none">
-      <div class="sec-title">Хадгалсан маршрутууд</div>
-      <div class="routes-grid">
-        <a href="map.html" class="route-card">
-          <div class="rc-map"><div class="rc-map-dots"><div class="rc-dot"></div><div class="rc-line"></div><div class="rc-dot"></div><div class="rc-line"></div><div class="rc-dot"></div></div></div>
-          <div class="rc-name">УБ → Хөвсгөл → Орхон</div>
-          <div class="rc-meta">3 цэг · 640 км · 9 цаг</div>
-          <div class="rc-actions"><button class="rc-btn pri">Нээх</button><button class="rc-btn">Хуваалцах</button></div>
-        </a>
-        <a href="map.html" class="route-card">
-          <div class="rc-map"><div class="rc-map-dots"><div class="rc-dot"></div><div class="rc-line"></div><div class="rc-dot" style="background:var(--earth)"></div><div class="rc-line"></div><div class="rc-dot"></div></div></div>
-          <div class="rc-name">Говийн дугуй маршрут</div>
-          <div class="rc-meta">5 цэг · 1,240 км · 16 цаг</div>
-          <div class="rc-actions"><button class="rc-btn pri">Нээх</button><button class="rc-btn">Хуваалцах</button></div>
-        </a>
-        <a href="map.html" class="route-card">
-          <div class="rc-map"><div class="rc-map-dots"><div class="rc-dot"></div><div class="rc-line"></div><div class="rc-dot" style="background:var(--moss)"></div></div></div>
-          <div class="rc-name">Тэрэлж → Хэнтий</div>
-          <div class="rc-meta">2 цэг · 180 км · 3 цаг</div>
-          <div class="rc-actions"><button class="rc-btn pri">Нээх</button><button class="rc-btn">Засах</button></div>
-        </a>
+  </main>
+  <!-- Footer -->
+  <footer
+    class="bg-[#f8edd8] dark:bg-[#120f0a] full-width py-16 px-8 mt-24 tonal-shift from surface to surface-container">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
+      <div class="space-y-6">
+        <span class="font-noto-serif text-xl font-bold text-[#855312]">Nomadic Horizon</span>
+        <p class="text-[#514539] dark:text-[#ede1cd] font-work-sans text-sm tracking-wide">Монголын онгон дагшин
+          байгаль, нүүдэлчин соёлын гайхамшгийг дэлхий дахинд сурталчлан таниулж байна.</p>
       </div>
-    </div>
-
-    <!-- NOTES -->
-    <div id="sec-notes" style="display:none">
-      <div class="sec-title">Аяллын тэмдэглэл</div>
-      <div class="notes-area">
-        <div class="notes-header"><span>📝 Тэмдэглэлүүд</span><button class="notes-add">+ Нэмэх</button></div>
-        <div class="note-item">
-          <div class="note-date"><div style="font-size:16px">07</div><div style="font-size:9px;text-transform:uppercase;letter-spacing:.5px">7-р сар</div></div>
-          <div style="flex:1"><div class="note-text">Хөвсгөл нуурт байх хугацаанд өглөө бүр загас барьсан. Нуурын ус маш цэвэр, тунгалаг байлаа. Дараагийн удаа кайяк авах хэрэгтэй.</div><div class="note-trip">Хөвсгөлийн аялал · 2024</div></div>
-          <button class="note-del">🗑</button>
-        </div>
-        <div class="note-item">
-          <div class="note-date"><div style="font-size:16px">08</div><div style="font-size:9px;text-transform:uppercase;letter-spacing:.5px">8-р сар</div></div>
-          <div style="flex:1"><div class="note-text">Говийн аялалд авах зүйлс: хөнгөн цагаан хувцас, нарны тосолгоо, усны сав, гутлын нэмэлт оосор.</div><div class="note-trip">Говийн аялал · 2025</div></div>
-          <button class="note-del">🗑</button>
+      <div>
+        <h5 class="text-[#855312] font-semibold mb-6">Туслах холбоос</h5>
+        <ul class="space-y-4">
+          <li><a
+              class="text-[#514539] dark:text-[#ede1cd] hover:underline decoration-[#c68b46] underline-offset-4 opacity-80 hover:opacity-100 transition-opacity font-work-sans text-sm"
+              href="#">Бидний тухай</a></li>
+          <li><a
+              class="text-[#514539] dark:text-[#ede1cd] hover:underline decoration-[#c68b46] underline-offset-4 opacity-80 hover:opacity-100 transition-opacity font-work-sans text-sm"
+              href="#">Холбоо барих</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="text-[#855312] font-semibold mb-6">Хууль эрх зүй</h5>
+        <ul class="space-y-4">
+          <li><a
+              class="text-[#514539] dark:text-[#ede1cd] hover:underline decoration-[#c68b46] underline-offset-4 opacity-80 hover:opacity-100 transition-opacity font-work-sans text-sm"
+              href="#">Нууцлалын бодлого</a></li>
+          <li><a
+              class="text-[#514539] dark:text-[#ede1cd] hover:underline decoration-[#c68b46] underline-offset-4 opacity-80 hover:opacity-100 transition-opacity font-work-sans text-sm"
+              href="#">Үйлчилгээний нөхцөл</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="text-[#855312] font-semibold mb-6">Сошиал суваг</h5>
+        <div class="flex gap-4">
+          <span class="material-symbols-outlined text-[#855312]">public</span>
+          <span class="material-symbols-outlined text-[#855312]">share</span>
+          <span class="material-symbols-outlined text-[#855312]">person</span>
         </div>
       </div>
     </div>
-
-    <!-- SETTINGS -->
-    <div id="sec-settings" style="display:none">
-      <div class="sec-title">Тохиргоо</div>
-      <div class="settings-card">
-        <h3>Хувийн мэдээлэл</h3>
-        <div class="settings-row"><div><div class="settings-label">Нэр</div><div class="settings-sub">Нийтлэлд харагдах нэр</div></div><input class="settings-input" value="Болормаа Дорж"/></div>
-        <div class="settings-row"><div><div class="settings-label">Имэйл</div></div><input class="settings-input" value="bolormaa@gmail.com"/></div>
-        <div class="settings-row"><div><div class="settings-label">Утасны дугаар</div></div><input class="settings-input" value="+976 9911 2233"/></div>
-      </div>
-      <div class="settings-card">
-        <h3>Мэдэгдэл</h3>
-        <div class="settings-row"><div><div class="settings-label">Захиалгын мэдэгдэл</div><div class="settings-sub">Шинэ захиалга, баталгааны имэйл</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
-        <div class="settings-row"><div><div class="settings-label">Санал болголт</div><div class="settings-sub">Шинэ аяллын санал болголт</div></div><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
-        <div class="settings-row"><div><div class="settings-label">SMS мэдэгдэл</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
-      </div>
-      <button style="background:var(--dusk);color:#fff;border:none;padding:13px 28px;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit">Хадгалах</button>
+    <div class="mt-16 pt-8 border-t border-outline-variant/20 max-w-7xl mx-auto text-center">
+      <p class="text-[#514539] dark:text-[#ede1cd] opacity-60 font-work-sans text-sm">© 2024 Nomadic Horizon. Бүх эрх
+        хуулиар хамгаалагдсан.</p>
     </div>
-
-  </div><!-- /profile-content -->
-</div><!-- /profile-body -->
-
-<footer>
-  <div class="footer-simple">
-    <a href="index.html" class="footer-logo">Нүүдэл</a>
-    <div class="footer-links"><a href="destinations.html">Газрууд</a><a href="packages.html">Аяллууд</a><a href="map.html">Маршрут</a></div>
-  </div>
-  <div class="footer-copy">© 2025 Нүүдэл. Бүх эрх хуулиар хамгаалагдсан.</div>
-</footer>
-
-<script>
-function setSection(id,el){
-  ['trips','routes','notes','settings'].forEach(s=>document.getElementById('sec-'+s).style.display=s===id?'block':'none');
-  document.querySelectorAll('.pnav-link').forEach(l=>l.classList.remove('active'));
-  el.classList.add('active');
-}
-document.querySelectorAll('.note-del').forEach(b=>{b.addEventListener('click',()=>b.closest('.note-item').remove())});
-</script>
+  </footer>
 </body>
+
 </html>

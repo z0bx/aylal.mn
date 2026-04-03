@@ -1,0 +1,415 @@
+<!-- Админ хянах самбар (Admin Dashboard) -->
+<!DOCTYPE html>
+
+<html lang="mn">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&amp;family=Work+Sans:wght@300;400;500;600&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-tint": "#855312",
+                        "outline-variant": "#d5c3b4",
+                        "primary-fixed": "#ffddbb",
+                        "primary-container": "#c68b46",
+                        "surface-variant": "#ede1cd",
+                        "on-surface-variant": "#514539",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#72351c",
+                        "on-primary-fixed-variant": "#673d00",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#f1e2b2",
+                        "surface-bright": "#fff8f1",
+                        "secondary-container": "#fea685",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#f3e7d2",
+                        "secondary-fixed-dim": "#ffb59a",
+                        "tertiary": "#685e38",
+                        "on-primary": "#ffffff",
+                        "primary": "#855312",
+                        "surface-container": "#f8edd8",
+                        "inverse-primary": "#fbba70",
+                        "surface-container-low": "#fef2dd",
+                        "on-primary-container": "#472800",
+                        "on-secondary": "#ffffff",
+                        "background": "#fff8f1",
+                        "on-secondary-container": "#783920",
+                        "on-error": "#ffffff",
+                        "surface": "#fff8f1",
+                        "on-primary-fixed": "#2b1700",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#ffdbce",
+                        "on-tertiary-fixed-variant": "#4f4623",
+                        "on-background": "#201b0e",
+                        "tertiary-fixed-dim": "#d4c698",
+                        "surface-container-highest": "#ede1cd",
+                        "inverse-surface": "#363022",
+                        "on-tertiary-fixed": "#221b00",
+                        "tertiary-container": "#b8ab7f",
+                        "on-tertiary-container": "#483f1d",
+                        "on-surface": "#201b0e",
+                        "on-secondary-fixed": "#380d00",
+                        "surface-dim": "#e4d9c4",
+                        "on-error-container": "#93000a",
+                        "secondary": "#904c31",
+                        "outline": "#837467",
+                        "inverse-on-surface": "#fbefda",
+                        "primary-fixed-dim": "#fbba70"
+                    },
+                    fontFamily: {
+                        "headline": ["Noto Serif"],
+                        "body": ["Work Sans"],
+                        "label": ["Work Sans"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            background-color: #fff8f1;
+            color: #201b0e;
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        .font-noto-serif {
+            font-family: 'Noto Serif', serif;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen">
+    <!-- TopNavBar -->
+    <header
+        class="bg-[#fff8f1]/80 dark:bg-[#1a160f]/80 backdrop-blur-lg docked full-width top-0 sticky z-50 no-border tonal-shift bg-[#fef2dd] dark:bg-[#2a241a] transition-all duration-300">
+        <div class="flex justify-between items-center w-full px-8 py-6 max-w-[1920px] mx-auto">
+            <div class="flex items-center gap-12">
+                <h1
+                    class="text-2xl font-black text-[#855312] dark:text-[#c68b46] font-noto-serif uppercase tracking-tight">
+                    Nomadic Horizon</h1>
+                <nav class="hidden md:flex gap-8 items-center">
+                    <a class="text-[#855312] dark:text-[#c68b46] font-bold border-b-2 border-[#855312] pb-1 font-noto-serif uppercase tracking-tight"
+                        href="#">Нүүр</a>
+                    <a class="text-[#514539] dark:text-[#ede1cd] hover:text-[#855312] transition-colors duration-300 font-noto-serif uppercase tracking-tight"
+                        href="#">Чиглэлүүд</a>
+                    <a class="text-[#514539] dark:text-[#ede1cd] hover:text-[#855312] transition-colors duration-300 font-noto-serif uppercase tracking-tight"
+                        href="#">Аяллын хөтөлбөр</a>
+                    <a class="text-[#514539] dark:text-[#ede1cd] hover:text-[#855312] transition-colors duration-300 font-noto-serif uppercase tracking-tight"
+                        href="#">Экспедиц</a>
+                    <a class="text-[#514539] dark:text-[#ede1cd] hover:text-[#855312] transition-colors duration-300 font-noto-serif uppercase tracking-tight"
+                        href="#">Өв соёл</a>
+                </nav>
+            </div>
+            <div class="flex items-center gap-4">
+                <button
+                    class="px-6 py-2 bg-gradient-to-v from-[#855312] to-[#c68b46] text-white rounded-md font-medium scale-95 transition-transform duration-200 uppercase text-sm tracking-widest">Захиалах</button>
+                <button
+                    class="px-6 py-2 text-[#514539] font-medium hover:bg-[#ede1cd]/50 rounded-md transition-colors duration-300 uppercase text-sm tracking-widest">Нэвтрэх</button>
+            </div>
+        </div>
+    </header>
+    <main class="max-w-7xl mx-auto px-8 py-16">
+        <!-- Hero Branding Section -->
+        <div class="mb-20">
+            <span class="text-primary font-label uppercase tracking-[0.3em] text-xs font-bold mb-4 block">Системийн
+                удирдлага</span>
+            <h2 class="text-6xl font-headline font-black text-on-surface tracking-tighter leading-none mb-6">Удирдах
+                хэсэг</h2>
+            <p class="text-on-surface-variant font-body max-w-2xl text-lg leading-relaxed">
+                Таны аялал жуулчлалын бизнесийн өдөр тутмын хяналт болон стратегийн удирдлагын нэгдсэн төв.
+            </p>
+        </div>
+        <!-- Bento Grid Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+            <!-- Stat 1: Revenue -->
+            <div
+                class="bg-surface-container-low p-8 rounded-xl flex flex-col justify-between min-h-[220px] relative overflow-hidden group">
+                <div class="z-10">
+                    <span class="text-on-surface-variant font-label text-sm uppercase tracking-wider">Нийт орлого</span>
+                    <div class="text-4xl font-headline font-bold text-primary mt-4">$412,850</div>
+                </div>
+                <div class="z-10 mt-4 flex items-center gap-2 text-green-700 font-medium">
+                    <span class="material-symbols-outlined text-sm">trending_up</span>
+                    <span class="text-xs uppercase font-bold tracking-tighter">+12.5% Өнгөрсөн сараас</span>
+                </div>
+                <div
+                    class="absolute -right-4 -bottom-4 opacity-5 group-hover:scale-110 transition-transform duration-500">
+                    <span class="material-symbols-outlined text-[120px]">payments</span>
+                </div>
+            </div>
+            <!-- Stat 2: Active Trips -->
+            <div
+                class="bg-surface-container p-8 rounded-xl flex flex-col justify-between min-h-[220px] relative overflow-hidden group">
+                <div class="z-10">
+                    <span class="text-on-surface-variant font-label text-sm uppercase tracking-wider">Идэвхтэй
+                        аяллууд</span>
+                    <div class="text-4xl font-headline font-bold text-primary mt-4">24</div>
+                </div>
+                <div class="z-10 mt-4 flex items-center gap-2 text-on-surface-variant font-medium">
+                    <span class="material-symbols-outlined text-sm">location_on</span>
+                    <span class="text-xs uppercase font-bold tracking-tighter">8 Орон нутгийн чиглэлд</span>
+                </div>
+                <div
+                    class="absolute -right-4 -bottom-4 opacity-5 group-hover:scale-110 transition-transform duration-500">
+                    <span class="material-symbols-outlined text-[120px]">explore</span>
+                </div>
+            </div>
+            <!-- Stat 3: New Travelers -->
+            <div
+                class="bg-surface-container-highest p-8 rounded-xl flex flex-col justify-between min-h-[220px] relative overflow-hidden group">
+                <div class="z-10">
+                    <span class="text-on-surface-variant font-label text-sm uppercase tracking-wider">Шинэ
+                        аялагчид</span>
+                    <div class="text-4xl font-headline font-bold text-primary mt-4">1,204</div>
+                </div>
+                <div class="z-10 mt-4 flex items-center gap-2 text-primary-fixed-dim font-medium">
+                    <span class="material-symbols-outlined text-sm"
+                        style="font-variation-settings: 'FILL' 1;">stars</span>
+                    <span class="text-xs uppercase font-bold tracking-tighter">98% Сэтгэл ханамж</span>
+                </div>
+                <div
+                    class="absolute -right-4 -bottom-4 opacity-5 group-hover:scale-110 transition-transform duration-500">
+                    <span class="material-symbols-outlined text-[120px]">group</span>
+                </div>
+            </div>
+        </div>
+        <!-- Main Dashboard Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <!-- Chart Section (Left) -->
+            <div class="lg:col-span-8">
+                <div class="bg-surface-container-lowest p-10 rounded-xl shadow-sm border border-outline-variant/10">
+                    <div class="flex justify-between items-end mb-12">
+                        <div>
+                            <h3 class="text-2xl font-headline font-bold text-on-surface">Аялал захиалга</h3>
+                            <p class="text-on-surface-variant text-sm mt-1">Сүүлийн 6 сарын захиалгын үзүүлэлт</p>
+                        </div>
+                        <div class="flex gap-4">
+                            <span
+                                class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-on-surface-variant">
+                                <span class="w-3 h-3 bg-primary rounded-full"></span> Дотоод
+                            </span>
+                            <span
+                                class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-on-surface-variant">
+                                <span class="w-3 h-3 bg-primary-container rounded-full"></span> Гадаад
+                            </span>
+                        </div>
+                    </div>
+                    <!-- Visual Placeholder for Chart using Tonal Blocks -->
+                    <div class="h-64 flex items-end gap-6 px-4">
+                        <div class="flex-1 flex flex-col gap-1 items-center group cursor-pointer">
+                            <div
+                                class="w-full bg-surface-container rounded-t-sm h-[40%] group-hover:bg-primary-container transition-colors">
+                            </div>
+                            <span class="text-[10px] font-bold uppercase text-outline mt-2 tracking-tighter">1-р
+                                сар</span>
+                        </div>
+                        <div class="flex-1 flex flex-col gap-1 items-center group cursor-pointer">
+                            <div
+                                class="w-full bg-surface-container rounded-t-sm h-[65%] group-hover:bg-primary-container transition-colors">
+                            </div>
+                            <span class="text-[10px] font-bold uppercase text-outline mt-2 tracking-tighter">2-р
+                                сар</span>
+                        </div>
+                        <div class="flex-1 flex flex-col gap-1 items-center group cursor-pointer">
+                            <div class="w-full bg-primary-container rounded-t-sm h-[85%]"></div>
+                            <span class="text-[10px] font-bold uppercase text-outline mt-2 tracking-tighter">3-р
+                                сар</span>
+                        </div>
+                        <div class="flex-1 flex flex-col gap-1 items-center group cursor-pointer">
+                            <div
+                                class="w-full bg-surface-container rounded-t-sm h-[55%] group-hover:bg-primary-container transition-colors">
+                            </div>
+                            <span class="text-[10px] font-bold uppercase text-outline mt-2 tracking-tighter">4-р
+                                сар</span>
+                        </div>
+                        <div class="flex-1 flex flex-col gap-1 items-center group cursor-pointer">
+                            <div
+                                class="w-full bg-surface-container rounded-t-sm h-[75%] group-hover:bg-primary-container transition-colors">
+                            </div>
+                            <span class="text-[10px] font-bold uppercase text-outline mt-2 tracking-tighter">5-р
+                                сар</span>
+                        </div>
+                        <div class="flex-1 flex flex-col gap-1 items-center group cursor-pointer">
+                            <div class="w-full bg-primary rounded-t-sm h-[95%]"></div>
+                            <span class="text-[10px] font-bold uppercase text-outline mt-2 tracking-tighter">6-р
+                                сар</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Featured Journey Management (Asymmetric Layout) -->
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="relative h-80 rounded-xl overflow-hidden group">
+                        <img alt="Gobi desert sand dunes"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            data-alt="wide shot of sweeping golden sand dunes in the Gobi desert with deep shadows and warm sunlight at dusk"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB88hoMLYy513sDn3ctYOsNJBNoQNW5hPFD34fmFc_FQ4dSOShyjMqEQ1o8GdUKbirw3I6wNjA5TM_VrAaKBvmq5BCcouQNqwhuPMHSAdBVurm44TG6iM0cjcj2mvelJ8BTXJtQ3cFg3b_0d9CF8KNG0nHTUAE2oUEZHd_OriGPYLKZc-EDJViaeEjNeBr1gNtmb56l9txinPv5wfW9kjDdlH_iOed9QttXV5bPeB8N5e70V8lOrlhwnr-fal6YLnKYc5jdonISHMU" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-on-surface/80 to-transparent"></div>
+                        <div class="absolute bottom-8 left-8 right-8">
+                            <span class="text-primary-fixed font-bold text-xs uppercase tracking-widest">Онцлох
+                                аялал</span>
+                            <h4 class="text-2xl font-headline font-bold text-white mt-2">Говийн их нүүдэл</h4>
+                            <button
+                                class="mt-4 text-white text-xs uppercase font-bold underline underline-offset-8 decoration-primary tracking-widest hover:text-primary-fixed transition-colors">Засварлах</button>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-surface-container-low p-8 rounded-xl flex flex-col justify-center border border-outline-variant/10">
+                        <h4 class="text-xl font-headline font-bold text-on-surface mb-4">Шуурхай үйлдэл</h4>
+                        <div class="space-y-3">
+                            <button
+                                class="w-full flex justify-between items-center px-6 py-4 bg-white rounded-lg hover:bg-primary hover:text-white transition-all duration-300 group">
+                                <span class="font-bold text-sm uppercase tracking-widest">Шинэ аялал нэмэх</span>
+                                <span
+                                    class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">add</span>
+                            </button>
+                            <button
+                                class="w-full flex justify-between items-center px-6 py-4 bg-white rounded-lg hover:bg-primary hover:text-white transition-all duration-300 group">
+                                <span class="font-bold text-sm uppercase tracking-widest">Тайлан татах</span>
+                                <span
+                                    class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">download</span>
+                            </button>
+                            <button
+                                class="w-full flex justify-between items-center px-6 py-4 bg-white rounded-lg hover:bg-primary hover:text-white transition-all duration-300 group">
+                                <span class="font-bold text-sm uppercase tracking-widest">Мэдэгдэл илгээх</span>
+                                <span
+                                    class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">campaign</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Recent Activity (Right) -->
+            <div class="lg:col-span-4">
+                <div class="sticky top-32">
+                    <h3 class="text-xl font-headline font-bold text-on-surface mb-8">Сүүлийн үйл ажиллагаа</h3>
+                    <div class="space-y-8 relative">
+                        <!-- Vertical timeline visual -->
+                        <div class="absolute left-[11px] top-2 bottom-2 w-[1px] bg-outline-variant/30"></div>
+                        <!-- Activity Item 1 -->
+                        <div class="relative pl-10">
+                            <div
+                                class="absolute left-0 top-1 w-6 h-6 rounded-full bg-surface-container-highest border-4 border-surface flex items-center justify-center">
+                                <div class="w-2 h-2 rounded-full bg-primary"></div>
+                            </div>
+                            <p class="text-sm font-bold text-on-surface">Б. Бат-Эрдэнэ захиалга хийлээ</p>
+                            <p class="text-xs text-on-surface-variant mt-1">Говийн экспедиц • 2 минутын өмнө</p>
+                        </div>
+                        <!-- Activity Item 2 -->
+                        <div class="relative pl-10">
+                            <div
+                                class="absolute left-0 top-1 w-6 h-6 rounded-full bg-surface-container-highest border-4 border-surface flex items-center justify-center">
+                                <div class="w-2 h-2 rounded-full bg-secondary"></div>
+                            </div>
+                            <p class="text-sm font-bold text-on-surface">Шинэ сэтгэгдэл ирлээ</p>
+                            <p class="text-xs text-on-surface-variant mt-1">"Гайхалтай аялал боллоо..." • 1 цагийн өмнө
+                            </p>
+                        </div>
+                        <!-- Activity Item 3 -->
+                        <div class="relative pl-10">
+                            <div
+                                class="absolute left-0 top-1 w-6 h-6 rounded-full bg-surface-container-highest border-4 border-surface flex items-center justify-center">
+                                <div class="w-2 h-2 rounded-full bg-tertiary"></div>
+                            </div>
+                            <p class="text-sm font-bold text-on-surface">Төлбөр баталгаажлаа</p>
+                            <p class="text-xs text-on-surface-variant mt-1">Захиалга #8842 • 3 цагийн өмнө</p>
+                        </div>
+                        <!-- Activity Item 4 -->
+                        <div class="relative pl-10">
+                            <div
+                                class="absolute left-0 top-1 w-6 h-6 rounded-full bg-surface-container-highest border-4 border-surface flex items-center justify-center">
+                                <div class="w-2 h-2 rounded-full bg-primary-container"></div>
+                            </div>
+                            <p class="text-sm font-bold text-on-surface">Аяллын хөтөлбөр шинэчлэгдлээ</p>
+                            <p class="text-xs text-on-surface-variant mt-1">Хөвсгөл нуурын аялал • 5 цагийн өмнө</p>
+                        </div>
+                    </div>
+                    <!-- Side Card -->
+                    <div class="mt-12 p-8 bg-[#855312] rounded-xl text-white">
+                        <span class="material-symbols-outlined mb-4 opacity-80"
+                            style="font-variation-settings: 'FILL' 1;">shield_with_heart</span>
+                        <h5 class="font-headline font-bold text-lg mb-2">Системийн төлөв</h5>
+                        <p class="text-xs opacity-80 leading-relaxed mb-6">Бүх системүүд хэвийн ажиллаж байна. Сүүлийн
+                            хамгаалалтын шалгалт 12 минутын өмнө хийгдсэн.</p>
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                            <span class="text-[10px] font-bold uppercase tracking-widest">Аюулгүй</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer
+        class="bg-[#f8edd8] dark:bg-[#120f0a] full-width py-16 px-8 mt-24 tonal-shift from surface to surface-container transition-all duration-500">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
+            <div class="col-span-1 md:col-span-1">
+                <h3 class="font-noto-serif text-xl font-bold text-[#855312] mb-6">Nomadic Horizon</h3>
+                <p class="text-[#514539] dark:text-[#ede1cd] text-sm leading-relaxed opacity-80 font-work-sans">
+                    Монголын үзэсгэлэнт байгаль, нүүдэлчин соёлыг дэлхийд таниулах эрхэм зорилготой.
+                </p>
+            </div>
+            <div>
+                <h4 class="text-[#855312] font-semibold mb-6 text-sm uppercase tracking-widest font-work-sans">Цэс</h4>
+                <ul class="space-y-4">
+                    <li><a class="text-[#514539] dark:text-[#ede1cd] text-sm hover:underline decoration-[#c68b46] underline-offset-4 transition-all opacity-80 hover:opacity-100 font-work-sans"
+                            href="#">Бидний тухай</a></li>
+                    <li><a class="text-[#514539] dark:text-[#ede1cd] text-sm hover:underline decoration-[#c68b46] underline-offset-4 transition-all opacity-80 hover:opacity-100 font-work-sans"
+                            href="#">Холбоо барих</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-[#855312] font-semibold mb-6 text-sm uppercase tracking-widest font-work-sans">Хууль эрх
+                    зүй</h4>
+                <ul class="space-y-4">
+                    <li><a class="text-[#514539] dark:text-[#ede1cd] text-sm hover:underline decoration-[#c68b46] underline-offset-4 transition-all opacity-80 hover:opacity-100 font-work-sans"
+                            href="#">Нууцлалын бодлого</a></li>
+                    <li><a class="text-[#514539] dark:text-[#ede1cd] text-sm hover:underline decoration-[#c68b46] underline-offset-4 transition-all opacity-80 hover:opacity-100 font-work-sans"
+                            href="#">Үйлчилгээний нөхцөл</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-[#855312] font-semibold mb-6 text-sm uppercase tracking-widest font-work-sans">Мэдээлэл
+                    авах</h4>
+                <div class="flex gap-2">
+                    <input
+                        class="bg-transparent border-b border-[#837467]/30 text-sm focus:outline-none focus:border-[#855312] py-2 w-full font-work-sans"
+                        placeholder="И-мэйл хаяг" type="email" />
+                    <button class="material-symbols-outlined text-[#855312]">arrow_forward</button>
+                </div>
+            </div>
+        </div>
+        <div
+            class="max-w-7xl mx-auto mt-16 pt-8 border-t border-[#837467]/10 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-[#514539] dark:text-[#ede1cd] text-xs font-work-sans tracking-wide">© 2024 Nomadic Horizon.
+                Бүх эрх хуулиар хамгаалагдсан.</p>
+            <div class="flex gap-6">
+                <span
+                    class="material-symbols-outlined text-[#855312] cursor-pointer hover:opacity-70 transition-opacity">public</span>
+                <span
+                    class="material-symbols-outlined text-[#855312] cursor-pointer hover:opacity-70 transition-opacity">share</span>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
