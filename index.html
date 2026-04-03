@@ -1,333 +1,227 @@
-<!-- Нүүр хуудас (Landing) -->
 <!DOCTYPE html>
-
 <html lang="mn">
-
 <head>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;0,900;1,400&amp;family=Work+Sans:wght@300;400;500;600&amp;display=swap"
-    rel="stylesheet" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-    rel="stylesheet" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-    rel="stylesheet" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nomadic Horizon – Нүүр хуудас</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script id="tailwind-config">
     tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            "surface-tint": "#855312",
-            "outline-variant": "#d5c3b4",
-            "primary-fixed": "#ffddbb",
-            "primary-container": "#c68b46",
-            "surface-variant": "#ede1cd",
-            "on-surface-variant": "#514539",
-            "error-container": "#ffdad6",
-            "on-secondary-fixed-variant": "#72351c",
-            "on-primary-fixed-variant": "#673d00",
-            "surface-container-lowest": "#ffffff",
-            "tertiary-fixed": "#f1e2b2",
-            "surface-bright": "#fff8f1",
-            "secondary-container": "#fea685",
-            "on-tertiary": "#ffffff",
-            "surface-container-high": "#f3e7d2",
-            "secondary-fixed-dim": "#ffb59a",
-            "tertiary": "#685e38",
-            "on-primary": "#ffffff",
-            "primary": "#855312",
-            "surface-container": "#f8edd8",
-            "inverse-primary": "#fbba70",
-            "surface-container-low": "#fef2dd",
-            "on-primary-container": "#472800",
-            "on-secondary": "#ffffff",
-            "background": "#fff8f1",
-            "on-secondary-container": "#783920",
-            "on-error": "#ffffff",
-            "surface": "#fff8f1",
-            "on-primary-fixed": "#2b1700",
-            "error": "#ba1a1a",
-            "secondary-fixed": "#ffdbce",
-            "on-tertiary-fixed-variant": "#4f4623",
-            "on-background": "#201b0e",
-            "tertiary-fixed-dim": "#d4c698",
-            "surface-container-highest": "#ede1cd",
-            "inverse-surface": "#363022",
-            "on-tertiary-fixed": "#221b00",
-            "tertiary-container": "#b8ab7f",
-            "on-tertiary-container": "#483f1d",
-            "on-surface": "#201b0e",
-            "on-secondary-fixed": "#380d00",
-            "surface-dim": "#e4d9c4",
-            "on-error-container": "#93000a",
-            "secondary": "#904c31",
-            "outline": "#837467",
-            "inverse-on-surface": "#fbefda",
-            "primary-fixed-dim": "#fbba70"
-          },
-          fontFamily: {
-            "headline": ["Noto Serif", "serif"],
-            "body": ["Work Sans", "sans-serif"],
-            "label": ["Work Sans", "sans-serif"]
-          },
-          borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+      darkMode:"class",
+      theme:{ extend:{
+        colors:{
+          "surface-tint":"#855312","outline-variant":"#d5c3b4","primary-fixed":"#ffddbb",
+          "primary-container":"#c68b46","surface-variant":"#ede1cd","on-surface-variant":"#514539",
+          "error-container":"#ffdad6","surface-container-lowest":"#ffffff","surface-bright":"#fff8f1",
+          "secondary-container":"#fea685","on-tertiary":"#ffffff","surface-container-high":"#f3e7d2",
+          "tertiary":"#685e38","on-primary":"#ffffff","primary":"#855312","surface-container":"#f8edd8",
+          "inverse-primary":"#fbba70","surface-container-low":"#fef2dd","on-primary-container":"#472800",
+          "on-secondary":"#ffffff","background":"#fff8f1","on-secondary-container":"#783920",
+          "surface":"#fff8f1","on-primary-fixed":"#2b1700","error":"#ba1a1a",
+          "on-background":"#201b0e","surface-container-highest":"#ede1cd","inverse-surface":"#363022",
+          "tertiary-container":"#b8ab7f","on-tertiary-container":"#483f1d","on-surface":"#201b0e",
+          "surface-dim":"#e4d9c4","secondary":"#904c31","outline":"#837467","inverse-on-surface":"#fbefda",
+          "primary-fixed-dim":"#fbba70","on-primary-fixed-variant":"#673d00",
+          "secondary-fixed":"#ffdbce","on-secondary-fixed":"#380d00","tertiary-fixed":"#f1e2b2"
         },
-      },
+        fontFamily:{"headline":["Noto Serif","serif"],"body":["Work Sans","sans-serif"],"label":["Work Sans","sans-serif"]},
+        borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"}
+      }}
     }
   </script>
-  <style>
-    .material-symbols-outlined {
-      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-    }
-
-    .editorial-shadow {
-      box-shadow: 0 20px 40px -10px rgba(32, 27, 14, 0.08);
-    }
-
-    .glass-nav {
-      backdrop-filter: blur(16px);
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css"/>
 </head>
+<body class="bg-surface text-on-surface font-body">
 
-<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
-  <!-- TopNavBar Component -->
-  <nav class="docked full-width top-0 sticky z-50 bg-[#fff8f1]/80 backdrop-blur-lg no-border tonal-shift bg-[#fef2dd]">
-    <div class="flex justify-between items-center w-full px-8 py-6 max-w-[1920px] mx-auto">
-      <div class="text-2xl font-black text-[#855312] font-headline uppercase tracking-tight">Nomadic Horizon</div>
-      <div class="hidden md:flex items-center gap-8">
-        <a class="text-[#855312] font-bold border-b-2 border-[#855312] pb-1 font-headline uppercase tracking-tight"
-          href="#">Нүүр</a>
-        <a class="text-[#514539] hover:text-[#855312] transition-colors duration-300 font-headline uppercase tracking-tight"
-          href="#">Чиглэлүүд</a>
-        <a class="text-[#514539] hover:text-[#855312] transition-colors duration-300 font-headline uppercase tracking-tight"
-          href="#">Аяллын хөтөлбөр</a>
-        <a class="text-[#514539] hover:text-[#855312] transition-colors duration-300 font-headline uppercase tracking-tight"
-          href="#">Экспедиц</a>
-        <a class="text-[#514539] hover:text-[#855312] transition-colors duration-300 font-headline uppercase tracking-tight"
-          href="#">Өв соёл</a>
-      </div>
-      <div class="flex items-center gap-4">
-        <button
-          class="px-6 py-2 rounded-md border border-outline-variant/15 text-on-surface font-label text-sm uppercase tracking-widest hover:bg-surface-container transition-colors">Нэвтрэх</button>
-        <button
-          class="px-6 py-2 rounded-md bg-gradient-to-v from-primary to-primary-container text-on-primary font-label text-sm uppercase tracking-widest shadow-sm active:scale-95 transition-transform">Захиалах</button>
-      </div>
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header class="site-header">
+  <div class="inner">
+    <a class="site-logo" href="index.html">Nomadic Horizon</a>
+    <nav class="site-nav">
+      <a href="index.html" class="active">Нүүр</a>
+      <a href="map.html">Чиглэлүүд</a>
+      <a href="travel_details.html">Аяллын хөтөлбөр</a>
+      <a href="travel_details.html">Экспедиц</a>
+      <a href="travel_details.html">Өв соёл</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="login.html" class="btn-ghost">Нэвтрэх</a>
+      <a href="booking.html" class="btn-primary">Захиалах</a>
+      <button class="nav-toggle" aria-label="Цэс" aria-expanded="false">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
     </div>
+  </div>
+  <nav class="mobile-nav">
+    <a href="index.html" class="active">Нүүр</a>
+    <a href="map.html">Чиглэлүүд</a>
+    <a href="travel_details.html">Аяллын хөтөлбөр</a>
+    <a href="login.html">Нэвтрэх</a>
+    <a href="booking.html">Захиалах</a>
   </nav>
-  <main>
-    <!-- Hero Section -->
-    <section class="relative min-h-[921px] flex items-center pt-20 pb-24 px-8 overflow-hidden">
-      <div class="absolute inset-0 z-0">
-        <img class="w-full h-full object-cover grayscale-[20%] sepia-[10%] opacity-90"
-          data-alt="vast Mongolian steppe landscape at sunrise with golden tall grass waving in the wind and hazy mountains in the distance"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDl4MOQ4VIx0P4Zj5n0z4ax-JmcHESb_HwWaW09c_E-ZWHdHu2TCxwiMGBc1zfqtB3QkIoOasG_huPj4UzJGPVbCvYqSyouYWlo_1r-i8-5O7bc5zvSLXTulc50wonRVfQm97oKKFWbTbhDE2E7DR7ZC5sLXU6AZM_w1AyzFvwqkxdzKBfDaIaR89CZxJABL3Zd53Ic3_dTlxuwfpYm0_MT5WE9hwxaZuaelYb6J6tIfBZS2pZBnX_51Uznls17AtIBZFAT0Ph8Uwc" />
-        <div class="absolute inset-0 bg-gradient-to-r from-surface/80 via-surface/40 to-transparent"></div>
-      </div>
-      <div class="relative z-10 max-w-4xl">
-        <span
-          class="inline-block py-1 px-3 bg-primary-fixed text-on-primary-fixed text-xs font-label uppercase tracking-[0.2em] mb-6">Discovery
-          Mongolia</span>
-        <h1 class="font-headline font-black text-7xl md:text-8xl text-on-surface leading-[1.1] tracking-tight mb-8">
-          Алтан талын <br />шивнээ
-        </h1>
-        <p class="font-body text-xl md:text-2xl text-on-surface-variant max-w-2xl leading-relaxed mb-12">
-          Монгол орны онгон дагшин байгаль, нүүдэлчин соёлтой танилцах хосгүй аялал.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-6">
-          <button
-            class="group flex items-center gap-4 bg-primary text-on-primary px-8 py-5 rounded-md hover:bg-primary-container transition-all duration-300">
-            <span class="font-label uppercase tracking-widest font-semibold">Аялалаа эхлэх</span>
-            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
-          </button>
-          <button
-            class="flex items-center gap-4 px-8 py-5 rounded-md border border-outline-variant/30 font-label uppercase tracking-widest text-on-surface hover:bg-surface-container-low transition-colors">
-            <span class="material-symbols-outlined">play_circle</span>
-            <span>Бичлэг үзэх</span>
-          </button>
-        </div>
-      </div>
-    </section>
-    <!-- Featured Destinations (Bento Grid) -->
-    <section class="py-24 px-8 bg-surface">
-      <div class="max-w-7xl mx-auto">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-          <div class="max-w-xl">
-            <h2 class="font-headline text-5xl font-bold text-primary mb-4">Алдартай чиглэлүүд</h2>
-            <div class="h-1 w-20 bg-secondary-container mb-6"></div>
-            <p class="text-on-surface-variant text-lg">Талын салхинаас эхлээд говийн элсэн манхан хүртэлх Монгол орны
-              хамгийн гайхалтай цэгүүд.</p>
-          </div>
-          <a class="group flex items-center gap-2 text-primary font-semibold border-b border-primary/20 pb-1 hover:border-primary transition-all"
-            href="#">
-            <span>Бүх чиглэлийг харах</span>
-            <span class="material-symbols-outlined text-sm">north_east</span>
-          </a>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[800px]">
-          <!-- Gobi Card -->
-          <div
-            class="md:col-span-8 group relative overflow-hidden rounded-xl bg-surface-container-low border border-outline-variant/10">
-            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              data-alt="dramatic sand dunes of the Gobi desert during golden hour with deep orange shadows and clear sky"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrP6RnYXS37YlzCLoCH76IXVefXlB4l7k9y6jRypWhU4HbtDMiaSbtpfnFr8abCPjwO7ukJitw7CAJDqYIQkc4ldAC0NsBbFP9s1qYAaMZwPcT2OdVfQbGHb3UAEu3E9avieBgUiP7VEjWEAVViipGuvadDbGumPCxwoOPOPhbPSVlwO0rgBdDvIv3aJL-YZnaraI6G4nkJ2wg4WWHL7i2EoV4k3k6K83JeMqaJY5DrZMXnnNj0k6zH2dumlLH8HDGqhbCCW3-hRs" />
-            <div class="absolute inset-0 bg-gradient-to-t from-on-surface/90 via-transparent to-transparent opacity-60">
-            </div>
-            <div class="absolute bottom-0 left-0 p-10 w-full">
-              <span class="text-primary-fixed font-label text-sm uppercase tracking-widest mb-2 block">Өмнөговь</span>
-              <h3 class="text-white font-headline text-4xl font-bold mb-4">Говь</h3>
-              <p class="text-surface-variant/90 max-w-md mb-6 font-light">Дуулдаг элсэн манхан, Хэрмэн цавын улаан хадан
-                хясаа болон үлэг гүрвэлийн мөрөөр аялах гайхамшигт ертөнц.</p>
-              <button
-                class="bg-surface/10 backdrop-blur-md border border-surface/20 text-white px-6 py-3 rounded-md hover:bg-white hover:text-primary transition-all">Дэлгэрэнгүй</button>
-            </div>
-          </div>
-          <!-- Altai Card -->
-          <div
-            class="md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container-low border border-outline-variant/10">
-            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              data-alt="snow-capped Altai mountain peaks reflecting in a pristine blue alpine lake during morning light"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjY8C8LlHB1-gU6Bu9Jvk_KFyRStMYWYrK9Ll1Lj63-4-F8VDkGHrMEHADZesOBytDV7MdUkgENmbSyg_cgHWxhvQMGeI4w3lM1mty_0SOKHgFEKLLI617qIIl-NJv-xBhRwoNUJlSW7ikkZHzi15Z2PVhb2RAhNxzt0snG4BdVdhFumm48lDenpBksThglRCdle3iBW26SwStjPHcgUEe1hyk0JBBrnAw1LGYNt7e2wr1qyJEXHuidHjVLBIBLRGLQ8UGSBLlDcI" />
-            <div class="absolute inset-0 bg-gradient-to-t from-on-surface/90 via-transparent to-transparent opacity-60">
-            </div>
-            <div class="absolute bottom-0 left-0 p-8">
-              <span class="text-primary-fixed font-label text-sm uppercase tracking-widest mb-2 block">Баян-Өлгий</span>
-              <h3 class="text-white font-headline text-3xl font-bold mb-4">Алтай</h3>
-              <p class="text-surface-variant/90 text-sm mb-6 line-clamp-2">Мөнх цаст оргилууд болон бүргэдээр ан хийх
-                уламжлалыг хадгалж үлдсэн бахархалт бүс.</p>
-              <span class="material-symbols-outlined text-white text-3xl">arrow_right_alt</span>
-            </div>
-          </div>
-          <!-- Terelj Card -->
-          <div
-            class="md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container-low border border-outline-variant/10">
-            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              data-alt="the famous Turtle Rock in Terelj National Park surrounded by green larch forests and granite formations"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCojIFQArIfuz2k-CnnCyyUGOwMKyoONePw3ZLorW2u-6YzQPzedgBoqLiYfxiBHlbjfQFu_oTbvKbVWOvFc51tc3ZT-qgKKoAV_nlyYD9txcn_KccxjWpBlvDC3Sdq87vazNFSa4KtvBVBBbVmObkYokf9Ocldq5mNMFtpZQyFdPdd3u9n58wvjbFP2s4BlbfyxLnMsNdtnV9DFp_976HHRCEW7bqoYy0PWmUwyeOhfBrVgigW-MK0NKRR5-POjy7yx7TVeXEDQE" />
-            <div class="absolute inset-0 bg-gradient-to-t from-on-surface/90 via-transparent to-transparent opacity-60">
-            </div>
-            <div class="absolute bottom-0 left-0 p-8">
-              <span class="text-primary-fixed font-label text-sm uppercase tracking-widest mb-2 block">Төв аймаг</span>
-              <h3 class="text-white font-headline text-3xl font-bold mb-4">Тэрэлж</h3>
-              <p class="text-surface-variant/90 text-sm mb-6 line-clamp-2">Нийслэл хоттой ойр орших байгалийн үзэсгэлэнт
-                цогцолбор газар, хадан тогтоц бүхий ой мод.</p>
-              <span class="material-symbols-outlined text-white text-3xl">arrow_right_alt</span>
-            </div>
-          </div>
-          <!-- Statistics/Editorial Section -->
-          <div class="md:col-span-8 flex flex-col justify-center bg-surface-container-low p-12 rounded-xl">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div>
-                <span class="block text-4xl font-headline font-black text-primary mb-2">1.5M</span>
-                <span class="text-sm font-label uppercase text-on-surface-variant">Нутаг дэвсгэр (км²)</span>
-              </div>
-              <div>
-                <span class="block text-4xl font-headline font-black text-primary mb-2">300+</span>
-                <span class="text-sm font-label uppercase text-on-surface-variant">Нартай өдөр</span>
-              </div>
-              <div>
-                <span class="block text-4xl font-headline font-black text-primary mb-2">21</span>
-                <span class="text-sm font-label uppercase text-on-surface-variant">Аймгийн соёл</span>
-              </div>
-              <div>
-                <span class="block text-4xl font-headline font-black text-primary mb-2">100%</span>
-                <span class="text-sm font-label uppercase text-on-surface-variant">Онгон байгаль</span>
-              </div>
-            </div>
-            <div class="mt-12 pt-12 border-t border-outline-variant/20">
-              <blockquote class="italic text-2xl font-headline text-on-surface/80 leading-relaxed">
-                "Талын нүүдэлчдийн сүнс салхинд нь оршиж, эрх чөлөө нь уудам талд нь багтдаг."
-              </blockquote>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Newsletter (Minimalist Design System) -->
-    <section class="py-24 px-8 bg-surface-container-high">
-      <div class="max-w-4xl mx-auto text-center">
-        <span class="material-symbols-outlined text-5xl text-primary mb-6" data-weight="fill">mail</span>
-        <h2 class="font-headline text-4xl font-bold mb-6 text-on-surface">Аяллын мэдээлэл хүлээн авах</h2>
-        <p class="text-on-surface-variant mb-10 text-lg">Шинэ аяллын хөтөлбөр болон онцгой хөнгөлөлтийн мэдээллийг цаг
-          алдалгүй аваарай.</p>
-        <form class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
-          <input
-            class="flex-grow bg-surface py-4 px-6 rounded-md border-b-2 border-outline-variant focus:border-primary outline-none transition-all placeholder:text-on-surface-variant/50"
-            placeholder="Таны имэйл хаяг" type="email" />
-          <button
-            class="bg-primary text-on-primary px-8 py-4 rounded-md font-label uppercase tracking-widest hover:bg-primary-container transition-all">Бүртгүүлэх</button>
-        </form>
-      </div>
-    </section>
-  </main>
-  <!-- Footer Component -->
-  <footer class="full-width py-16 px-8 mt-24 bg-[#f8edd8] tonal-shift">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
-      <div class="col-span-1 md:col-span-1">
-        <div class="font-headline text-xl font-bold text-[#855312] mb-6">Nomadic Horizon</div>
-        <p class="text-[#514539] font-body text-sm leading-relaxed mb-6">
-          Монгол орны өвөрмөц соёл, байгалийн үзэсгэлэнг дэлхий дахинд сурталчлах эрхэм зорилготой аяллын агентлаг.
-        </p>
-        <div class="flex gap-4">
-          <span
-            class="material-symbols-outlined text-[#855312] cursor-pointer hover:opacity-70 transition-opacity">social_leaderboard</span>
-          <span
-            class="material-symbols-outlined text-[#855312] cursor-pointer hover:opacity-70 transition-opacity">retweet</span>
-          <span
-            class="material-symbols-outlined text-[#855312] cursor-pointer hover:opacity-70 transition-opacity">public</span>
-        </div>
-      </div>
-      <div>
-        <h4 class="font-headline font-bold text-[#855312] mb-6 uppercase tracking-wider text-xs">Цэс</h4>
-        <ul class="space-y-4">
-          <li><a
-              class="text-[#514539] font-body text-sm hover:underline decoration-[#c68b46] underline-offset-4 transition-all opacity-80 hover:opacity-100"
-              href="#">Бидний тухай</a></li>
-          <li><a
-              class="text-[#514539] font-body text-sm hover:underline decoration-[#c68b46] underline-offset-4 transition-all opacity-80 hover:opacity-100"
-              href="#">Холбоо барих</a></li>
-          <li><a
-              class="text-[#514539] font-body text-sm hover:underline decoration-[#c68b46] underline-offset-4 transition-all opacity-80 hover:opacity-100"
-              href="#">Асуулт хариулт</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="font-headline font-bold text-[#855312] mb-6 uppercase tracking-wider text-xs">Хууль эрх зүй</h4>
-        <ul class="space-y-4">
-          <li><a
-              class="text-[#514539] font-body text-sm hover:underline decoration-[#c68b46] underline-offset-4 transition-all opacity-80 hover:opacity-100"
-              href="#">Нууцлалын бодлого</a></li>
-          <li><a
-              class="text-[#514539] font-body text-sm hover:underline decoration-[#c68b46] underline-offset-4 transition-all opacity-80 hover:opacity-100"
-              href="#">Үйлчилгээний нөхцөл</a></li>
-          <li><a
-              class="text-[#514539] font-body text-sm hover:underline decoration-[#c68b46] underline-offset-4 transition-all opacity-80 hover:opacity-100"
-              href="#">Төлбөрийн нөхцөл</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="font-headline font-bold text-[#855312] mb-6 uppercase tracking-wider text-xs">Холбоо барих</h4>
-        <p class="text-[#514539] font-body text-sm mb-2 opacity-80">Улаанбаатар хот, Сүхбаатар дүүрэг</p>
-        <p class="text-[#514539] font-body text-sm mb-2 opacity-80">+976 7000 0000</p>
-        <p class="text-[#514539] font-body text-sm opacity-80">info@nomadichorizon.mn</p>
-      </div>
-    </div>
-    <div
-      class="max-w-7xl mx-auto mt-16 pt-8 border-t border-outline-variant/20 flex flex-col md:flex-row justify-between items-center gap-4">
-      <div class="text-[#514539] font-body text-xs tracking-wide">
-        © 2024 Nomadic Horizon. Бүх эрх хуулиар хамгаалагдсан.
-      </div>
-      <div class="flex items-center gap-2 text-[#855312]">
-        <span class="material-symbols-outlined text-sm">language</span>
-        <span class="text-xs font-semibold">Mongolia (MN)</span>
-      </div>
-    </div>
-  </footer>
-</body>
+</header>
 
+<main>
+  <!-- Hero -->
+  <section class="relative min-h-[921px] flex items-center pt-20 pb-24 px-8 overflow-hidden fade-up">
+    <div class="absolute inset-0 z-0">
+      <img class="w-full h-full object-cover grayscale-[20%] sepia-[10%] opacity-90"
+        alt="Vast Mongolian steppe landscape at sunrise"
+        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDl4MOQ4VIx0P4Zj5n0z4ax-JmcHESb_HwWaW09c_E-ZWHdHu2TCxwiMGBc1zfqtB3QkIoOasG_huPj4UzJGPVbCvYqSyouYWlo_1r-i8-5O7bc5zvSLXTulc50wonRVfQm97oKKFWbTbhDE2E7DR7ZC5sLXU6AZM_w1AyzFvwqkxdzKBfDaIaR89CZxJABL3Zd53Ic3_dTlxuwfpYm0_MT5WE9hwxaZuaelYb6J6tIfBZS2pZBnX_51Uznls17AtIBZFAT0Ph8Uwc"/>
+      <div class="absolute inset-0 bg-gradient-to-r from-surface/80 via-surface/40 to-transparent"></div>
+    </div>
+    <div class="relative z-10 max-w-4xl fade-up-2">
+      <span class="badge badge-primary mb-6 inline-block">Discovery Mongolia</span>
+      <h1 class="font-headline font-black text-7xl md:text-8xl text-on-surface leading-[1.1] tracking-tight mb-8">
+        Алтан талын <br/>шивнээ
+      </h1>
+      <p class="font-body text-xl md:text-2xl text-on-surface-variant max-w-2xl leading-relaxed mb-12">
+        Монгол орны онгон дагшин байгаль, нүүдэлчин соёлтой танилцах хосгүй аялал.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-6">
+        <a href="travel_details.html" class="btn-primary text-base px-8 py-5 rounded-md group">
+          <span class="font-label uppercase tracking-widest font-semibold">Аялалаа эхлэх</span>
+          <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </a>
+        <button class="flex items-center gap-4 px-8 py-5 rounded-md border border-outline-variant/30 font-label uppercase tracking-widest text-on-surface hover:bg-surface-container-low transition-colors">
+          <span class="material-symbols-outlined">play_circle</span>
+          <span>Бичлэг үзэх</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Destinations -->
+  <section class="py-24 px-8 bg-surface">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6 fade-up">
+        <div class="max-w-xl">
+          <h2 class="font-headline text-5xl font-bold text-primary mb-4">Алдартай чиглэлүүд</h2>
+          <div class="h-1 w-20 bg-secondary-container mb-6"></div>
+          <p class="text-on-surface-variant text-lg">Талын салхинаас эхлээд говийн элсэн манхан хүртэлх Монгол орны хамгийн гайхалтай цэгүүд.</p>
+        </div>
+        <a href="map.html" class="group flex items-center gap-2 text-primary font-semibold border-b border-primary/20 pb-1 hover:border-primary transition-all">
+          <span>Бүх чиглэлийг харах</span>
+          <span class="material-symbols-outlined text-sm">north_east</span>
+        </a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[800px]">
+        <!-- Gobi -->
+        <a href="travel_details.html" class="md:col-span-8 group relative overflow-hidden rounded-xl bg-surface-container-low border border-outline-variant/10 card-lift block">
+          <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            alt="Gobi desert sand dunes at golden hour"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrP6RnYXS37YlzCLoCH76IXVefXlB4l7k9y6jRypWhU4HbtDMiaSbtpfnFr8abCPjwO7ukJitw7CAJDqYIQkc4ldAC0NsBbFP9s1qYAaMZwPcT2OdVfQbGHb3UAEu3E9avieBgUiP7VEjWEAVViipGuvadDbGumPCxwoOPOPhbPSVlwO0rgBdDvIv3aJL-YZnaraI6G4nkJ2wg4WWHL7i2EoV4k3k6K83JeMqaJY5DrZMXnnNj0k6zH2dumlLH8HDGqhbCCW3-hRs"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-on-surface/90 via-transparent to-transparent opacity-60"></div>
+          <div class="absolute bottom-0 left-0 p-10 w-full">
+            <span class="text-primary-fixed font-label text-sm uppercase tracking-widest mb-2 block">Өмнөговь</span>
+            <h3 class="text-white font-headline text-4xl font-bold mb-4">Говь</h3>
+            <p class="text-surface-variant/90 max-w-md mb-6 font-light">Дуулдаг элсэн манхан, Хэрмэн цавын улаан хадан хясаа болон үлэг гүрвэлийн мөрөөр аялах гайхамшигт ертөнц.</p>
+            <span class="bg-surface/10 backdrop-blur-md border border-surface/20 text-white px-6 py-3 rounded-md hover:bg-white hover:text-primary transition-all inline-block">Дэлгэрэнгүй</span>
+          </div>
+        </a>
+        <!-- Altai -->
+        <a href="travel_details.html" class="md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container-low border border-outline-variant/10 card-lift block">
+          <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            alt="Altai mountain peaks"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjY8C8LlHB1-gU6Bu9Jvk_KFyRStMYWYrK9Ll1Lj63-4-F8VDkGHrMEHADZesOBytDV7MdUkgENmbSyg_cgHWxhvQMGeI4w3lM1mty_0SOKHgFEKLLI617qIIl-NJv-xBhRwoNUJlSW7ikkZHzi15Z2PVhb2RAhNxzt0snG4BdVdhFumm48lDenpBksThglRCdle3iBW26SwStjPHcgUEe1hyk0JBBrnAw1LGYNt7e2wr1qyJEXHuidHjVLBIBLRGLQ8UGSBLlDcI"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-on-surface/90 via-transparent to-transparent opacity-60"></div>
+          <div class="absolute bottom-0 left-0 p-8">
+            <span class="text-primary-fixed font-label text-sm uppercase tracking-widest mb-2 block">Баян-Өлгий</span>
+            <h3 class="text-white font-headline text-3xl font-bold mb-4">Алтай</h3>
+            <span class="material-symbols-outlined text-white text-3xl">arrow_right_alt</span>
+          </div>
+        </a>
+        <!-- Terelj -->
+        <a href="travel_details.html" class="md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container-low border border-outline-variant/10 card-lift block">
+          <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            alt="Terelj National Park"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCojIFQArIfuz2k-CnnCyyUGOwMKyoONePw3ZLorW2u-6YzQPzedgBoqLiYfxiBHlbjfQFu_oTbvKbVWOvFc51tc3ZT-qgKKoAV_nlyYD9txcn_KccxjWpBlvDC3Sdq87vazNFSa4KtvBVBBbVmObkYokf9Ocldq5mNMFtpZQyFdPdd3u9n58wvjbFP2s4BlbfyxLnMsNdtnV9DFp_976HHRCEW7bqoYy0PWmUwyeOhfBrVgigW-MK0NKRR5-POjy7yx7TVeXEDQE"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-on-surface/90 via-transparent to-transparent opacity-60"></div>
+          <div class="absolute bottom-0 left-0 p-8">
+            <span class="text-primary-fixed font-label text-sm uppercase tracking-widest mb-2 block">Төв аймаг</span>
+            <h3 class="text-white font-headline text-3xl font-bold mb-4">Тэрэлж</h3>
+            <span class="material-symbols-outlined text-white text-3xl">arrow_right_alt</span>
+          </div>
+        </a>
+        <!-- Stats -->
+        <div class="md:col-span-8 flex flex-col justify-center bg-surface-container-low p-12 rounded-xl">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div><span class="block text-4xl font-headline font-black text-primary mb-2">1.5M</span><span class="text-sm font-label uppercase text-on-surface-variant">Нутаг дэвсгэр (км²)</span></div>
+            <div><span class="block text-4xl font-headline font-black text-primary mb-2">300+</span><span class="text-sm font-label uppercase text-on-surface-variant">Нартай өдөр</span></div>
+            <div><span class="block text-4xl font-headline font-black text-primary mb-2">21</span><span class="text-sm font-label uppercase text-on-surface-variant">Аймгийн соёл</span></div>
+            <div><span class="block text-4xl font-headline font-black text-primary mb-2">100%</span><span class="text-sm font-label uppercase text-on-surface-variant">Онгон байгаль</span></div>
+          </div>
+          <div class="mt-12 pt-12 border-t border-outline-variant/20">
+            <blockquote class="italic text-2xl font-headline text-on-surface/80 leading-relaxed">
+              "Талын нүүдэлчдийн сүнс салхинд нь оршиж, эрх чөлөө нь уудам талд нь багтдаг."
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="py-24 px-8 bg-surface-container-high">
+    <div class="max-w-4xl mx-auto text-center fade-up">
+      <span class="material-symbols-outlined text-5xl text-primary mb-6 block">mail</span>
+      <h2 class="font-headline text-4xl font-bold mb-6 text-on-surface">Аяллын мэдээлэл хүлээн авах</h2>
+      <p class="text-on-surface-variant mb-10 text-lg">Шинэ аяллын хөтөлбөр болон онцгой хөнгөлөлтийн мэдээллийг цаг алдалгүй аваарай.</p>
+      <form data-newsletter class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+        <input class="flex-grow bg-surface py-4 px-6 rounded-md border-b-2 border-outline-variant focus:border-primary outline-none transition-all placeholder:text-on-surface-variant/50" placeholder="Таны имэйл хаяг" type="email"/>
+        <button type="submit" class="btn-primary px-8 py-4 rounded-md">Бүртгүүлэх</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="site-footer">
+  <div class="inner">
+    <div class="grid">
+      <div class="footer-brand">
+        <a class="logo" href="index.html">Nomadic Horizon</a>
+        <p>Монгол орны өвөрмөц соёл, байгалийн үзэсгэлэнг дэлхий дахинд сурталчлах эрхэм зорилготой аяллын агентлаг.</p>
+        <div class="footer-socials mt-4">
+          <a href="#"><span class="material-symbols-outlined">public</span></a>
+          <a href="#"><span class="material-symbols-outlined">share</span></a>
+          <a href="#"><span class="material-symbols-outlined">mail</span></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Цэс</h4>
+        <ul>
+          <li><a href="#">Бидний тухай</a></li>
+          <li><a href="#">Холбоо барих</a></li>
+          <li><a href="#">Асуулт хариулт</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Хууль эрх зүй</h4>
+        <ul>
+          <li><a href="#">Нууцлалын бодлого</a></li>
+          <li><a href="#">Үйлчилгээний нөхцөл</a></li>
+          <li><a href="#">Төлбөрийн нөхцөл</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Холбоо барих</h4>
+        <ul>
+          <li><a href="#">Улаанбаатар хот</a></li>
+          <li><a href="tel:+97670000000">+976 7000 0000</a></li>
+          <li><a href="mailto:info@nomadichorizon.mn">info@nomadichorizon.mn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Nomadic Horizon. Бүх эрх хуулиар хамгаалагдсан.</p>
+      <div class="footer-socials">
+        <a href="#"><span class="material-symbols-outlined text-sm">language</span></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
+</body>
 </html>

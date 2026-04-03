@@ -1,318 +1,192 @@
-<!-- Хэрэглэгчийн хянах самбар (User Dashboard) -->
 <!DOCTYPE html>
-
-<html class="light" lang="mn">
-
+<html lang="mn">
 <head>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Nomadic Horizon | Kaelen Vance Dashboard</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nomadic Horizon – Хэрэглэгчийн самбар</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;0,900;1,400&amp;family=Work+Sans:wght@300;400;500;600;700&amp;display=swap"
-    rel="stylesheet" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-    rel="stylesheet" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-    rel="stylesheet" />
   <script id="tailwind-config">
     tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            "surface-tint": "#855312",
-            "outline-variant": "#d5c3b4",
-            "primary-fixed": "#ffddbb",
-            "primary-container": "#c68b46",
-            "surface-variant": "#ede1cd",
-            "on-surface-variant": "#514539",
-            "error-container": "#ffdad6",
-            "on-secondary-fixed-variant": "#72351c",
-            "on-primary-fixed-variant": "#673d00",
-            "surface-container-lowest": "#ffffff",
-            "tertiary-fixed": "#f1e2b2",
-            "surface-bright": "#fff8f1",
-            "secondary-container": "#fea685",
-            "on-tertiary": "#ffffff",
-            "surface-container-high": "#f3e7d2",
-            "secondary-fixed-dim": "#ffb59a",
-            "tertiary": "#685e38",
-            "on-primary": "#ffffff",
-            "primary": "#855312",
-            "surface-container": "#f8edd8",
-            "inverse-primary": "#fbba70",
-            "surface-container-low": "#fef2dd",
-            "on-primary-container": "#472800",
-            "on-secondary": "#ffffff",
-            "background": "#fff8f1",
-            "on-secondary-container": "#783920",
-            "on-error": "#ffffff",
-            "surface": "#fff8f1",
-            "on-primary-fixed": "#2b1700",
-            "error": "#ba1a1a",
-            "secondary-fixed": "#ffdbce",
-            "on-tertiary-fixed-variant": "#4f4623",
-            "on-background": "#201b0e",
-            "tertiary-fixed-dim": "#d4c698",
-            "surface-container-highest": "#ede1cd",
-            "inverse-surface": "#363022",
-            "on-tertiary-fixed": "#221b00",
-            "tertiary-container": "#b8ab7f",
-            "on-tertiary-container": "#483f1d",
-            "on-surface": "#201b0e",
-            "on-secondary-fixed": "#380d00",
-            "surface-dim": "#e4d9c4",
-            "on-error-container": "#93000a",
-            "secondary": "#904c31",
-            "outline": "#837467",
-            "inverse-on-surface": "#fbefda",
-            "primary-fixed-dim": "#fbba70"
-          },
-          fontFamily: {
-            "headline": ["Noto Serif"],
-            "body": ["Work Sans"],
-            "label": ["Work Sans"]
-          },
-          borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+      darkMode:"class",
+      theme:{ extend:{
+        colors:{
+          "surface-tint":"#855312","outline-variant":"#d5c3b4","primary-fixed":"#ffddbb",
+          "primary-container":"#c68b46","surface-variant":"#ede1cd","on-surface-variant":"#514539",
+          "surface-container-lowest":"#ffffff","surface-container-high":"#f3e7d2",
+          "tertiary":"#685e38","on-primary":"#ffffff","primary":"#855312","surface-container":"#f8edd8",
+          "surface-container-low":"#fef2dd","on-primary-container":"#472800","background":"#fff8f1",
+          "on-secondary":"#ffffff","surface":"#fff8f1","on-primary-fixed":"#2b1700",
+          "on-background":"#201b0e","surface-container-highest":"#ede1cd",
+          "tertiary-container":"#b8ab7f","on-tertiary-container":"#483f1d","on-surface":"#201b0e",
+          "outline":"#837467","secondary":"#904c31","primary-fixed-dim":"#fbba70"
         },
-      },
+        fontFamily:{"headline":["Noto Serif","serif"],"body":["Work Sans","sans-serif"],"label":["Work Sans","sans-serif"]},
+        borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"}
+      }}
     }
   </script>
-  <style>
-    .material-symbols-outlined {
-      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-    }
-
-    .no-scrollbar::-webkit-scrollbar {
-      display: none;
-    }
-
-    .glass-effect {
-      backdrop-filter: blur(16px);
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css"/>
 </head>
-
 <body class="bg-surface font-body text-on-surface antialiased">
-  <!-- TopNavBar Navigation Shell -->
-  <header
-    class="bg-[#fff8f1]/80 dark:bg-[#1a160f]/80 backdrop-blur-lg docked full-width top-0 sticky z-50 tonal-shift bg-[#fef2dd] dark:bg-[#2a241a] no-border">
-    <nav class="flex justify-between items-center w-full px-8 py-6 max-w-[1920px] mx-auto">
-      <div class="flex items-center gap-8">
-        <span class="text-2xl font-black text-[#855312] dark:text-[#c68b46] font-noto-serif">Nomadic Horizon</span>
-        <div class="hidden md:flex gap-8 items-center">
-          <a class="text-[#514539] dark:text-[#ede1cd] hover:text-[#855312] font-noto-serif display-md uppercase tracking-tight hover:bg-[#ede1cd]/50 transition-colors duration-300"
-            href="#">Нүүр</a>
-          <a class="text-[#514539] dark:text-[#ede1cd] hover:text-[#855312] font-noto-serif display-md uppercase tracking-tight hover:bg-[#ede1cd]/50 transition-colors duration-300"
-            href="#">Чиглэлүүд</a>
-          <a class="text-[#514539] dark:text-[#ede1cd] hover:text-[#855312] font-noto-serif display-md uppercase tracking-tight hover:bg-[#ede1cd]/50 transition-colors duration-300"
-            href="#">Аяллын хөтөлбөр</a>
-          <a class="text-[#514539] dark:text-[#ede1cd] hover:text-[#855312] font-noto-serif display-md uppercase tracking-tight hover:bg-[#ede1cd]/50 transition-colors duration-300"
-            href="#">Экспедиц</a>
-          <a class="text-[#514539] dark:text-[#ede1cd] hover:text-[#855312] font-noto-serif display-md uppercase tracking-tight hover:bg-[#ede1cd]/50 transition-colors duration-300"
-            href="#">Өв соёл</a>
-        </div>
-      </div>
-      <div class="flex items-center gap-6">
-        <button
-          class="bg-[#855312] text-white px-6 py-2 rounded-md font-bold transition-transform duration-200 scale-95 hover:scale-100">Захиалах</button>
-        <div class="w-10 h-10 rounded-full border-2 border-[#855312] flex items-center justify-center overflow-hidden">
-          <img class="w-full h-full object-cover"
-            data-alt="close-up portrait of a rugged man with weather-worn skin and intense eyes, warm cinematic sunset lighting"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRagUgsUFz6jMHHJFge82Zif60GWLLOM_gX_bCneUlPd2ZCTa67UKoT_22MDgGK4-Nlp-7k-VyHGEFTDW_n_muj4m0Zxh72TzNyvbyLKICRmvbBdGmlsh72GZ4MBOz4qF72jfCkFL7LME7XypyGs09Ug-vC1SHBdAfX0X6qw-WWbjWiqnUsC8ar5Fw6RpfH-M_DrEUk2-BCpW0NszByQspYxaOsfH1yDb4QlKaHEmwS-ckAgVoXUL8HG1tDpt_9iOf8sNQcWPtR9w" />
-        </div>
-      </div>
-    </nav>
-  </header>
-  <main class="max-w-[1920px] mx-auto px-8 py-12 lg:py-20">
-    <!-- Hero Section: User Identity -->
-    <section class="mb-16 md:mb-24 relative">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b-0">
-        <div class="space-y-4">
-          <span
-            class="inline-block px-4 py-1 bg-primary-fixed text-on-primary-fixed text-xs font-bold tracking-widest uppercase rounded-sm">Pathfinder
-            Rank</span>
-          <h1 class="font-headline text-5xl md:text-7xl font-black text-primary tracking-tight leading-tight">Аялагч
-            мастер</h1>
-          <div class="flex items-center gap-4 text-on-surface-variant">
-            <span class="font-headline text-2xl">Kaelen Vance</span>
-            <span class="text-outline-variant opacity-30">|</span>
-            <span class="font-body text-lg">Туулсан зам: 42,000 км</span>
-          </div>
-        </div>
-        <div class="hidden lg:block w-48 h-1 bg-primary-container/20 relative overflow-hidden">
-          <div class="absolute left-0 top-0 h-full bg-primary w-3/4"></div>
-        </div>
-      </div>
-    </section>
-    <!-- Bento Layout -->
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-10">
-      <!-- Left Column: Upcoming Trip (Featured) -->
-      <div class="md:col-span-8 space-y-10">
-        <section>
-          <div class="flex items-center justify-between mb-8">
-            <h2 class="font-headline text-3xl font-bold">Удахгүй болох аялал</h2>
-            <a class="text-primary font-bold text-sm underline-offset-4 hover:underline" href="#">Бүгдийг харах</a>
-          </div>
-          <div class="group relative overflow-hidden rounded-xl bg-surface-container-low shadow-sm">
-            <div class="aspect-[16/9] md:aspect-[21/9] overflow-hidden">
-              <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                data-alt="vast golden sand dunes of the Gobi desert at sunset with deep shadows and warm orange light textures"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpKovmDoY754DxpvL8ZgfmCeplZEmJV5PjOh92TBpI7xyEost3ul8-Ek6rJlvJ2P207SPTkUcj-TatTYT4-oQ2psG1lYnVE8fUBUpRrHFRQbgZSAaklaX16WC5yXLx-1tHiijxNBjpTnKpWbaOomapTaUEbIvRWA-Stt2IO29SF157B6eLBoPaINbOkC9Wuw-t2IIdW6zmhjVNS0z9Yv9hsQ_GfglggVuHOg2fghKZiAWKQiCUmEyIo8d4ar7W8H7oP6_fUrxC-58" />
-            </div>
-            <div class="absolute inset-0 bg-gradient-to-t from-on-background/80 via-transparent to-transparent"></div>
-            <div class="absolute bottom-0 left-0 p-8 md:p-12 text-white">
-              <div class="flex items-center gap-3 mb-4">
-                <span class="bg-primary px-3 py-1 text-xs font-bold uppercase rounded-md">8 сарын 15</span>
-                <span class="bg-white/20 backdrop-blur-md px-3 py-1 text-xs font-bold uppercase rounded-md">12
-                  өдөр</span>
-              </div>
-              <h3 class="font-headline text-4xl md:text-5xl font-black mb-4">Говийн элсэн манхан</h3>
-              <p class="text-white/80 max-w-lg font-body leading-relaxed">Өмнөговь аймгийн Хонгорын элс рүү хийх энэхүү
-                аялал нь байгалийн хамгийн үзэсгэлэнт тогтоц болон нүүдэлчин ахуйтай танилцах боломж олгоно.</p>
-              <button
-                class="mt-8 px-8 py-3 bg-white text-on-background font-bold rounded-md flex items-center gap-2 hover:bg-primary-fixed transition-colors">
-                <span class="material-symbols-outlined">map</span>
-                Аяллын дэлгэрэнгүй
-              </button>
-            </div>
-          </div>
-        </section>
-        <!-- Stats Grid (Injected as part of dashboard) -->
-        <section class="grid grid-cols-2 lg:grid-cols-4 gap-6">
-          <div class="bg-surface-container p-6 rounded-xl border-l-4 border-primary">
-            <p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Очсон газрууд</p>
-            <p class="font-headline text-3xl font-black">24</p>
-          </div>
-          <div class="bg-surface-container p-6 rounded-xl border-l-4 border-secondary">
-            <p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Аяллын тэмдэглэл</p>
-            <p class="font-headline text-3xl font-black">156</p>
-          </div>
-          <div class="bg-surface-container p-6 rounded-xl border-l-4 border-tertiary">
-            <p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Нийт ажиглалт</p>
-            <p class="font-headline text-3xl font-black">89</p>
-          </div>
-          <div class="bg-surface-container p-6 rounded-xl border-l-4 border-primary-container">
-            <p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Үнэлгээ</p>
-            <p class="font-headline text-3xl font-black">4.9</p>
-          </div>
-        </section>
-      </div>
-      <!-- Right Column: Recent Sagas -->
-      <aside class="md:col-span-4 space-y-8">
-        <div class="bg-surface-container-low p-8 rounded-xl">
-          <h2 class="font-headline text-2xl font-bold mb-8">Тэмдэглэлүүд</h2>
-          <div class="space-y-10">
-            <!-- Saga Entry -->
-            <div class="flex gap-4">
-              <div class="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden bg-surface-container-highest">
-                <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all"
-                  data-alt="scenic mountain peaks with snow in summer morning light under a clear sky"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4ND_zH12X15okfKZm04gCH2RlcwJwduxZUr1T8Beu7GN2YOgLiQiic_kcw_dSYQxOkkJng19O9aA5-eCLaDz6G-73IX22mK-63-ohxdNKXWNU2mgFuSp_Q2yz3MMGCHAXzL9EACR5hhw3yfBldrSltlBpm7xw-cynXoNgxdH2T_1NHPCuO_gmj89T6IzeOJisnyIiglwZ44xRURg-GJtQXQas7L9YzzgSTw5udR6hRCFaKNGi1gQLTYAYQhtvD7RWa0F4qde_UxI" />
-              </div>
-              <div>
-                <h4 class="font-bold text-on-surface">Алтай Таван Богд</h4>
-                <p class="text-xs text-on-surface-variant mb-2">2024.05.12 • 420 км</p>
-                <p class="text-sm line-clamp-2 italic text-on-surface-variant">"Мөсөн голын өглөөний туяа үнэхээр ер
-                  бусын..."</p>
-              </div>
-            </div>
-            <!-- Saga Entry -->
-            <div class="flex gap-4">
-              <div class="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden bg-surface-container-highest">
-                <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all"
-                  data-alt="crystal clear water of a deep blue lake reflecting green pine trees and blue sky"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNruDMtL12eRS6mvVKkfTOuI_bOasAK51NrWldOUp1BDStF36xikESF12Y73mY0luCKHzOe2FLZR5T_rUWzLtZHXiEKX7eYxhPSnL6dAhMR7pvVcH_ysyK4_ZQ56_EKM3iZ09sdn87Ys2swSKSnYZaD5Dmjptn8qMdakcmsTftHMNkk3htndEtIaOYcwaqZm3_-qyUeagltQlvcy2GAJdNxftLYncEeN0CYWHaQ4xlN5z-qH9EIxE2LlUY14kEKmhm1UAt8EhLHgc" />
-              </div>
-              <div>
-                <h4 class="font-bold text-on-surface">Хөвсгөл нуур</h4>
-                <p class="text-xs text-on-surface-variant mb-2">2024.03.20 • 850 км</p>
-                <p class="text-sm line-clamp-2 italic text-on-surface-variant">"Мөсний баярын үеэр авсан зургууд
-                  минь..."</p>
-              </div>
-            </div>
-            <!-- Saga Entry -->
-            <div class="flex gap-4">
-              <div class="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden bg-surface-container-highest">
-                <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all"
-                  data-alt="lush green deep forest with sunlight filtering through ancient trees"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1Y3QAxfxLRiFv6BnwDEzCUu4SFojhtbtZSjUJHFPZBluVY_Kb9NRDJQKN9cO0DlcV9Nl9UZtjtRfg6vCvgLBRPMn5obAAWbkbS43zqN9-BFBemayMu93aLfISEkZCp6P6MpLTB6y-UE8WL-iewUeP0nYlndHnoG7qzK05Gwdj11XNul-ksROQggt5D1ML-l6rderAf3xV6YmPKYvTQiOJakVFx69uXJqJcCExcIc201NZ87GXU6Toh8yEoy5h6rW8f0CASRJKdYU" />
-              </div>
-              <div>
-                <h4 class="font-bold text-on-surface">Тэрэлж байгалийн цогцолбор</h4>
-                <p class="text-xs text-on-surface-variant mb-2">2024.01.05 • 60 км</p>
-                <p class="text-sm line-clamp-2 italic text-on-surface-variant">"Хадан тогтоц ба өвлийн нам гүм
-                  байдал..."</p>
-              </div>
-            </div>
-          </div>
-          <button
-            class="w-full mt-12 py-4 border border-outline-variant/30 text-on-surface-variant font-bold rounded-md hover:bg-surface-container-highest transition-colors">
-            Бүх тэмдэглэлийг унших
-          </button>
-        </div>
-        <!-- Ad/Teaser -->
-        <div class="bg-primary-container p-8 rounded-xl text-on-primary-container relative overflow-hidden">
-          <div class="relative z-10">
-            <h4 class="font-headline text-xl font-bold mb-2">Дараагийн даваа</h4>
-            <p class="text-sm opacity-90 mb-6">"Аялагч мастер" зэргээ ахиулж "Ертөнцийн хайгуулч" болоход 8,000 км дутуу
-              байна.</p>
-            <div class="h-2 w-full bg-on-primary-container/20 rounded-full overflow-hidden">
-              <div class="bg-primary w-4/5 h-full"></div>
-            </div>
-          </div>
-        </div>
-      </aside>
-    </div>
-  </main>
-  <!-- Footer -->
-  <footer
-    class="bg-[#f8edd8] dark:bg-[#120f0a] full-width py-16 px-8 mt-24 tonal-shift from surface to surface-container">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
-      <div class="space-y-6">
-        <span class="font-noto-serif text-xl font-bold text-[#855312]">Nomadic Horizon</span>
-        <p class="text-[#514539] dark:text-[#ede1cd] font-work-sans text-sm tracking-wide">Монголын онгон дагшин
-          байгаль, нүүдэлчин соёлын гайхамшгийг дэлхий дахинд сурталчлан таниулж байна.</p>
-      </div>
-      <div>
-        <h5 class="text-[#855312] font-semibold mb-6">Туслах холбоос</h5>
-        <ul class="space-y-4">
-          <li><a
-              class="text-[#514539] dark:text-[#ede1cd] hover:underline decoration-[#c68b46] underline-offset-4 opacity-80 hover:opacity-100 transition-opacity font-work-sans text-sm"
-              href="#">Бидний тухай</a></li>
-          <li><a
-              class="text-[#514539] dark:text-[#ede1cd] hover:underline decoration-[#c68b46] underline-offset-4 opacity-80 hover:opacity-100 transition-opacity font-work-sans text-sm"
-              href="#">Холбоо барих</a></li>
-        </ul>
-      </div>
-      <div>
-        <h5 class="text-[#855312] font-semibold mb-6">Хууль эрх зүй</h5>
-        <ul class="space-y-4">
-          <li><a
-              class="text-[#514539] dark:text-[#ede1cd] hover:underline decoration-[#c68b46] underline-offset-4 opacity-80 hover:opacity-100 transition-opacity font-work-sans text-sm"
-              href="#">Нууцлалын бодлого</a></li>
-          <li><a
-              class="text-[#514539] dark:text-[#ede1cd] hover:underline decoration-[#c68b46] underline-offset-4 opacity-80 hover:opacity-100 transition-opacity font-work-sans text-sm"
-              href="#">Үйлчилгээний нөхцөл</a></li>
-        </ul>
-      </div>
-      <div>
-        <h5 class="text-[#855312] font-semibold mb-6">Сошиал суваг</h5>
-        <div class="flex gap-4">
-          <span class="material-symbols-outlined text-[#855312]">public</span>
-          <span class="material-symbols-outlined text-[#855312]">share</span>
-          <span class="material-symbols-outlined text-[#855312]">person</span>
-        </div>
-      </div>
-    </div>
-    <div class="mt-16 pt-8 border-t border-outline-variant/20 max-w-7xl mx-auto text-center">
-      <p class="text-[#514539] dark:text-[#ede1cd] opacity-60 font-work-sans text-sm">© 2024 Nomadic Horizon. Бүх эрх
-        хуулиар хамгаалагдсан.</p>
-    </div>
-  </footer>
-</body>
 
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header class="site-header">
+  <div class="inner">
+    <a class="site-logo" href="index.html">Nomadic Horizon</a>
+    <nav class="site-nav">
+      <a href="index.html">Нүүр</a>
+      <a href="map.html">Чиглэлүүд</a>
+      <a href="travel_details.html">Аяллын хөтөлбөр</a>
+      <a href="travel_details.html">Экспедиц</a>
+      <a href="travel_details.html">Өв соёл</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="booking.html" class="btn-primary">Захиалах</a>
+      <a href="profile.html" class="w-10 h-10 rounded-full border-2 border-primary flex items-center justify-center overflow-hidden" title="Профайл">
+        <img class="w-full h-full object-cover" alt="User avatar"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRagUgsUFz6jMHHJFge82Zif60GWLLOM_gX_bCneUlPd2ZCTa67UKoT_22MDgGK4-Nlp-7k-VyHGEFTDW_n_muj4m0Zxh72TzNyvbyLKICRmvbBdGmlsh72GZ4MBOz4qF72jfCkFL7LME7XypyGs09Ug-vC1SHBdAfX0X6qw-WWbjWiqnUsC8ar5Fw6RpfH-M_DrEUk2-BCpW0NszByQspYxaOsfH1yDb4QlKaHEmwS-ckAgVoXUL8HG1tDpt_9iOf8sNQcWPtR9w"/>
+      </a>
+      <button class="nav-toggle" aria-label="Цэс"><span class="material-symbols-outlined">menu</span></button>
+    </div>
+  </div>
+  <nav class="mobile-nav">
+    <a href="index.html">Нүүр</a>
+    <a href="map.html">Чиглэлүүд</a>
+    <a href="travel_details.html">Аяллын хөтөлбөр</a>
+    <a href="booking.html">Захиалах</a>
+  </nav>
+</header>
+
+<main class="max-w-[1920px] mx-auto px-8 py-12 lg:py-20">
+  <!-- Hero: User Identity -->
+  <section class="mb-16 md:mb-24 relative fade-up">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+      <div class="space-y-4">
+        <span class="badge badge-primary">Pathfinder Rank</span>
+        <h1 class="font-headline text-5xl md:text-7xl font-black text-primary tracking-tight leading-tight">Аялагч мастер</h1>
+        <div class="flex items-center gap-4 text-on-surface-variant">
+          <span class="font-headline text-2xl">Kaelen Vance</span>
+          <span class="text-outline-variant opacity-30">|</span>
+          <span class="font-body text-lg">Туулсан зам: 42,000 км</span>
+        </div>
+      </div>
+      <div class="hidden lg:flex items-center gap-3">
+        <a href="booking.html" class="btn-primary">Шинэ аялал захиалах</a>
+        <a href="map.html" class="btn-ghost">Маршрут харах</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bento Layout -->
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-10">
+    <!-- Left: Upcoming Trip -->
+    <div class="md:col-span-8 space-y-10">
+      <section class="fade-up-1">
+        <div class="flex items-center justify-between mb-8">
+          <h2 class="font-headline text-3xl font-bold">Удахгүй болох аялал</h2>
+          <a class="text-primary font-bold text-sm underline-offset-4 hover:underline" href="#">Бүгдийг харах</a>
+        </div>
+        <a href="travel_details.html" class="group relative overflow-hidden rounded-xl bg-surface-container-low shadow-sm card-lift block">
+          <div class="aspect-[16/9] md:aspect-[21/9] overflow-hidden">
+            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              alt="Gobi desert sand dunes at sunset"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpKovmDoY754DxpvL8ZgfmCeplZEmJV5PjOh92TBpI7xyEost3ul8-Ek6rJlvJ2P207SPTkUcj-TatTYT4-oQ2psG1lYnVE8fUBUpRrHFRQbgZSAaklaX16WC5yXLx-1tHiijxNBjpTnKpWbaOomapTaUEbIvRWA-Stt2IO29SF157B6eLBoPaINbOkC9Wuw-t2IIdW6zmhjVNS0z9Yv9hsQ_GfglggVuHOg2fghKZiAWKQiCUmEyIo8d4ar7W8H7oP6_fUrxC-58"/>
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-on-background/80 via-transparent to-transparent"></div>
+          <div class="absolute bottom-0 left-0 p-8 md:p-12 text-white">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="bg-primary px-3 py-1 text-xs font-bold uppercase rounded-md">8 сарын 15</span>
+              <span class="bg-white/20 backdrop-blur-md px-3 py-1 text-xs font-bold uppercase rounded-md">12 өдөр</span>
+            </div>
+            <h3 class="font-headline text-4xl md:text-5xl font-black mb-4">Говийн элсэн манхан</h3>
+            <p class="text-white/80 max-w-lg font-body leading-relaxed">Өмнөговь аймгийн Хонгорын элс рүү хийх энэхүү аялал нь байгалийн хамгийн үзэсгэлэнт тогтоц болон нүүдэлчин ахуйтай танилцах боломж олгоно.</p>
+            <span class="mt-8 px-8 py-3 bg-white text-on-background font-bold rounded-md flex items-center gap-2 hover:bg-primary-fixed transition-colors w-fit">
+              <span class="material-symbols-outlined">map</span>Аяллын дэлгэрэнгүй
+            </span>
+          </div>
+        </a>
+      </section>
+
+      <!-- Stats -->
+      <section class="grid grid-cols-2 lg:grid-cols-4 gap-6 fade-up-2">
+        <div class="bg-surface-container p-6 rounded-xl border-l-4 border-primary"><p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Очсон газрууд</p><p class="font-headline text-3xl font-black">24</p></div>
+        <div class="bg-surface-container p-6 rounded-xl border-l-4 border-secondary"><p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Аяллын тэмдэглэл</p><p class="font-headline text-3xl font-black">156</p></div>
+        <div class="bg-surface-container p-6 rounded-xl border-l-4 border-tertiary"><p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Нийт ажиглалт</p><p class="font-headline text-3xl font-black">89</p></div>
+        <div class="bg-surface-container p-6 rounded-xl border-l-4 border-primary-container"><p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-1">Үнэлгээ</p><p class="font-headline text-3xl font-black">4.9</p></div>
+      </section>
+    </div>
+
+    <!-- Right: Saga Journal -->
+    <aside class="md:col-span-4 space-y-8 fade-up-3">
+      <div class="bg-surface-container-low p-8 rounded-xl">
+        <h2 class="font-headline text-2xl font-bold mb-8">Тэмдэглэлүүд</h2>
+        <div class="space-y-10">
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden bg-surface-container-highest">
+              <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all" alt="Altai mountain peaks"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4ND_zH12X15okfKZm04gCH2RlcwJwduxZUr1T8Beu7GN2YOgLiQiic_kcw_dSYQxOkkJng19O9aA5-eCLaDz6G-73IX22mK-63-ohxdNKXWNU2mgFuSp_Q2yz3MMGCHAXzL9EACR5hhw3yfBldrSltlBpm7xw-cynXoNgxdH2T_1NHPCuO_gmj89T6IzeOJisnyIiglwZ44xRURg-GJtQXQas7L9YzzgSTw5udR6hRCFaKNGi1gQLTYAYQhtvD7RWa0F4qde_UxI"/>
+            </div>
+            <div>
+              <h4 class="font-bold text-on-surface">Алтай Таван Богд</h4>
+              <p class="text-xs text-on-surface-variant mb-2">2024.05.12 • 420 км</p>
+              <p class="text-sm line-clamp-2 italic text-on-surface-variant">"Мөсөн голын өглөөний туяа үнэхээр ер бусын..."</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden bg-surface-container-highest">
+              <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all" alt="Khovsgol lake"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNruDMtL12eRS6mvVKkfTOuI_bOasAK51NrWldOUp1BDStF36xikESF12Y73mY0luCKHzOe2FLZR5T_rUWzLtZHXiEKX7eYxhPSnL6dAhMR7pvVcH_ysyK4_ZQ56_EKM3iZ09sdn87Ys2swSKSnYZaD5Dmjptn8qMdakcmsTftHMNkk3htndEtIaOYcwaqZm3_-qyUeagltQlvcy2GAJdNxftLYncEeN0CYWHaQ4xlN5z-qH9EIxE2LlUY14kEKmhm1UAt8EhLHgc"/>
+            </div>
+            <div>
+              <h4 class="font-bold text-on-surface">Хөвсгөл нуур</h4>
+              <p class="text-xs text-on-surface-variant mb-2">2024.03.20 • 850 км</p>
+              <p class="text-sm line-clamp-2 italic text-on-surface-variant">"Мөсний баярын үеэр авсан зургууд минь..."</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden bg-surface-container-highest">
+              <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all" alt="Terelj forest"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1Y3QAxfxLRiFv6BnwDEzCUu4SFojhtbtZSjUJHFPZBluVY_Kb9NRDJQKN9cO0DlcV9Nl9UZtjtRfg6vCvgLBRPMn5obAAWbkbS43zqN9-BFBemayMu93aLfISEkZCp6P6MpLTB6y-UE8WL-iewUeP0nYlndHnoG7qzK05Gwdj11XNul-ksROQggt5D1ML-l6rderAf3xV6YmPKYvTQiOJakVFx69uXJqJcCExcIc201NZ87GXU6Toh8yEoy5h6rW8f0CASRJKdYU"/>
+            </div>
+            <div>
+              <h4 class="font-bold text-on-surface">Тэрэлж байгалийн цогцолбор</h4>
+              <p class="text-xs text-on-surface-variant mb-2">2024.01.05 • 60 км</p>
+              <p class="text-sm line-clamp-2 italic text-on-surface-variant">"Хадан тогтоц ба өвлийн нам гүм байдал..."</p>
+            </div>
+          </div>
+        </div>
+        <button class="w-full mt-12 py-4 border border-outline-variant/30 text-on-surface-variant font-bold rounded-md hover:bg-surface-container-highest transition-colors">
+          Бүх тэмдэглэлийг унших
+        </button>
+      </div>
+
+      <!-- Rank Progress -->
+      <div class="bg-primary-container p-8 rounded-xl text-on-primary-container relative overflow-hidden fade-up-4">
+        <div class="relative z-10">
+          <h4 class="font-headline text-xl font-bold mb-2">Дараагийн даваа</h4>
+          <p class="text-sm opacity-90 mb-6">"Аялагч мастер" зэргээс "Ертөнцийн хайгуулч" болоход 8,000 км дутуу байна.</p>
+          <div class="h-2 w-full bg-on-primary-container/20 rounded-full overflow-hidden">
+            <div class="bg-primary w-4/5 h-full"></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="inner">
+    <div class="grid">
+      <div class="footer-brand"><a class="logo" href="index.html">Nomadic Horizon</a><p>Монголын онгон дагшин байгаль, нүүдэлчин соёлын гайхамшгийг дэлхий дахинд сурталчлан таниулж байна.</p></div>
+      <div class="footer-col"><h4>Туслах холбоос</h4><ul><li><a href="#">Бидний тухай</a></li><li><a href="#">Холбоо барих</a></li></ul></div>
+      <div class="footer-col"><h4>Хууль эрх зүй</h4><ul><li><a href="#">Нууцлалын бодлого</a></li><li><a href="#">Үйлчилгээний нөхцөл</a></li></ul></div>
+      <div class="footer-col"><h4>Сошиал суваг</h4><div class="footer-socials mt-2"><a href="#"><span class="material-symbols-outlined">public</span></a><a href="#"><span class="material-symbols-outlined">share</span></a><a href="#"><span class="material-symbols-outlined">person</span></a></div></div>
+    </div>
+    <div class="footer-bottom"><p>© 2024 Nomadic Horizon. Бүх эрх хуулиар хамгаалагдсан.</p></div>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
+</body>
 </html>

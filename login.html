@@ -1,174 +1,155 @@
-
-<!-- Нэвтрэх (Login) -->
 <!DOCTYPE html>
-
-<html lang="mn"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Nomadic Horizon - Нэвтрэх</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&amp;family=Work+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "surface-tint": "#855312",
-              "outline-variant": "#d5c3b4",
-              "primary-fixed": "#ffddbb",
-              "primary-container": "#c68b46",
-              "surface-variant": "#ede1cd",
-              "on-surface-variant": "#514539",
-              "error-container": "#ffdad6",
-              "on-secondary-fixed-variant": "#72351c",
-              "on-primary-fixed-variant": "#673d00",
-              "surface-container-lowest": "#ffffff",
-              "tertiary-fixed": "#f1e2b2",
-              "surface-bright": "#fff8f1",
-              "secondary-container": "#fea685",
-              "on-tertiary": "#ffffff",
-              "surface-container-high": "#f3e7d2",
-              "secondary-fixed-dim": "#ffb59a",
-              "tertiary": "#685e38",
-              "on-primary": "#ffffff",
-              "primary": "#855312",
-              "surface-container": "#f8edd8",
-              "inverse-primary": "#fbba70",
-              "surface-container-low": "#fef2dd",
-              "on-primary-container": "#472800",
-              "on-secondary": "#ffffff",
-              "background": "#fff8f1",
-              "on-secondary-container": "#783920",
-              "on-error": "#ffffff",
-              "surface": "#fff8f1",
-              "on-primary-fixed": "#2b1700",
-              "error": "#ba1a1a",
-              "secondary-fixed": "#ffdbce",
-              "on-tertiary-fixed-variant": "#4f4623",
-              "on-background": "#201b0e",
-              "tertiary-fixed-dim": "#d4c698",
-              "surface-container-highest": "#ede1cd",
-              "inverse-surface": "#363022",
-              "on-tertiary-fixed": "#221b00",
-              "tertiary-container": "#b8ab7f",
-              "on-tertiary-container": "#483f1d",
-              "on-surface": "#201b0e",
-              "on-secondary-fixed": "#380d00",
-              "surface-dim": "#e4d9c4",
-              "on-error-container": "#93000a",
-              "secondary": "#904c31",
-              "outline": "#837467",
-              "inverse-on-surface": "#fbefda",
-              "primary-fixed-dim": "#fbba70"
-            },
-            fontFamily: {
-              "headline": ["Noto Serif"],
-              "body": ["Work Sans"],
-              "label": ["Work Sans"]
-            },
-            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
-          },
+<html lang="mn">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nomadic Horizon – Нэвтрэх</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode:"class",
+      theme:{ extend:{
+        colors:{
+          "surface-tint":"#855312","outline-variant":"#d5c3b4","primary-fixed":"#ffddbb",
+          "primary-container":"#c68b46","surface-variant":"#ede1cd","on-surface-variant":"#514539",
+          "surface-container-lowest":"#ffffff","surface-bright":"#fff8f1",
+          "secondary-container":"#fea685","surface-container-high":"#f3e7d2",
+          "tertiary":"#685e38","on-primary":"#ffffff","primary":"#855312","surface-container":"#f8edd8",
+          "surface-container-low":"#fef2dd","background":"#fff8f1","surface":"#fff8f1",
+          "on-primary-fixed":"#2b1700","on-background":"#201b0e",
+          "surface-container-highest":"#ede1cd","tertiary-container":"#b8ab7f",
+          "on-surface":"#201b0e","outline":"#837467","primary-fixed-dim":"#fbba70"
         },
-      }
-    </script>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .editorial-shadow {
-            box-shadow: 0 20px 40px -10px rgba(32, 27, 14, 0.08);
-        }
-        .asymmetric-clip {
-            clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 95%);
-        }
-    </style>
+        fontFamily:{"headline":["Noto Serif","serif"],"body":["Work Sans","sans-serif"],"label":["Work Sans","sans-serif"]},
+        borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"}
+      }}
+    }
+  </script>
+  <link rel="stylesheet" href="styles.css"/>
 </head>
 <body class="bg-surface font-body text-on-surface antialiased">
+
 <main class="min-h-screen flex flex-col md:flex-row overflow-hidden">
-<div class="hidden md:flex md:w-1/2 lg:w-3/5 bg-surface-container relative items-center justify-center p-12 lg:p-24 overflow-hidden">
-<div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(#855312 0.5px, transparent 0.5px); background-size: 24px 24px;"></div>
-<div class="relative z-10 w-full max-w-2xl">
-<div class="mb-12">
-<span class="font-label text-sm uppercase tracking-widest text-primary mb-4 block">Nomadic Horizon</span>
-<h1 class="font-headline text-6xl lg:text-8xl font-black text-on-surface leading-none tracking-tight">
-                        Тавтай <br/> морилно уу
-                    </h1>
-</div>
-<div class="relative group">
-<div class="absolute -top-8 -left-8 w-32 h-32 bg-primary-fixed rounded-full opacity-50 blur-2xl group-hover:opacity-70 transition-opacity"></div>
-<img class="w-full h-[500px] object-cover rounded-xl editorial-shadow asymmetric-clip grayscale hover:grayscale-0 transition-all duration-700" data-alt="dramatic wide landscape of the mongolian steppe at sunset with golden light hitting the rolling hills and a lone rider in the distance" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7eDiJTgCf6P7Azpw3Po7UsXp2NvClbNGc_KgPLP2kXott4l5bidV3oXcF0kgi4zZuHsahncFAT2b-sw_xzXh_SheRD_qS-jAqW7VBczSXsQt-NiKV6DmA4g90OB0xvxuHNwPT45rdOXy5_U3UUbP3R6-4cqylLZA7alMFGtm2ivwzL60tc6l4VIdZJPKe5moNKA8lfHX1ry66ELvuzpbtr8S20v6oQQ_GVS5AUAbGZm9Gk7Aq4kgf1PYHT_Wkcjb7HNcf12AzrkQ"/>
-<div class="absolute -bottom-6 -right-6 bg-surface p-6 rounded-lg editorial-shadow max-w-xs border-l-4 border-primary">
-<p class="font-headline italic text-on-surface-variant text-lg">"Ертөнцийн хязгаар руу хийх таны дараагийн аялал эндээс эхэлнэ."</p>
-</div>
-</div>
-</div>
-</div>
-<div class="w-full md:w-1/2 lg:w-2/5 bg-surface flex items-center justify-center p-8 md:p-12 lg:p-20 relative">
-<a class="absolute top-8 left-8 md:left-12 flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
-<span class="material-symbols-outlined text-sm">arrow_back</span>
-<span class="font-label text-sm uppercase tracking-widest">Нүүр хуудас</span>
-</a>
-<div class="w-full max-w-md">
-<div class="mb-10 flex gap-8 items-end">
-<button class="font-headline text-3xl font-bold border-b-2 border-primary pb-2 transition-all">
-                        Нэвтрэх
-                    </button>
-<button class="font-headline text-xl font-medium text-on-surface-variant hover:text-on-surface pb-2 transition-all">
-                        Бүртгүүлэх
-                    </button>
-</div>
-<form class="space-y-8">
-<div class="group">
-<label class="block font-label text-xs uppercase tracking-widest text-on-surface-variant group-focus-within:text-primary transition-colors mb-2" for="email">Имэйл хаяг</label>
-<input class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-primary px-0 py-3 text-on-surface font-body placeholder:text-outline-variant/50 transition-all" id="email" placeholder="example@nomad.mn" type="email"/>
-</div>
-<div class="group">
-<div class="flex justify-between items-center mb-2">
-<label class="block font-label text-xs uppercase tracking-widest text-on-surface-variant group-focus-within:text-primary transition-colors" for="password">Нууц үг</label>
-<a class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary underline-offset-4 hover:underline" href="#">Мартсан уу?</a>
-</div>
-<div class="relative">
-<input class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-primary px-0 py-3 text-on-surface font-body transition-all" id="password" placeholder="••••••••" type="password"/>
-<button class="absolute right-0 top-1/2 -translate-y-1/2 text-on-surface-variant" type="button">
-<span class="material-symbols-outlined text-lg">visibility</span>
-</button>
-</div>
-</div>
-<div class="flex items-center gap-3">
-<input class="w-4 h-4 rounded-sm border-outline-variant text-primary focus:ring-primary/20 bg-transparent" id="remember" type="checkbox"/>
-<label class="font-label text-sm text-on-surface-variant" for="remember">Намайг сануул</label>
-</div>
-<button class="w-full py-5 px-8 bg-gradient-to-b from-primary to-primary-container text-on-primary font-label text-sm uppercase tracking-[0.2em] font-semibold rounded-md shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex justify-between items-center group" type="submit">
-<span>Аяллаа үргэлжлүүлэх</span>
-<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
-</button>
-</form>
-<div class="mt-16">
-<div class="relative flex items-center justify-center py-4">
-<div class="absolute inset-0 flex items-center"><div class="w-full border-t border-outline-variant/20"></div></div>
-<span class="relative px-4 bg-surface font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Эсвэл нэвтрэх</span>
-</div>
-<div class="grid grid-cols-2 gap-4 mt-6">
-<button class="flex items-center justify-center gap-3 py-4 px-4 bg-surface-container-low hover:bg-surface-container-highest rounded-lg transition-colors group">
-<svg class="w-5 h-5" viewbox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path><path d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path></svg>
-<span class="font-label text-xs uppercase tracking-widest font-medium">Google</span>
-</button>
-<button class="flex items-center justify-center gap-3 py-4 px-4 bg-surface-container-low hover:bg-surface-container-highest rounded-lg transition-colors group">
-<span class="material-symbols-outlined text-lg text-on-surface">ios</span>
-<span class="font-label text-xs uppercase tracking-widest font-medium">Apple</span>
-</button>
-</div>
-</div>
-<footer class="mt-20 text-center">
-<p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant leading-relaxed">
-                        © 2024 Nomadic Horizon. БҮХ ЭРХ ХУУЛИАР ХАМГААЛАГДСАН.<br/>
-<a class="hover:text-primary transition-colors" href="#">НУУЦЛАЛЫН БОДЛОГО</a> • <a class="hover:text-primary transition-colors" href="#">ҮЙЛЧИЛГЭЭНИЙ НӨХЦӨЛ</a>
-</p>
-</footer>
-</div>
-</div>
+  <!-- Left Panel: Branding -->
+  <div class="hidden md:flex md:w-1/2 lg:w-3/5 bg-surface-container relative items-center justify-center p-12 lg:p-24 overflow-hidden">
+    <div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image:radial-gradient(#855312 0.5px,transparent 0.5px);background-size:24px 24px;"></div>
+    <div class="relative z-10 w-full max-w-2xl fade-up">
+      <div class="mb-12">
+        <a href="index.html" class="font-label text-sm uppercase tracking-widest text-primary mb-4 block hover:opacity-70 transition-opacity">← Nomadic Horizon</a>
+        <h1 class="font-headline text-6xl lg:text-8xl font-black text-on-surface leading-none tracking-tight">
+          Тавтай <br/> морилно уу
+        </h1>
+      </div>
+      <div class="relative group">
+        <div class="absolute -top-8 -left-8 w-32 h-32 bg-primary-fixed rounded-full opacity-50 blur-2xl group-hover:opacity-70 transition-opacity"></div>
+        <img class="w-full h-[500px] object-cover rounded-xl editorial-shadow asymmetric-clip grayscale hover:grayscale-0 transition-all duration-700"
+          alt="Mongolian steppe at sunset with lone rider"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7eDiJTgCf6P7Azpw3Po7UsXp2NvClbNGc_KgPLP2kXott4l5bidV3oXcF0kgi4zZuHsahncFAT2b-sw_xzXh_SheRD_qS-jAqW7VBczSXsQt-NiKV6DmA4g90OB0xvxuHNwPT45rdOXy5_U3UUbP3R6-4cqylLZA7alMFGtm2ivwzL60tc6l4VIdZJPKe5moNKA8lfHX1ry66ELvuzpbtr8S20v6oQQ_GVS5AUAbGZm9Gk7Aq4kgf1PYHT_Wkcjb7HNcf12AzrkQ"/>
+        <div class="login-quote-card">
+          <p class="font-headline italic text-on-surface-variant text-lg">"Ертөнцийн хязгаар руу хийх таны дараагийн аялал эндээс эхэлнэ."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Panel: Form -->
+  <div class="w-full md:w-1/2 lg:w-2/5 bg-surface flex items-center justify-center p-8 md:p-12 lg:p-20 relative">
+    <a class="absolute top-8 left-8 md:left-12 flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors" href="index.html">
+      <span class="material-symbols-outlined text-sm">arrow_back</span>
+      <span class="font-label text-sm uppercase tracking-widest">Нүүр хуудас</span>
+    </a>
+
+    <div class="w-full max-w-md fade-up-2">
+      <!-- Tabs -->
+      <div class="mb-10 flex gap-8 items-end">
+        <button class="login-tab active-tab font-headline text-3xl font-bold border-b-2 border-primary pb-2 transition-all" data-tab="form-login">
+          Нэвтрэх
+        </button>
+        <button class="login-tab font-headline text-xl font-medium text-on-surface-variant hover:text-on-surface pb-2 transition-all" data-tab="form-register">
+          Бүртгүүлэх
+        </button>
+      </div>
+
+      <!-- Login Form -->
+      <div id="form-login" class="login-form-panel space-y-8">
+        <div class="group">
+          <label class="field-label" for="email">Имэйл хаяг</label>
+          <input class="field-underline" id="email" placeholder="example@nomad.mn" type="email"/>
+        </div>
+        <div class="group">
+          <div class="flex justify-between items-center mb-2">
+            <label class="field-label" for="password">Нууц үг</label>
+            <a class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary hover:underline underline-offset-4" href="#">Мартсан уу?</a>
+          </div>
+          <div class="relative">
+            <input class="field-underline pr-10" id="password" placeholder="••••••••" type="password"/>
+            <button class="absolute right-0 top-1/2 -translate-y-1/2 text-on-surface-variant" type="button">
+              <span class="material-symbols-outlined text-lg">visibility</span>
+            </button>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <input class="w-4 h-4 rounded-sm border-outline-variant text-primary focus:ring-primary/20 bg-transparent" id="remember" type="checkbox"/>
+          <label class="font-label text-sm text-on-surface-variant" for="remember">Намайг сануул</label>
+        </div>
+        <a href="profile.html" class="btn-primary w-full py-5 px-8 rounded-md flex justify-between items-center group text-sm">
+          <span>Аяллаа үргэлжлүүлэх</span>
+          <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </a>
+      </div>
+
+      <!-- Register Form -->
+      <div id="form-register" class="login-form-panel hidden space-y-8">
+        <div>
+          <label class="field-label">Нэр</label>
+          <input class="field-underline" placeholder="Таны нэр" type="text"/>
+        </div>
+        <div>
+          <label class="field-label">Имэйл хаяг</label>
+          <input class="field-underline" placeholder="example@nomad.mn" type="email"/>
+        </div>
+        <div>
+          <label class="field-label">Нууц үг</label>
+          <input class="field-underline" placeholder="••••••••" type="password"/>
+        </div>
+        <a href="profile.html" class="btn-primary w-full py-5 px-8 rounded-md flex justify-between items-center group text-sm">
+          <span>Бүртгүүлэх</span>
+          <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </a>
+      </div>
+
+      <!-- Social login -->
+      <div class="mt-12">
+        <div class="relative flex items-center justify-center py-4">
+          <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-outline-variant/20"></div></div>
+          <span class="relative px-4 bg-surface font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Эсвэл нэвтрэх</span>
+        </div>
+        <div class="grid grid-cols-2 gap-4 mt-6">
+          <button class="flex items-center justify-center gap-3 py-4 px-4 bg-surface-container-low hover:bg-surface-container-highest rounded-lg transition-colors">
+            <svg class="w-5 h-5" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            <span class="font-label text-xs uppercase tracking-widest font-medium">Google</span>
+          </button>
+          <button class="flex items-center justify-center gap-3 py-4 px-4 bg-surface-container-low hover:bg-surface-container-highest rounded-lg transition-colors">
+            <span class="material-symbols-outlined text-lg">smartphone</span>
+            <span class="font-label text-xs uppercase tracking-widest font-medium">Apple</span>
+          </button>
+        </div>
+      </div>
+
+      <footer class="mt-16 text-center">
+        <p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant leading-relaxed">
+          © 2024 Nomadic Horizon.<br/>
+          <a class="hover:text-primary transition-colors" href="#">Нууцлалын бодлого</a> • <a class="hover:text-primary transition-colors" href="#">Үйлчилгээний нөхцөл</a>
+        </p>
+      </footer>
+    </div>
+  </div>
 </main>
-</body></html>
+
+<style>
+  .login-tab { background: none; border: none; cursor: pointer; }
+  .active-tab { border-bottom: 2px solid var(--primary) !important; color: var(--on-surface) !important; }
+</style>
+<script src="nav.js"></script>
+</body>
+</html>
