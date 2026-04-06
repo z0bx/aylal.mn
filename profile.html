@@ -1,31 +1,63 @@
 <!DOCTYPE html>
 <html lang="mn">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Nomadic Horizon – Хэрэглэгчийн самбар</title>
+
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
   <script id="tailwind-config">
     tailwind.config = {
-      darkMode:"class",
-      theme:{ extend:{
-        colors:{
-          "surface-tint":"#855312","outline-variant":"#d5c3b4","primary-fixed":"#ffddbb",
-          "primary-container":"#c68b46","surface-variant":"#ede1cd","on-surface-variant":"#514539",
-          "surface-container-lowest":"#ffffff","surface-container-high":"#f3e7d2",
-          "tertiary":"#685e38","on-primary":"#ffffff","primary":"#855312","surface-container":"#f8edd8",
-          "surface-container-low":"#fef2dd","on-primary-container":"#472800","background":"#fff8f1",
-          "on-secondary":"#ffffff","surface":"#fff8f1","on-primary-fixed":"#2b1700",
-          "on-background":"#201b0e","surface-container-highest":"#ede1cd",
-          "tertiary-container":"#b8ab7f","on-tertiary-container":"#483f1d","on-surface":"#201b0e",
-          "outline":"#837467","secondary":"#904c31","primary-fixed-dim":"#fbba70"
-        },
-        fontFamily:{"headline":["Noto Serif","serif"],"body":["Work Sans","sans-serif"],"label":["Work Sans","sans-serif"]},
-        borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"}
-      }}
-    }
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-tint": "#855312",
+            "outline-variant": "#d5c3b4",
+            "primary-fixed": "#ffddbb",
+            "primary-container": "#c68b46",
+            "surface-variant": "#ede1cd",
+            "on-surface-variant": "#514539",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-high": "#f3e7d2",
+            "tertiary": "#685e38",
+            "on-primary": "#ffffff",
+            "primary": "#855312",
+            "surface-container": "#f8edd8",
+            "surface-container-low": "#fef2dd",
+            "on-primary-container": "#472800",
+            "background": "#fff8f1",
+            "on-secondary": "#ffffff",
+            "surface": "#fff8f1",
+            "on-primary-fixed": "#2b1700",
+            "on-background": "#201b0e",
+            "surface-container-highest": "#ede1cd",
+            "tertiary-container": "#b8ab7f",
+            "on-tertiary-container": "#483f1d",
+            "on-surface": "#201b0e",
+            "outline": "#837467",
+            "secondary": "#904c31",
+            "primary-fixed-dim": "#fbba70"
+          },
+          fontFamily: {
+            "headline": ["Noto Serif", "serif"],
+            "body": ["Work Sans", "sans-serif"],
+            "label": ["Work Sans", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          }
+        }
+      }
+    };
   </script>
-  <link rel="stylesheet" href="styles.css"/>
+
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="bg-surface font-body text-on-surface antialiased">
 
@@ -60,22 +92,46 @@
 <main class="max-w-[1920px] mx-auto px-8 py-12 lg:py-20">
   <!-- Hero: User Identity -->
   <section class="mb-16 md:mb-24 relative fade-up">
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
-      <div class="space-y-4">
-        <span class="badge badge-primary">Pathfinder Rank</span>
-        <h1 class="font-headline text-5xl md:text-7xl font-black text-primary tracking-tight leading-tight">Аялагч мастер</h1>
-        <div class="flex items-center gap-4 text-on-surface-variant">
-          <span class="font-headline text-2xl">Kaelen Vance</span>
-          <span class="text-outline-variant opacity-30">|</span>
-          <span class="font-body text-lg">Туулсан зам: 42,000 км</span>
-        </div>
-      </div>
-      <div class="hidden lg:flex items-center gap-3">
-        <a href="booking.html" class="btn-primary">Шинэ аялал захиалах</a>
-        <a href="map.html" class="btn-ghost">Маршрут харах</a>
+  <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+
+    <!-- Left content -->
+    <div class="space-y-4">
+      <span class="badge badge-primary">
+        Pathfinder Rank
+      </span>
+
+      <h1 class="font-headline text-5xl md:text-7xl font-black text-primary tracking-tight leading-tight">
+        Аялагч мастер
+      </h1>
+
+      <div class="flex items-center gap-4 text-on-surface-variant">
+        <span class="font-headline text-2xl">
+          Kaelen Vance
+        </span>
+
+        <span class="text-outline-variant opacity-30">
+          |
+        </span>
+
+        <span class="font-body text-lg">
+          Туулсан зам: 42,000 км
+        </span>
       </div>
     </div>
-  </section>
+
+    <!-- Right buttons -->
+    <div class="hidden lg:flex items-center gap-3">
+      <a href="booking.html" class="btn-primary">
+        Шинэ аялал захиалах
+      </a>
+
+      <a href="map.html" class="btn-ghost">
+        Маршрут харах
+      </a>
+    </div>
+
+  </div>
+</section>
 
   <!-- Bento Layout -->
   <div class="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-10">
@@ -183,7 +239,7 @@
       <div class="footer-col"><h4>Хууль эрх зүй</h4><ul><li><a href="#">Нууцлалын бодлого</a></li><li><a href="#">Үйлчилгээний нөхцөл</a></li></ul></div>
       <div class="footer-col"><h4>Сошиал суваг</h4><div class="footer-socials mt-2"><a href="#"><span class="material-symbols-outlined">public</span></a><a href="#"><span class="material-symbols-outlined">share</span></a><a href="#"><span class="material-symbols-outlined">person</span></a></div></div>
     </div>
-    <div class="footer-bottom"><p>© 2024 Nomadic Horizon. Бүх эрх хуулиар хамгаалагдсан.</p></div>
+    <div class="footer-bottom"><p>© 2026 Nomadic Horizon. Бүх эрх хуулиар хамгаалагдсан.</p></div>
   </div>
 </footer>
 
