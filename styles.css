@@ -470,5 +470,54 @@ h1, h2, h3, h4 { font-family: 'Noto Serif', serif; }
   cursor: pointer;
 }
 
+/* FAQ нэмэлт style */
+.faq-section {
+  padding: 60px 0;
+  background: #f9fafb;
+}
+
+.faq-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.faq-question {
+  width: 100%;
+  padding: 15px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.faq-answer {
+  display: none;
+  padding: 0 15px 15px;
+  font-size: 13px;
+  color: #555;
+}
+
+.faq-item.active .faq-answer {
+  display: block;
+}
+
 /* ---------- Active nav highlighting helper ---------- */
 /* Pages set data-page on <body>; JS marks the matching link */
