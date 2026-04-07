@@ -105,4 +105,20 @@
       bookingBtn.style.opacity = '0.7';
     });
   }
+    document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+
+      document.querySelectorAll('.faq-item').forEach(i => {
+        if (i !== item) i.classList.remove('active');
+      });
+
+      item.classList.toggle('active');
+
+      document.querySelectorAll('.faq-icon').forEach(i => i.textContent = '+');
+      const icon = btn.querySelector('.faq-icon');
+      if (icon && item.classList.contains('active')) icon.textContent = '−';
+    });
+  });
+  
 })();
