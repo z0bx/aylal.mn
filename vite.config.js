@@ -5,5 +5,5 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: 'aylal.mn', // Must match your GitHub repo name
+  base: '/aylal.mn/', // Must match your GitHub repo name
 })
