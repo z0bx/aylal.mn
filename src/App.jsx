@@ -147,8 +147,6 @@ function Header({ page, setPage, loggedIn }) {
     { label: "Нүүр", key: "home" },
     { label: "Чиглэлүүд", key: "map" },
     { label: "Аяллын хөтөлбөр", key: "travel" },
-    { label: "Экспедиц", key: "travel" },
-    { label: "Өв соёл", key: "travel" },
   ];
 
   const headerBg = scrolled ? T.surfaceContainerLow : "rgba(255,248,241,0.85)";
@@ -182,20 +180,10 @@ function Header({ page, setPage, loggedIn }) {
                 <BtnPrimary onClick={() => setPage("booking")} small>Захиалах</BtnPrimary>
               </>
             )}
-            <button className="nh-mobile-toggle" onClick={() => setMobileOpen(!mobileOpen)} style={{ background: "none", border: "none", color: T.primary, display: "flex", alignItems: "center" }}>
-              <Icon name={mobileOpen ? "close" : "menu"} size={24} />
-            </button>
+           
           </div>
         </div>
-        {mobileOpen && (
-          <nav style={{ display: "flex", flexDirection: "column", background: T.surfaceContainerLow, borderTop: `1px solid ${T.outlineVariant}30`, padding: "12px 32px 20px", gap: 12 }}>
-            {[...navLinks, { label: "Нэвтрэх", key: "login" }, { label: "Захиалах", key: "booking" }].map((l, i) => (
-              <a key={i} onClick={() => { setPage(l.key); setMobileOpen(false); }} style={{ fontFamily: "'Noto Serif',serif", fontSize: 14, textTransform: "uppercase", letterSpacing: "0.05em", color: T.onSurfaceVariant, padding: "8px 0", borderBottom: `1px solid ${T.outlineVariant}20`, cursor: "pointer" }}>
-                {l.label}
-              </a>
-            ))}
-          </nav>
-        )}
+       
       </header>
     </>
   );
