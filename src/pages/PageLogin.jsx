@@ -4,12 +4,19 @@ import { IMGS } from "../constants/images";
 import Icon from "../components/Icon";
 import { BtnPrimary } from "../components/Buttons";
 import FieldUnderline from "../components/FieldUnderline";
+import { useAuth } from "../hooks/useAuth";
+import { useNavigation } from "../hooks/useNavigation";
 
-export default function PageLogin({ setPage, setLoggedIn }) {
+export default function PageLogin({ setPage }) {
   const [tab,    setTab]    = useState("login");
   const [showPw, setShowPw] = useState(false);
+  const { login } = useAuth();
+  const { navigateTo } = useNavigation();
 
-  const handleLogin = () => { setLoggedIn(true); setPage("profile"); };
+  const handleLogin = () => { 
+    login({ name: "User", email: "user@example.com" }); 
+    navigateTo("profile");
+  };
 
   return (
     <main style={{ minHeight: "calc(100vh - 80px)", display: "flex", overflow: "hidden" }}>
@@ -17,7 +24,7 @@ export default function PageLogin({ setPage, setLoggedIn }) {
       <div style={{ flex: 3, background: T.surfaceContainer, position: "relative", display: "flex", alignItems: "center", justifyContent: "center", padding: "48px 80px" }}>
         <div style={{ position: "absolute", inset: 0, opacity: .2, backgroundImage: `radial-gradient(${T.primary} 0.5px, transparent 0.5px)`, backgroundSize: "24px 24px", pointerEvents: "none" }} />
         <div style={{ position: "relative", zIndex: 1, width: "100%", maxWidth: 560 }} className="fu">
-          <a onClick={() => setPage("home")} style={{ fontFamily: "'Work Sans',sans-serif", fontSize: 12, textTransform: "uppercase", letterSpacing: "0.15em", color: T.primary, display: "block", marginBottom: 40, cursor: "pointer" }}>
+          <a onClick={() => navigateTo("home")} style={{ fontFamily: "'Work Sans',sans-serif", fontSize: 12, textTransform: "uppercase", letterSpacing: "0.15em", color: T.primary, display: "block", marginBottom: 40, cursor: "pointer" }}>
             ← Nomadic Horizon
           </a>
           <h1 style={{ fontFamily: "'Noto Serif',serif", fontSize: "clamp(48px,6vw,80px)", fontWeight: 900, color: T.onSurface, lineHeight: .95, letterSpacing: "-0.02em", marginBottom: 40 }}>

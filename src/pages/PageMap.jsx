@@ -3,26 +3,48 @@ import { T } from "../constants/theme";
 import { IMGS } from "../constants/images";
 import Icon from "../components/Icon";
 import { BtnPrimary } from "../components/Buttons";
-import MapMarker from "../components/MapMarker";
-
-const MARKERS = [
-  { top: "25%", left: "33%", name: "Тэрэлж БЦГ",  color: T.primary,    img: IMGS.marker1 },
-  { top: "50%", left: "25%", name: "Хустай Нуруу", color: "#904c31",    img: IMGS.marker2 },
-];
+import GoogleMapComponent from "../components/GoogleMap";
+import { useNavigation } from "../hooks/useNavigation";
 
 export default function PageMap({ setPage }) {
+  const { navigateTo } = useNavigation();
   const [stops,     setStops]     = useState([
-    { id: 1, label: "Зогсоол 1", name: "Тэрэлж БЦГ"  },
-    { id: 2, label: "Зогсоол 2", name: "Хустай Нуруу" },
+    { id: 1, label: "Зогсоол 1", name: "Тэрэлж БЦГ", lat: 47.8926, lng: 107.3044 },
+    { id: 2, label: "Зогсоол 2", name: "Хустай Нуруу", lat: 47.7333, lng: 107.2667 },
   ]);
   const [stopInput, setStopInput] = useState("");
   const [addMode,   setAddMode]   = useState(false);
 
   const addStop = () => {
     if (!stopInput.trim()) return;
-    setStops(s => [...s, { id: Date.now(), label: `Зогсоол ${s.length + 1}`, name: stopInput }]);
+    setStops(s => [...s, { id: Date.now(), label: `Зогсоол ${s.length + 1}`, name: stopInput, lat: 47.9, lng: 106.88 }]);
     setStopInput(""); setAddMode(false);
   };
+
+  const handleMapClick = (event) => {
+    if (!event || !event.latLng) return;
+    const lat = event.latLng.lat();
+    const lng = event.latLng.lng();
+    setStops((s) => [
+      ...s,
+      {
+        id: Date.now(),
+        label: `Зогсоол ${s.length + 1}`,
+        name: `Шинэ цэг ${s.length + 1}`,
+        lat,
+        lng,
+      },
+    ]);
+  };
+
+  // Map markers for Google Maps
+  const mapMarkers = [
+    { id: 0, name: "Улаанбаатар", lat: 47.9, lng: 106.88, color: T.primary },
+    ...stops.map(s => ({ id: s.id, name: s.name, lat: s.lat, lng: s.lng, color: T.secondary }))
+  ];
+
+  // Create route path
+  const routePath = mapMarkers.map(m => ({ lat: m.lat, lng: m.lng }));
 
   return (
     <main style={{ display: "flex", height: "calc(100vh - 80px)", overflow: "hidden" }}>
@@ -95,7 +117,7 @@ export default function PageMap({ setPage }) {
             </div>
           </div>
 
-          <BtnPrimary onClick={() => setPage("booking")} style={{ padding: "16px", justifyContent: "center", borderRadius: 8, fontSize: 13, gap: 10 }}>
+          <BtnPrimary onClick={() => navigateTo("booking")} style={{ padding: "16px", justifyContent: "center", borderRadius: 8, fontSize: 13, gap: 10 }}>
             Аялал эхлүүлэх <Icon name="arrow_forward" size={16} />
           </BtnPrimary>
         </div>
@@ -103,20 +125,11 @@ export default function PageMap({ setPage }) {
 
       {/* ── Map canvas ── */}
       <section style={{ flex: 1, position: "relative", background: T.surfaceContainerHigh, overflow: "hidden" }}>
-        <img src={IMGS.mapBg} alt="Map background" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: .35 }} />
-
-        {MARKERS.map(m => <MapMarker key={m.name} {...m} />)}
-
-        {/* Route line */}
-        <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}>
-          <defs>
-            <linearGradient id="rg" x1="0%" x2="100%" y1="0%" y2="0%">
-              <stop offset="0%"   stopColor={T.primary}   />
-              <stop offset="100%" stopColor={T.secondary} />
-            </linearGradient>
-          </defs>
-          <path d="M 640 220 Q 600 350 480 440" fill="none" stroke="url(#rg)" strokeDasharray="12 8" strokeWidth="4" />
-        </svg>
+        <div style={{ position: "absolute", top: 24, left: 24, zIndex: 12, background: "rgba(255,255,255,.95)", padding: "10px 16px", borderRadius: 999, boxShadow: "0 10px 30px rgba(32,27,14,.08)", fontSize: 13, fontWeight: 600, color: T.onSurface, display: "flex", alignItems: "center", gap: 8 }}>
+          <Icon name="place" size={16} />
+          <span>Газрын цэг нэмэхэд газрын зураг дээр дарна уу</span>
+        </div>
+        <GoogleMapComponent markers={mapMarkers} routePath={routePath} onMapClick={handleMapClick} />
 
         {/* Route info pill */}
         <div style={{ position: "absolute", top: 24, right: 24, background: "rgba(255,255,255,.85)", backdropFilter: "blur(12px)", padding: "10px 24px", borderRadius: 999, boxShadow: "0 4px 16px rgba(32,27,14,.12)", display: "flex", alignItems: "center", gap: 16 }}>
