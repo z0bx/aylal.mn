@@ -4,7 +4,7 @@ import { useState } from "react";
 const packages = [
   {
     id: 1,
-    image: "https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=700&q=80",
+    image: "https://source.unsplash.com/featured/700x500/?gobi,mongolia",
     alt: "Говь",
     duration: "5 хоног",
     groupSize: "2–12 хүн",
@@ -15,7 +15,7 @@ const packages = [
   },
   {
     id: 2,
-    image: "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=700&q=80",
+    image: "https://source.unsplash.com/featured/700x500/?khovsgol,lake,mongolia",
     alt: "Хөвсгөл",
     duration: "4 хоног",
     groupSize: "2–8 хүн",
@@ -26,7 +26,7 @@ const packages = [
   },
   {
     id: 3,
-    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=700&q=80",
+    image: "https://source.unsplash.com/featured/700x500/?terelj,mongolia",
     alt: "Тэрэлж",
     duration: "2 хоног",
     groupSize: "2–15 хүн",
@@ -37,7 +37,7 @@ const packages = [
   },
   {
     id: 4,
-    image: "https://images.unsplash.com/photo-1491555103944-7c647fd857e6?w=700&q=80",
+    image: "https://source.unsplash.com/featured/700x500/?khentii,forest,mongolia",
     alt: "Хэнтий",
     duration: "7 хоног",
     groupSize: "4–10 хүн",
@@ -48,7 +48,7 @@ const packages = [
   },
   {
     id: 5,
-    image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=700&q=80",
+    image: "https://source.unsplash.com/featured/700x500/?altai,mongolia",
     alt: "Алтай",
     duration: "6 хоног",
     groupSize: "2–8 хүн",
@@ -59,7 +59,7 @@ const packages = [
   },
   {
     id: 6,
-    image: "https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=700&q=80",
+    image: "https://source.unsplash.com/featured/700x500/?mongolia,steppe",
     alt: "Тал",
     duration: "3 хоног",
     groupSize: "2–20 хүн",

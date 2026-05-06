@@ -1,5 +1,5 @@
 export const IMGS = {
-  hero:        "https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?w=1600&q=80",
+  hero:        "https://images.unsplash.com/photo-1613294576846-73901118ef6d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   gobi:        "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=900&q=80",
   altai:       "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=700&q=80",
   terelj:      "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=700&q=80",

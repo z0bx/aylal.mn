@@ -1,7 +1,7 @@
 import { useState } from "react";
  
 const packageDetail = {
-  image: "https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=1400&q=80",
+  image: "https://source.unsplash.com/featured/1400x900/?gobi,mongolia",
   alt: "Говь",
   title: "Өмнөговийн аялал",
   duration: "5 хоног",
