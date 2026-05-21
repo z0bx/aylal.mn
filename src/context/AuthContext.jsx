@@ -1,42 +1,51 @@
 import { createContext, useState, useEffect } from "react";
+import { authService } from "../services/authService";
 
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // Restore auth state from localStorage on mount
   useEffect(() => {
-    const savedAuth = localStorage.getItem("authUser");
-    if (savedAuth) {
-      const userData = JSON.parse(savedAuth);
-      setUser(userData);
-      setLoggedIn(true);
+    // Апп асах үед localStorage-оос хэрэглэгчийн мэдээлэл байгаа эсэхийг шалгах
+    const token = localStorage.getItem("authToken");
+    const savedUser = localStorage.getItem("userData");
+    if (token && savedUser) {
+      setUser(JSON.parse(savedUser));
     }
+    setLoading(false);
   }, []);
 
-  /**
-   * Login user and persist to localStorage
-   */
-  const login = (userData) => {
-    setUser(userData);
-    setLoggedIn(true);
-    localStorage.setItem("authUser", JSON.stringify(userData));
+  const login = async (email, password) => {
+    const data = await authService.login(email, password);
+    if (data.success) {
+      localStorage.setItem("authToken", data.token);
+      localStorage.setItem("userData", JSON.stringify(data.user));
+      setUser(data.user);
+    }
+    return data;
   };
 
-  /**
-   * Logout user and clear localStorage
-   */
-  const logout = () => {
+  const register = async (userData) => {
+    const data = await authService.register(userData);
+    if (data.success) {
+      localStorage.setItem("authToken", data.token);
+      localStorage.setItem("userData", JSON.stringify(data.user));
+      setUser(data.user);
+    }
+    return data;
+  };
+
+  const logout = async () => {
+    await authService.logout();
+    localStorage.removeItem("userData");
     setUser(null);
-    setLoggedIn(false);
-    localStorage.removeItem("authUser");
   };
 
   return (
-    <AuthContext.Provider value={{ loggedIn, user, login, logout }}>
-      {children}
+    <AuthContext.Provider value={{ user, loading, login, register, logout, isAuthenticated: !!user, loggedIn: !!user }}>
+      {!loading && children}
     </AuthContext.Provider>
   );
 }

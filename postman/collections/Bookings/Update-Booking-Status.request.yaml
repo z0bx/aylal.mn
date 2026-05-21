@@ -1,0 +1,41 @@
+$kind: http-request
+name: Update Booking Status
+method: PUT
+url: '{{baseUrl}}/api/bookings/{{bookingId}}'
+order: 5000
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{authToken}}'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "status": "completed"
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 200", function () {
+          pm.response.to.have.status(200);
+      });
+
+      pm.test("success is true", function () {
+          var jsonData = pm.response.json();
+          pm.expect(jsonData.success).to.be.true;
+      });
+
+      pm.test("Response has booking object", function () {
+          var jsonData = pm.response.json();
+          pm.expect(jsonData).to.have.property("booking");
+      });
+
+      pm.test("booking.status equals completed", function () {
+          var jsonData = pm.response.json();
+          pm.expect(jsonData.booking.status).to.eql("completed");
+      });

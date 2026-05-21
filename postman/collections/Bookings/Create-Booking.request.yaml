@@ -1,0 +1,60 @@
+$kind: http-request
+name: Create Booking
+method: POST
+url: '{{baseUrl}}/api/bookings'
+order: 1000
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{authToken}}'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "tourId": "{{tourId}}",
+      "travellers": 2,
+      "paymentMethod": "credit_card",
+      "cardDetails": {
+        "cardNumber": "4111111111111111",
+        "expiryDate": "12/26",
+        "cvv": "123"
+      },
+      "totalPrice": 900,
+      "discount": 0
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 201", function () {
+          pm.response.to.have.status(201);
+      });
+
+      pm.test("success is true", function () {
+          var jsonData = pm.response.json();
+          pm.expect(jsonData.success).to.be.true;
+      });
+
+      pm.test("Response has booking object", function () {
+          var jsonData = pm.response.json();
+          pm.expect(jsonData).to.have.property("booking");
+      });
+
+      pm.test("booking.status equals confirmed", function () {
+          var jsonData = pm.response.json();
+          pm.expect(jsonData.booking.status).to.eql("confirmed");
+      });
+
+      pm.test("booking.travellers equals 2", function () {
+          var jsonData = pm.response.json();
+          pm.expect(jsonData.booking.travellers).to.eql(2);
+      });
+
+      var jsonData = pm.response.json();
+      if (jsonData.booking && jsonData.booking._id) {
+          pm.environment.set("bookingId", jsonData.booking._id);
+      }

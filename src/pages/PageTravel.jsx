@@ -3,31 +3,7 @@ import { IMGS } from "../constants/images";
 import Icon from "../components/Icon";
 import Badge from "../components/Bagde";
 import { BtnPrimary, BtnGhost } from "../components/Buttons";
-
-const DAYS = [
-  {
-    num: "01",
-    title: "Улаанбаатар хотод хүрэлцэн ирэх",
-    text: "Хүрэлцэн ирсэн зочдыг угтан авч, аяллын ерөнхий зааварчилгаа болон багийн танилцуулга хийгдэнэ.",
-    badges: ["Буудал", "Оройн хоол"],
-    border: true,
-  },
-  {
-    num: "05",
-    title: "Бүргэдийн сургуулилт",
-    text: "Казах түмний олон зуун жилийн түүхтэй бүргэдээр ан хийх соёлтой гүнзгий танилцана.",
-    badges: ["Мастер анги", "Фото аялал"],
-    border: false,
-    badgePrimary: 0,
-  },
-  {
-    num: "10",
-    title: "Морин аялал",
-    text: "Алтайн өндөр уулс, цэнгэг нуурын хөвөөгөөр мориор аялан байгалийн үзэмжийг тольдоно.",
-    badges: ["Хоног: 3", "Барууны морьд"],
-    border: true,
-  },
-];
+import siteData from "../data/site-data.json";
 
 export default function PageTravel({ setPage }) {
   return (
@@ -87,7 +63,7 @@ export default function PageTravel({ setPage }) {
           Аяллын ариун жим
         </h2>
         <div style={{ display: "flex", flexDirection: "column", gap: 80 }}>
-          {DAYS.map((d, i) => (
+          {siteData.days.map((d, i) => (
             <div key={d.num} className={`fu${i + 1}`} style={{ display: "flex", gap: 40, alignItems: "flex-start" }}>
               <div style={{ width: "30%", display: "flex", justifyContent: "flex-end" }}>
                 <span style={{ fontFamily: "'Noto Serif',serif", fontSize: 64, fontWeight: 900, color: T.primary, opacity: .2 }}>{d.num}</span>

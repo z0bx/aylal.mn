@@ -1,0 +1,3 @@
+$kind: collection
+name: Bookings
+description: Bookings API - Create and manage tour bookings in Nomadic Horizon

@@ -1,0 +1,59 @@
+$kind: http-request
+name: Register
+method: POST
+url: '{{baseUrl}}/api/auth/register'
+order: 1000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Test User",
+      "email": "testuser@example.com",
+      "password": "password123",
+      "phone": "99001122"
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      // Test 1: Status code is 201
+      pm.test("Status code is 201", function () {
+          pm.response.to.have.status(201);
+      });
+
+      // Test 2: Response has success: true
+      pm.test("Response has success: true", function () {
+          var jsonData = pm.response.json();
+          pm.expect(jsonData.success).to.eql(true);
+      });
+
+      // Test 3: Response has a token field
+      pm.test("Response has a token field", function () {
+          var jsonData = pm.response.json();
+          pm.expect(jsonData).to.have.property("token");
+          pm.expect(jsonData.token).to.be.a("string").and.not.empty;
+      });
+
+      // Test 4: Response user object has id, name, email, role fields
+      pm.test("Response user object has id, name, email, role fields", function () {
+          var jsonData = pm.response.json();
+          pm.expect(jsonData).to.have.property("user");
+          pm.expect(jsonData.user).to.have.property("id");
+          pm.expect(jsonData.user).to.have.property("name");
+          pm.expect(jsonData.user).to.have.property("email");
+          pm.expect(jsonData.user).to.have.property("role");
+      });
+
+      // Test 5: Save token to environment variable
+      if (pm.response.code === 201) {
+          pm.environment.set("authToken", pm.response.json().token);
+      }
+
+      // Test 6: Status code is 400 when required fields are missing
+      // To test this case, send a request without one or more of the required fields
+      // (name, email, password). The server should respond with status 400.
+      // Example: remove "email" from the request body and expect:
+      //   pm.response.to.have.status(400);

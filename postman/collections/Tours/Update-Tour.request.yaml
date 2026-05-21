@@ -1,0 +1,42 @@
+$kind: http-request
+method: PUT
+order: 4000
+url: '{{baseUrl}}/api/tours/{{tourId}}'
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{authToken}}'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "price": 500,
+      "maxCapacity": 20
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 200", function () {
+          pm.response.to.have.status(200);
+      });
+
+      pm.test("success is true", function () {
+          var json = pm.response.json();
+          pm.expect(json.success).to.be.true;
+      });
+
+      pm.test("Response has tour object", function () {
+          var json = pm.response.json();
+          pm.expect(json).to.have.property("tour");
+          pm.expect(json.tour).to.be.an("object");
+      });
+
+      pm.test("tour.price equals 500", function () {
+          var json = pm.response.json();
+          pm.expect(json.tour.price).to.eql(500);
+      });

@@ -1,0 +1,53 @@
+$kind: http-request
+name: Login
+method: POST
+url: '{{baseUrl}}/api/auth/login'
+order: 2000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "email": "admin@aylal.mn",
+      "password": "admin1234"
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      // Test 1: Status code is 200
+      pm.test("Status code is 200", function () {
+          pm.response.to.have.status(200);
+      });
+
+      // Test 2: Response has success: true
+      pm.test("Response has success: true", function () {
+          var jsonData = pm.response.json();
+          pm.expect(jsonData.success).to.eql(true);
+      });
+
+      // Test 3: Response has a token field
+      pm.test("Response has a token field", function () {
+          var jsonData = pm.response.json();
+          pm.expect(jsonData).to.have.property("token");
+          pm.expect(jsonData.token).to.be.a("string").and.not.empty;
+      });
+
+      // Test 4: Response user object has id, name, email, role fields
+      pm.test("Response user object has id, name, email, role fields", function () {
+          var jsonData = pm.response.json();
+          pm.expect(jsonData).to.have.property("user");
+          // Тэмдэглэл: Хэрэв таны бэкенд Mongoose-ийн '_id'-ийг 'id' болгож хөрвүүлээгүй бол
+          // доорх мөрийг харах эсвэл "id" унавал "_id" болгож солиорой.
+          pm.expect(jsonData.user).to.have.any.keys("id", "_id");
+          pm.expect(jsonData.user).to.have.property("name");
+          pm.expect(jsonData.user).to.have.property("email");
+          pm.expect(jsonData.user).to.have.property("role");
+      });
+
+      // Test 5: Save token to environment variable
+      if (pm.response.code === 200) {
+          pm.environment.set("authToken", pm.response.json().token);
+      }

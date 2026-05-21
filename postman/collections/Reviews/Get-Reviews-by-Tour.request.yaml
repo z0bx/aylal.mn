@@ -1,0 +1,27 @@
+$kind: http-request
+name: Get Reviews by Tour
+method: GET
+url: '{{baseUrl}}/api/reviews/tour/{{tourId}}'
+order: 1000
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 200", function () {
+          pm.response.to.have.status(200);
+      });
+
+      pm.test("success is true", function () {
+          var jsonData = pm.response.json();
+          pm.expect(jsonData.success).to.be.true;
+      });
+
+      pm.test("Response has reviews array", function () {
+          var jsonData = pm.response.json();
+          pm.expect(jsonData.reviews).to.be.an('array');
+      });
+
+      pm.test("Response has count field", function () {
+          var jsonData = pm.response.json();
+          pm.expect(jsonData).to.have.property('count');
+      });

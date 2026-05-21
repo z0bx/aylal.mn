@@ -1,0 +1,32 @@
+$kind: http-request
+method: GET
+order: 2000
+url: '{{baseUrl}}/api/tours/{{tourId}}'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 200", function () {
+          pm.response.to.have.status(200);
+      });
+
+      pm.test("success is true", function () {
+          var json = pm.response.json();
+          pm.expect(json.success).to.be.true;
+      });
+
+      pm.test("Response has tour object", function () {
+          var json = pm.response.json();
+          pm.expect(json).to.have.property("tour");
+          pm.expect(json.tour).to.be.an("object");
+      });
+
+      pm.test("tour._id equals tourId", function () {
+          var json = pm.response.json();
+          pm.expect(json.tour._id).to.eql(pm.environment.get("tourId"));
+      });
+
+      var json = pm.response.json();
+      if (json.tour && json.tour._id) {
+          pm.environment.set("tourId", json.tour._id);
+      }

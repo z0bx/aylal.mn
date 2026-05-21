@@ -1,0 +1,53 @@
+$kind: http-request
+method: POST
+order: 3000
+url: '{{baseUrl}}/api/tours'
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{authToken}}'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "title": "Gobi Desert Adventure",
+      "description": "A 5-day journey through the stunning Gobi Desert landscapes.",
+      "price": 450,
+      "duration": 5,
+      "location": "Gobi Desert, Mongolia",
+      "maxCapacity": 15,
+      "daysItinerary": ["Day 1: Arrival", "Day 2: Dunes", "Day 3: Flaming Cliffs", "Day 4: Yurt Camp", "Day 5: Return"],
+      "image": ""
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 201", function () {
+          pm.response.to.have.status(201);
+      });
+
+      pm.test("success is true", function () {
+          var json = pm.response.json();
+          pm.expect(json.success).to.be.true;
+      });
+
+      pm.test("Response has tour object", function () {
+          var json = pm.response.json();
+          pm.expect(json).to.have.property("tour");
+          pm.expect(json.tour).to.be.an("object");
+      });
+
+      pm.test("tour.title equals Gobi Desert Adventure", function () {
+          var json = pm.response.json();
+          pm.expect(json.tour.title).to.eql("Gobi Desert Adventure");
+      });
+
+      var json = pm.response.json();
+      if (json.tour && json.tour._id) {
+          pm.environment.set("tourId", json.tour._id);
+      }

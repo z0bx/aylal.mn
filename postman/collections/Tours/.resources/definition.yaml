@@ -1,0 +1,3 @@
+$kind: collection
+name: Tours
+description: Tours API - CRUD operations for tour packages in Nomadic Horizon

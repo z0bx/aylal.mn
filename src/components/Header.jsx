@@ -8,11 +8,9 @@ const NAV_LINKS = [
   { label: "Нүүр",           key: "home"   },
   { label: "Чиглэлүүд",     key: "map"    },
   { label: "Аяллын хөтөлбөр", key: "travel" },
-  { label: "Экспедиц",      key: "travel" },
-  { label: "Өв соёл",       key: "travel" },
 ];
 
-export default function Header({ page, setPage, loggedIn }) {
+export default function Header({ page, setPage, loggedIn, logout }) {
   const [scrolled,    setScrolled]    = useState(false);
   const [mobileOpen,  setMobileOpen]  = useState(false);
 
@@ -76,6 +74,7 @@ export default function Header({ page, setPage, loggedIn }) {
           {loggedIn ? (
             <>
               <BtnPrimary onClick={() => setPage("booking")} small>Захиалах</BtnPrimary>
+              <BtnGhost onClick={logout} small>Гарах</BtnGhost>
               <div
                 onClick={() => setPage("profile")}
                 style={{ width: 36, height: 36, borderRadius: "50%", border: `2px solid ${T.primary}`, overflow: "hidden", cursor: "pointer", flexShrink: 0 }}

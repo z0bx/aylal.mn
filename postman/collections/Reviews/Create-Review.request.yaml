@@ -1,0 +1,52 @@
+$kind: http-request
+name: Create Review
+method: POST
+url: '{{baseUrl}}/api/reviews/tour/{{tourId}}'
+order: 2000
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{authToken}}'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "rating": 5,
+      "comment": "Amazing tour! The Gobi Desert was breathtaking and the guides were excellent."
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 201", function () {
+          pm.response.to.have.status(201);
+      });
+
+      pm.test("success is true", function () {
+          var jsonData = pm.response.json();
+          pm.expect(jsonData.success).to.be.true;
+      });
+
+      pm.test("Response has review object", function () {
+          var jsonData = pm.response.json();
+          pm.expect(jsonData.review).to.be.an('object');
+      });
+
+      pm.test("review.rating equals 5", function () {
+          var jsonData = pm.response.json();
+          pm.expect(jsonData.review.rating).to.eql(5);
+      });
+
+      pm.test("review.comment is a string", function () {
+          var jsonData = pm.response.json();
+          pm.expect(jsonData.review.comment).to.be.a('string');
+      });
+
+      var jsonData = pm.response.json();
+      if (jsonData.review && jsonData.review._id) {
+          pm.environment.set("reviewId", jsonData.review._id);
+      }
