@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useNavigation } from "../hooks/useNavigation";
 import { T } from "../constants/theme";
 import { IMGS } from "../constants/images";
 import Icon from "../components/Icon";
 import Badge from "../components/Bagde";
 import { BtnPrimary } from "../components/Buttons";
 import FieldUnderline from "../components/FieldUnderline";
+import { bookingService } from "../services/bookingService";
 
 const PAYMENT_METHODS = [
   { icon: "credit_card",    label: "Дебит/Кредит карт",  sub: "Visa, Mastercard, UnionPay" },
@@ -21,6 +23,10 @@ const TRAVELLER_FIELDS = [
 export default function PageBooking() {
   const [selectedPayment, setSelectedPayment] = useState(0);
   const [confirmed,       setConfirmed]       = useState(false);
+  const { routeEstimate } = useNavigation();
+  const { pageParams } = useNavigation();
+
+  const formatMNT = (v) => v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "₮";
 
   return (
     <main style={{ width: "100%", padding: "48px 32px 96px" }}>
@@ -91,7 +97,7 @@ export default function PageBooking() {
               <span style={{ display: "flex", alignItems: "center", gap: 6 }}><Icon name="schedule" size={14} />8 өдөр</span>
             </div>
             <div style={{ borderTop: `1px solid ${T.outlineVariant}25`, paddingTop: 24, display: "flex", flexDirection: "column", gap: 14 }}>
-              {[["Насанд хүрэгч (2)", "4,200,000₮"], ["Үйлчилгээний хураамж", "85,000₮"]].map(([k, v]) => (
+              {[["Насанд хүрэгч (2)", "4,200,000₮"], ["Үйлчилгээний хураамж", "85,000₮"], ["Тээврийн зардал (зам)", routeEstimate && routeEstimate.cost ? formatMNT(routeEstimate.cost) : "0₮"]].map(([k, v]) => (
                 <div key={k} style={{ display: "flex", justifyContent: "space-between", color: T.onSurfaceVariant, fontSize: 14 }}>
                   <span>{k}</span><span>{v}</span>
                 </div>
@@ -103,14 +109,39 @@ export default function PageBooking() {
               <div style={{ paddingTop: 20, marginTop: 12, borderTop: `1px solid ${T.onSurface}15`, display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
                 <div>
                   <p style={{ fontSize: 10, textTransform: "uppercase", letterSpacing: "0.15em", color: T.onSurfaceVariant, marginBottom: 4 }}>Нийт дүн</p>
-                  <p style={{ fontFamily: "'Noto Serif',serif", fontSize: 28, fontWeight: 900, color: T.primary }}>4,135,000₮</p>
+                  <p style={{ fontFamily: "'Noto Serif',serif", fontSize: 28, fontWeight: 900, color: T.primary }}>{formatMNT(4135000 + (routeEstimate?.cost || 0))}</p>
                 </div>
                 <Badge>БАТАЛГААЖСАН</Badge>
               </div>
             </div>
 
             <button
-              onClick={() => setConfirmed(true)}
+              onClick={async () => {
+                if (confirmed) return;
+                const baseTotal = 4135000; // existing hardcoded base
+                // Prefer transport from page params if provided, otherwise use context estimate
+                const transport = pageParams?.estimate?.cost || routeEstimate?.cost || 0;
+                const totalPrice = baseTotal + transport;
+
+                const payload = {
+                  tourId: pageParams?.tourId || null,
+                  travellers: [],
+                  paymentMethod: selectedPayment === 0 ? "credit_card" : "bank_transfer",
+                  cardDetails: null,
+                  totalPrice,
+                  transportSegments: pageParams?.estimate?.segments || routeEstimate?.segments || [],
+                  discount: 150000,
+                };
+
+                try {
+                  await bookingService.createBooking(payload);
+                  setConfirmed(true);
+                } catch (err) {
+                  // eslint-disable-next-line no-console
+                  console.error("Booking error:", err);
+                  alert(err.message || "Захиалга илгээгдсэнгүй");
+                }
+              }}
               disabled={confirmed}
               style={{ width: "100%", marginTop: 32, padding: "20px", background: confirmed ? T.surfaceContainerHigh : `linear-gradient(to bottom, ${T.primary}, ${T.primaryContainer})`, color: confirmed ? T.onSurfaceVariant : T.onPrimary, fontFamily: "'Work Sans',sans-serif", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", fontSize: 13, border: "none", borderRadius: 6, cursor: confirmed ? "default" : "pointer", transition: "all .2s", boxShadow: confirmed ? "none" : `0 4px 12px ${T.primary}33` }}
             >

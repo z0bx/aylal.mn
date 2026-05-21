@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { T } from "../constants/theme";
 import { IMGS } from "../constants/images";
 import Icon from "../components/Icon";
 import { BtnPrimary } from "../components/Buttons";
 import GoogleMapComponent from "../components/GoogleMap";
 import { useNavigation } from "../hooks/useNavigation";
+import { totalDistanceKm, segmentsWithCost } from "../utils/distance";
 
 export default function PageMap({ setPage }) {
-  const { navigateTo } = useNavigation();
+  const { navigateTo, setRouteEstimate, routeEstimate } = useNavigation();
   const [stops,     setStops]     = useState([
     { id: 1, label: "Зогсоол 1", name: "Тэрэлж БЦГ", lat: 47.8926, lng: 107.3044 },
     { id: 2, label: "Зогсоол 2", name: "Хустай Нуруу", lat: 47.7333, lng: 107.2667 },
@@ -45,6 +46,16 @@ export default function PageMap({ setPage }) {
 
   // Create route path
   const routePath = mapMarkers.map(m => ({ lat: m.lat, lng: m.lng }));
+
+  // Pricing: per-km rate (₮). Adjust as needed.
+  const RATE_PER_KM = 12000;
+
+  useEffect(() => {
+    const dist = Math.round(totalDistanceKm(routePath));
+    const segments = segmentsWithCost(routePath, RATE_PER_KM);
+    const cost = segments.reduce((s, seg) => s + (seg.cost || 0), 0);
+    setRouteEstimate({ distanceKm: dist, cost, segments });
+  }, [routePath, setRouteEstimate]);
 
   return (
     <main style={{ display: "flex", height: "calc(100vh - 80px)", overflow: "hidden" }}>
@@ -108,16 +119,32 @@ export default function PageMap({ setPage }) {
               <Icon name="payments" size={28} style={{ color: T.primaryContainer }} />
             </div>
             <div style={{ marginTop: 16, paddingTop: 12, borderTop: `1px solid ${T.outlineVariant}20`, display: "flex", flexDirection: "column", gap: 8 }}>
-              {[["Шатахуун", "450,000 ₮"], ["Байрлах газар", "1,200,000 ₮"], ["Хөтөч & Хоол", "800,000 ₮"]].map(([k, v]) => (
-                <div key={k} style={{ display: "flex", justifyContent: "space-between", fontSize: 12 }}>
-                  <span style={{ color: T.onSurfaceVariant }}>{k}</span>
-                  <span style={{ fontWeight: 700 }}>{v}</span>
-                </div>
-              ))}
+                {[["Шатахуун", "450,000 ₮"], ["Байрлах газар", "1,200,000 ₮"], ["Хөтөч & Хоол", "800,000 ₮"]].map(([k, v]) => (
+                  <div key={k} style={{ display: "flex", justifyContent: "space-between", fontSize: 12 }}>
+                    <span style={{ color: T.onSurfaceVariant }}>{k}</span>
+                    <span style={{ fontWeight: 700 }}>{v}</span>
+                  </div>
+                ))}
+
+                {/* Segment breakdown */}
+                {routeEstimate?.segments && routeEstimate.segments.length > 0 && (
+                  <div style={{ marginTop: 8, borderTop: `1px dashed ${T.outlineVariant}20`, paddingTop: 8 }}>
+                    <h4 style={{ fontSize: 12, marginBottom: 8, color: T.onSurfaceVariant }}>Маршрут хэсэг тус бүр</h4>
+                    {routeEstimate.segments.map((seg, i) => (
+                      <div key={i} style={{ display: "flex", justifyContent: "space-between", fontSize: 12, padding: "6px 0" }}>
+                        <span style={{ color: T.onSurfaceVariant }}>Хэсэг {i + 1}: {Math.round(seg.distanceKm)} км</span>
+                        <span style={{ fontWeight: 700 }}>{seg.cost.toLocaleString()} ₮</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
             </div>
           </div>
 
-          <BtnPrimary onClick={() => navigateTo("booking")} style={{ padding: "16px", justifyContent: "center", borderRadius: 8, fontSize: 13, gap: 10 }}>
+          <BtnPrimary
+            onClick={() => navigateTo("booking", { tourId: null, routePath, estimate: routeEstimate })}
+            style={{ padding: "16px", justifyContent: "center", borderRadius: 8, fontSize: 13, gap: 10 }}
+          >
             Аялал эхлүүлэх <Icon name="arrow_forward" size={16} />
           </BtnPrimary>
         </div>
@@ -135,12 +162,12 @@ export default function PageMap({ setPage }) {
         <div style={{ position: "absolute", top: 24, right: 24, background: "rgba(255,255,255,.85)", backdropFilter: "blur(12px)", padding: "10px 24px", borderRadius: 999, boxShadow: "0 4px 16px rgba(32,27,14,.12)", display: "flex", alignItems: "center", gap: 16 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <Icon name="distance" size={14} style={{ color: T.primary }} />
-            <span style={{ fontSize: 13, fontWeight: 700 }}>185 км</span>
+            <span style={{ fontSize: 13, fontWeight: 700 }}>{Math.round(totalDistanceKm(routePath))} км</span>
           </div>
           <div style={{ width: 1, height: 16, background: T.outlineVariant }} />
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <Icon name="schedule" size={14} style={{ color: T.primary }} />
-            <span style={{ fontSize: 13, fontWeight: 700 }}>3ц 45м</span>
+            <span style={{ fontSize: 13, fontWeight: 700 }}>~{Math.round(totalDistanceKm(routePath) / 60)}ц</span>
           </div>
         </div>
 

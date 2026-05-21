@@ -10,7 +10,7 @@ const bookingSchema = new mongoose.Schema(
     tourId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Tour",
-      required: true,
+      required: false,
     },
     travellers: [
       {
@@ -34,6 +34,14 @@ const bookingSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    transportSegments: [
+      {
+        from: { lat: Number, lng: Number },
+        to: { lat: Number, lng: Number },
+        distanceKm: Number,
+        cost: Number,
+      }
+    ],
     discount: {
       type: Number,
       default: 0,

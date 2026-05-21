@@ -3,30 +3,34 @@ import Tour from "../models/Tour.js";
 
 export const createBooking = async (req, res) => {
   try {
-    const { tourId, travellers, paymentMethod, cardDetails, totalPrice, discount } = req.body;
+    const { tourId, travellers, paymentMethod, cardDetails, totalPrice, discount, transportSegments } = req.body;
 
-    if (!tourId || !travellers || !paymentMethod || !totalPrice) {
+    if (!travellers || !paymentMethod || !totalPrice) {
       return res.status(400).json({
         success: false,
         message: "Please provide all required fields",
       });
     }
 
-    const tour = await Tour.findById(tourId);
-    if (!tour) {
-      return res.status(404).json({
-        success: false,
-        message: "Tour not found",
-      });
+    let tour = null;
+    if (tourId) {
+      tour = await Tour.findById(tourId);
+      if (!tour) {
+        return res.status(404).json({
+          success: false,
+          message: "Tour not found",
+        });
+      }
     }
 
     const booking = await Booking.create({
       userId: req.user.id,
-      tourId,
+      tourId: tour ? tour._id : null,
       travellers,
       paymentMethod,
       cardDetails: paymentMethod === "credit_card" ? cardDetails : null,
       totalPrice,
+      transportSegments: transportSegments || [],
       discount: discount || 0,
       status: "confirmed",
     });
